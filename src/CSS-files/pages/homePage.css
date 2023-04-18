@@ -1,0 +1,40 @@
+@import '../variables.css';
+
+header {
+    height: 55px;
+    width: 100vw;
+    background-color: var(--header-color);
+}
+
+.header-content {
+    display: flex;
+    padding: 10px 35px;
+}
+
+.header-btn {
+    width: 28px;
+    height: 28px;
+    background-color: transparent;
+    border: none;
+}
+
+#header-menu-btn {
+    background-image: url('../../assets/icons/hamburger.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    filter: invert(90%);
+}
+
+#header-home-btn {
+    background-image: url('../../assets/icons/home.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    filter: invert(90%);
+}
+
+#new-task-btn {
+    background-image: url('../../assets/icons/add.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    filter: invert(100%);
+}

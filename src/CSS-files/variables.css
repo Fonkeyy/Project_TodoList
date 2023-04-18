@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: url('../assets/fonts/Roboto/Roboto-Regular.ttf');
+}
+@font-face {
+    font-family: 'Roboto-Medium';
+    src: url('../assets/fonts/Roboto/Roboto-Medium.ttf');
+}
+@font-face {
+    font-family: 'Roboto-Bold';
+    src: url('../assets/fonts/Roboto/Roboto-Bold.ttf');
+}
+
+:root {
+    --primary-text-color: rgb(32, 32, 32);
+    --header-color: rgb(219, 76, 63);
+    --date-color: rgb(209, 69, 59);
+}
