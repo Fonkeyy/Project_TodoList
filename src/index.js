@@ -3,35 +3,29 @@ import { ToDoItem } from './JS-files/ToDoItemClass';
 import { loadMainPage } from './JS-files/homePage';
 import './CSS-files/global.css';
 
-const defaultProject = new Project();
+const defaultProject = new Project('default');
 const testProject = new Project('test');
 const test1Project = new Project('test1');
 
-const toDoTest = new ToDoItem(
-    'Gestionnaire mdp',
-    "Trouver le meilleur gestionnaire mdp et l'installer",
-    null,
-    'P1',
-    'no comments'
-);
-const toDoTest1 = new ToDoItem(
-    'Gestionnaire mdp 123456',
-    "Trouver le meilleur gestionnaire mdp et l'installer",
-    null,
-    'P1',
-    'no comments'
-);
+const toDoTest = new ToDoItem('try mdp', 'find something', null, 'P1', 'no comments');
+const toDoTest1 = new ToDoItem('try mdp 123456', 'find something', null, 'P1', 'no comments');
 
 defaultProject.addNewItem(toDoTest);
 defaultProject.addNewItem(toDoTest1);
 defaultProject.addNewItem(toDoTest);
+defaultProject.addNewItem(toDoTest1);
 defaultProject.addNewItem(toDoTest);
-defaultProject.addNewItem(toDoTest);
-defaultProject.addNewItem(toDoTest);
+defaultProject.addNewItem(toDoTest1);
 testProject.addNewItem(toDoTest);
+test1Project.addNewItem(toDoTest);
+test1Project.addNewItem(toDoTest);
 test1Project.addNewItem(toDoTest);
 
 loadMainPage();
+
+// .forEach((project) => {
+//    return `${project.getName()}${project.getLength()}`;
+// }
 
 // import { dom } from './global';
 // import { generateCalendar } from './calendar';

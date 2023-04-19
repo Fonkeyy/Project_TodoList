@@ -3,12 +3,11 @@ import { dom } from './global';
 import { projectInstances } from './ProjectClass';
 import '../CSS-files/pages/homePage.css';
 import '../CSS-files/variables.css';
+import { searchFunction } from './utility';
 
 export const loadMainPage = () => {
     //header
-    const $header = document.createElement('header');
-    document.body.appendChild($header);
-    $header.appendChild(displayHeader());
+    document.body.appendChild(displayHeader());
 
     //main
     const $main = document.createElement('main');
@@ -19,35 +18,52 @@ export const loadMainPage = () => {
 };
 
 const displayHeader = () => {
-    const $headerContent = document.createElement('div');
-    $headerContent.classList.add('header-content');
+    const $header = document.createElement('header');
 
-    const $menuBtn = dom.createBtn($headerContent, 'button', 'id', 'header-menu-btn');
+    const $headerLeftContainer = dom.createDiv($header, 'id', 'header-left-container');
+
+    const $menuBtn = dom.createBtn($headerLeftContainer, 'button', 'id', 'header-menu-btn');
     $menuBtn.classList.add('header-btn');
     $menuBtn.addEventListener('click', () => {}); //todo => add function listener
 
-    const $homeBtn = dom.createBtn($headerContent, 'button', 'id', 'header-home-btn');
+    const $homeBtn = dom.createBtn($headerLeftContainer, 'button', 'id', 'header-home-btn');
     $homeBtn.classList.add('header-btn');
     $homeBtn.addEventListener('click', () => {}); //todo => add function listener
 
-    //todo => implement searchbar
+    const $searchInput = document.createElement('input');
+    $searchInput.type = 'text';
+    $searchInput.id = 'search-input';
+    $searchInput.placeholder = 'Search';
+    $headerLeftContainer.appendChild($searchInput);
+    $searchInput.onkeyup = searchFunction();
 
-    const $newTaskBtn = dom.createBtn($headerContent, 'button', 'id', 'new-task-btn');
+    const $headerRightContainer = dom.createDiv($header, 'id', 'header-right-container');
+
+    const $newTaskBtn = dom.createBtn($headerRightContainer, 'button', 'id', 'new-task-btn');
     $newTaskBtn.classList.add('header-btn');
     $newTaskBtn.addEventListener('click', () => {}); //todo => add function listener
 
-    return $headerContent;
+    return $header;
 };
 
 const displaySidebar = () => {
     const $sidebar = document.createElement('div');
     $sidebar.classList.add('sidebar', 'hidden');
 
+    const $sideProjectContainer = dom.createDiv($sidebar, 'id', 'side-project-container');
+    const $sideProjectContainerTitle = dom.createH($sideProjectContainer, 'Projects', 3);
+
+    const $addProjectBtn = dom.createBtn($sideProjectContainerTitle, 'button', 'class', 'hidden');
+    $addProjectBtn.addEventListener('click', () => {}); //todo => add function listeners
+
     projectInstances.getInstances().forEach((project) => {
-        const $projectContainer = dom.createDiv($sidebar, 'class', 'project-container');
-        dom.createP($projectContainer, `${project.getName()}`, 'class', 'project-name');
-        dom.createP($projectContainer, `${project.getLength()}`, 'class', 'project-length');
-        $sidebar.appendChild($projectContainer);
+        const $projectItemContainer = dom.createDiv(
+            $sideProjectContainer,
+            'class',
+            'project-container'
+        );
+        dom.createP($projectItemContainer, `${project.getName()}`, 'class', 'project-name');
+        dom.createP($projectItemContainer, `${project.getLength()}`, 'class', 'project-length');
     });
 
     return $sidebar;

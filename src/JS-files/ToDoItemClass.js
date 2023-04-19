@@ -7,7 +7,7 @@ export class ToDoItem {
         comment = null,
         checkStatus = false
         // id = null
-        // projectName = 'default'
+        // projectNames = 'default'
     ) {
         this.title = title;
         this.description = description;
@@ -16,7 +16,7 @@ export class ToDoItem {
         this.comment = comment;
         this.checkStatus = checkStatus;
         this.Id = null;
-        this.projectName = 'default';
+        this.projectNames = ['default'];
 
         this.setId();
     }
@@ -29,7 +29,7 @@ export class ToDoItem {
     getComment = () => this.comment;
     getCheckStatus = () => this.checkStatus;
     getId = () => this.id;
-    getProjectName = () => this.projectName;
+    getProjectNames = () => this.projectNames;
 
     //Setters
     setDescription = (text) => (this.description = text);
@@ -38,5 +38,5 @@ export class ToDoItem {
     setComment = (text) => (this.comment = text);
     setCheckStatus = (boolean) => (this.checkStatus = boolean);
     setId = () => (this.id = Date.now());
-    setProjectName = (projectName) => (this.projectName = projectName);
+    setProjectName = (projectName) => this.projectNames.push(projectName);
 }

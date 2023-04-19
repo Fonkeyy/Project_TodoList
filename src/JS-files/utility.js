@@ -1,3 +1,26 @@
+import { projectInstances } from './ProjectClass';
+
+export const searchFunction = () => {
+    const input = document.querySelector('#searchInput');
+
+    let filter = '';
+    if (input && input.value) {
+        filter = input.value.toUpperCase();
+    }
+
+    const defaultProject = projectInstances
+        .getInstances()
+        .find((project) => project.getName() === 'default');
+
+    defaultProject.getList().forEach((element) => {
+        if (element.getTitle().toUpperCase().indexOf(filter) > -1) {
+            element.style.display = '';
+        } else {
+            element.style.display = 'none';
+        }
+    });
+};
+
 export const generateCalendar = () => {
     const date = new Date();
     const month = date.getMonth();
