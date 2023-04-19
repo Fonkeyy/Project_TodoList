@@ -21,8 +21,8 @@ export class Project {
         // check if project name is already set to item
         if (item.getProjectNames().every((element) => element !== this.getName())) {
             item.setProjectName(this.getName());
-            this.list.push(item);
         }
+        this.list.push(item);
     };
 
     removeItem = (item) => this.list.remove(this.list.getIds() === item.getId());
