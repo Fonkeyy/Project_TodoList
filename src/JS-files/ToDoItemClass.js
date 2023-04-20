@@ -1,3 +1,5 @@
+import { projectInstances } from './ProjectClass';
+
 export class ToDoItem {
     constructor(
         title = null,
@@ -19,6 +21,11 @@ export class ToDoItem {
         this.projectNames = ['default'];
 
         this.setId();
+
+        const defaultProject = projectInstances
+            .getInstances()
+            .find((project) => project.getName() === 'default');
+        defaultProject.addNewItem(this);
     }
 
     //Getters

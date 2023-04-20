@@ -1,0 +1,80 @@
+@import '../CSS-files/global.css';
+@import '../CSS-files/variables.css';
+
+#card {
+    width: 90%;
+    height: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: lightgray;
+    opacity: 0;
+    border-radius: 15px;
+}
+
+.header-content {
+    display: grid;
+    place-items: center;
+    grid-template-columns: 15fr repeat(4, 1fr);
+    padding: 1rem;
+}
+
+.header-btn {
+    /* width: 32px;
+    height: 32px;
+    background-color: lightcoral; */
+}
+
+.header-content > p {
+    justify-self: flex-start;
+}
+
+.close-btn {
+    background-image: url('../assets/icons/close.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+}
+
+#title-container {
+    display: flex;
+}
+
+@media screen and (min-width: 750px) {
+    .main-content {
+        display: grid;
+        grid-template-columns: min-content 3fr 1fr;
+    }
+
+    .main-content > input[type='checkbox'] {
+    }
+
+    .main-content > h2 {
+    }
+
+    .main-content > .item-description {
+        grid-column-start: 2;
+        grid-row-start: 2;
+    }
+
+    .main-content > .item-comment {
+        grid-column-start: 2;
+    }
+
+    .main-content > .project-name-container {
+        grid-column-start: 3;
+        grid-row-start: 1;
+    }
+
+    .main-content > .due-date-container {
+        grid-column-start: 3;
+        grid-row-start: 2;
+    }
+
+    .main-content > .priority-container {
+        grid-column-start: 3;
+        grid-row-start: 3;
+    }
+}

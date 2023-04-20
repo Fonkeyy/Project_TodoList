@@ -1,134 +1,14 @@
 @import '../variables.css';
 
-/* Header */
-header {
-    height: 55px;
-    width: 100vw;
-    background-color: var(--header-color);
-    padding: 0px 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
-}
-
-#header-left-container {
-    width: 60%;
-    height: 65%;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-}
-
-.header-btn {
-    width: 28px;
-    height: 28px;
-    background-color: transparent;
-    border: none;
-}
-
-#header-menu-btn {
-    background-image: url('../../assets/icons/hamburger.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    filter: invert(90%);
-}
-
-#header-home-btn {
-    background-image: url('../../assets/icons/home.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    filter: invert(90%);
-}
-
-#search-input {
-    width: 100%;
-    height: 100%;
-    background: hsla(0, 0%, 100%, 0.2);
-    border: none;
-    display: flex;
-    border-radius: 5px;
-}
-
-#search-input::placeholder {
-    color: white;
-    padding-left: 0.6rem;
-}
-
-#search-input:hover::placeholder {
-    color: grey;
-}
-
-#header-right-container {
-    width: 40%;
-    display: flex;
-    justify-content: flex-end;
-}
-
-#new-task-btn {
-    background-image: url('../../assets/icons/add.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    filter: invert(100%);
-}
-
-/* Sidebar */
-
-.sidebar {
-    display: none;
-}
-
-#side-project-container {
-    width: 100%;
-    margin: 0px 24px;
-    cursor: pointer;
-}
-
-#sidebar-project-container-title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 5px;
-    height: 36px;
-    margin: 0px 4px 0px;
-    color: rgba(0, 0, 0, 0.56);
-}
-
-#sidebar-project-container-title > button {
-    width: 28px;
-    height: 28px;
-    background-image: url('../../assets/icons/add.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    border: none;
-    cursor: pointer;
-}
-
-.project-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 43px;
-    padding: 0px 10px 0px;
-    border-radius: 5px;
-}
-
-.project-length {
-    color: #aaa;
-}
-
-/* Main */
 main {
     display: flex;
-    /* place-items: start; */
-    margin: 30px 0px;
 }
 
 #item-list {
     width: 100%;
     display: grid;
     gap: 2rem;
-    padding: 0px 75px;
+    padding: 30px 75px;
 }
 
 #project-title {
@@ -161,6 +41,9 @@ main {
     background-size: contain;
     border: none;
     cursor: pointer;
+    width: min-content;
+    opacity: 0;
+    transition: opacity 0.15s ease-in;
 }
 
 .item-list-due-date {

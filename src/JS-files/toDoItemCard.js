@@ -9,40 +9,53 @@ const toDoItemCard = (() => {
 
         // header-content
         const $headerContent = dom.createDiv($cardContent, 'class', 'header-content');
-        dom.createP($headerContent, item.getProjectName());
+        dom.createP($headerContent, item.getProjectNames());
 
         const $nextBtn = dom.createBtn($headerContent, 'button', 'class', 'next-btn');
+        $nextBtn.classList.add('header-btn');
         $nextBtn.addEventListener('click', () => {}); //todo => add function listener
 
         const $previousBtn = dom.createBtn($headerContent, 'button', 'class', 'previous-btn');
+        $previousBtn.classList.add('header-btn');
         $previousBtn.addEventListener('click', () => {}); //todo => add function listener
 
         const $moreBtn = dom.createBtn($headerContent, 'button', 'class', 'more-btn');
+        $moreBtn.classList.add('header-btn');
         $moreBtn.addEventListener('click', () => {}); //todo => add function listener
 
         const $closeBtn = dom.createBtn($headerContent, 'button', 'class', 'close-btn');
-        $closeBtn.addEventListener('click', () => {}); //todo => add function listener
+        $moreBtn.classList.add('header-btn');
+        $closeBtn.addEventListener('click', () => {
+            clearCard();
+        });
 
         // main-content
         const $mainContent = dom.createDiv($cardContent, 'class', 'main-content');
 
+        const $titleContainer = dom.createDiv($mainContent, 'id', 'title-container');
         const $checkbox = document.createElement('input');
         $checkbox.type = 'checkbox';
         $checkbox.name = 'checkStatus';
         $checkbox.value = 'true';
         $checkbox.id = 'checkbox';
-        $mainContent.appendChild($checkbox);
+        $titleContainer.appendChild($checkbox);
 
-        dom.createH($mainContent, item.getTitle(), 2);
-        dom.createP($mainContent, item.getDescription(), 'class', 'item-description');
-        dom.createP($mainContent, item.getComment(), 'class', 'item-comment');
+        dom.createH($titleContainer, item.getTitle(), 2);
+
+        const $itemDescriptionContainer = dom.createDiv(
+            $mainContent,
+            'id',
+            'item-description-container'
+        );
+        dom.createDiv($itemDescriptionContainer, 'class', 'svg-card');
+        dom.createP($itemDescriptionContainer, item.getDescription(), 'class', 'item-description');
 
         const $projectNameContainer = dom.createDiv(
             $mainContent,
             'class',
             'project-name-container'
         );
-        dom.createLabel($projectNameContainer, item.getProjectName());
+        dom.createLabel($projectNameContainer, item.getProjectNames());
 
         const $dueDateContainer = dom.createDiv($mainContent, 'class', 'due-date-container');
         dom.createLabel($dueDateContainer, 'Due Date');
@@ -51,16 +64,17 @@ const toDoItemCard = (() => {
         const $priorityContainer = dom.createDiv($mainContent, 'class', 'priority-container');
         dom.createLabel($priorityContainer, 'Priority');
         //todo Create checkbox
+
+        dom.createP($mainContent, item.getComment(), 'class', 'item-comment');
+
+        $card.classList.toggle('opacity');
     };
 
     const clearCard = () => {
         const $card = document.querySelector('#card');
-        $card.remove();
-        // const $card = document.querySelector('#card');
-
-        // while ($card.firstChild) {
-        //     $card.removeChild($card.firstChild);
-        // }
+        if ($card) {
+            $card.remove();
+        }
     };
 
     return { displayCard, clearCard };

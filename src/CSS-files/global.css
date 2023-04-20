@@ -44,8 +44,9 @@ h6 {
     isolation: isolate;
 }
 
-.hidden {
-    visibility: hidden;
+.opacity {
+    opacity: 1 !important;
+    transition: opacity 0.15s ease-out;
 }
 
 .none {

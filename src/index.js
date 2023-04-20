@@ -16,12 +16,12 @@ const toDoTest1 = new ToDoItem(
     'no comments'
 );
 
-defaultProject.addNewItem(toDoTest);
 defaultProject.addNewItem(toDoTest1);
-defaultProject.addNewItem(toDoTest);
-defaultProject.addNewItem(toDoTest1);
-defaultProject.addNewItem(toDoTest);
-defaultProject.addNewItem(toDoTest1);
+testProject.addNewItem(toDoTest1);
+testProject.addNewItem(toDoTest);
+testProject.addNewItem(toDoTest1);
+testProject.addNewItem(toDoTest);
+testProject.addNewItem(toDoTest1);
 testProject.addNewItem(toDoTest);
 test1Project.addNewItem(toDoTest);
 test1Project.addNewItem(toDoTest);
