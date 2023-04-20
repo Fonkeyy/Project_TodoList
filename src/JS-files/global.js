@@ -1,4 +1,6 @@
-export { dom };
+export { dom, focusUp, focusDown };
+
+import '../CSS-files/global.css';
 
 const dom = (() => {
     const createDiv = (parent, attribute, attributeName) => {
@@ -50,3 +52,16 @@ const dom = (() => {
     };
     return { createDiv, createH, createP, createBtn, createImg, createLabel };
 })();
+
+const focusUp = (parent, child) => {
+    const focusDiv = document.createElement('div');
+    focusDiv.id = 'focus-div';
+    parent.appendChild(focusDiv);
+    focusDiv.appendChild(child);
+    focusDiv.classList.add('focus-up');
+};
+
+const focusDown = () => {
+    const focusDiv = document.querySelector('#focus-div');
+    focusDiv.remove();
+};

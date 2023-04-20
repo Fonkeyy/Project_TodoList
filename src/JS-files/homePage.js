@@ -1,5 +1,5 @@
 import Sortable from 'sortablejs';
-import { dom } from './global';
+import { dom, focusUp } from './global';
 import { projectInstances } from './ProjectClass';
 import { displaySidebar } from './sidebar';
 import { displayHeader } from './header';
@@ -82,6 +82,7 @@ export const displayItemList = (project) => {
             toDoItemCard.displayCard(
                 defaultProject.getList().find((todo) => todo.getTitle() === itemTitle)
             );
+            focusUp(document.body, document.querySelector('#card'));
         });
     });
 

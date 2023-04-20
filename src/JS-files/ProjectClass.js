@@ -42,5 +42,14 @@ export const projectInstances = (() => {
         }
     };
 
-    return { addInstance, getInstances, getInstancesNames, getInstancesLength };
+    const removeInstance = (instance) => {
+        const index = getInstances().indexOf(
+            projectInstances
+                .getInstances()
+                .find((project) => project.getName() === instance.getName())
+        );
+        getInstances().splice(index, 1);
+    };
+
+    return { addInstance, getInstances, getInstancesNames, getInstancesLength, removeInstance };
 })();

@@ -1,6 +1,9 @@
 @import '../CSS-files/global.css';
 @import '../CSS-files/variables.css';
 
+#card-focus {
+}
+
 #card {
     width: 90%;
     height: 90%;
@@ -8,29 +11,75 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: lightgray;
+    background-color: white;
     opacity: 0;
     border-radius: 15px;
+    color: rgb(26, 26, 26);
 }
+
+/* Header */
 
 .header-content {
     display: grid;
-    place-items: center;
-    grid-template-columns: 15fr repeat(4, 1fr);
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
     padding: 1rem;
 }
 
-.header-btn {
-    /* width: 32px;
+.header-card-btn {
+    width: 32px;
     height: 32px;
-    background-color: lightcoral; */
+    background-color: transparent;
 }
 
-.header-content > p {
-    justify-self: flex-start;
+#header-content-left {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
 }
 
-.close-btn {
+#header-content-left > #project-name-svg {
+    background-image: url('../assets/icons/inbox.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#header-content-left > p {
+    font-size: 12px;
+    align-self: flex-end;
+}
+
+#header-content-right {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.3rem;
+}
+
+#header-content-right > .next-btn {
+    background-image: url('../assets/icons/chevron-up.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+}
+
+#header-content-right > .previous-btn {
+    background-image: url('../assets/icons/chevron-down.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+}
+
+#header-content-right > .more-btn {
+    background-image: url('../assets/icons/dots.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+}
+
+#header-content-right > .close-btn {
     background-image: url('../assets/icons/close.svg');
     background-repeat: no-repeat;
     background-size: contain;
@@ -38,43 +87,123 @@
     cursor: pointer;
 }
 
+/* Main */
+
+#main-content {
+    margin: 0px 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
 #title-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#title-container > input[type='checkbox'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 1px solid rgb(128, 128, 128);
+}
+#item-description-container {
+    display: flex;
+    margin-left: 15px;
+}
+
+#description-svg {
+    background-image: url('../assets/icons/description.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+}
+
+#project-name-container {
     display: flex;
 }
 
+#project-svg {
+    background-image: url('../assets/icons/inbox.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+}
+
+#due-date-container {
+    display: flex;
+}
+
+#due-date-svg {
+    background-image: url('../assets/icons/due-date.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+}
+
+#priority-container {
+    display: flex;
+}
+
+#priority-svg {
+    background-image: url('../assets/icons/priority.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+}
+
+.svg-card {
+    width: 15px;
+    height: 15px;
+}
+
 @media screen and (min-width: 750px) {
-    .main-content {
+    #main-content {
         display: grid;
-        grid-template-columns: min-content 3fr 1fr;
+        align-items: center;
+        grid-template-columns: 4fr 1fr;
+        grid-auto-rows: 40px;
     }
 
-    .main-content > input[type='checkbox'] {
+    #main-content > h2 {
     }
 
-    .main-content > h2 {
-    }
-
-    .main-content > .item-description {
-        grid-column-start: 2;
+    #main-content > #item-description-container {
+        grid-column-start: 1;
         grid-row-start: 2;
     }
 
-    .main-content > .item-comment {
-        grid-column-start: 2;
+    #main-content > .item-comment {
+        grid-column-start: 1;
+        margin-left: 15px;
     }
 
-    .main-content > .project-name-container {
-        grid-column-start: 3;
+    #main-content > #project-name-container {
+        flex-direction: column;
+
+        grid-column-start: 2;
         grid-row-start: 1;
     }
 
-    .main-content > .due-date-container {
-        grid-column-start: 3;
+    #main-content > #due-date-container {
+        flex-direction: column-reverse;
+        gap: 0.5rem;
+        grid-column-start: 2;
         grid-row-start: 2;
     }
 
-    .main-content > .priority-container {
-        grid-column-start: 3;
+    #main-content > #priority-container {
+        flex-direction: column-reverse;
+        gap: 0.5rem;
+        grid-column-start: 2;
         grid-row-start: 3;
     }
 }

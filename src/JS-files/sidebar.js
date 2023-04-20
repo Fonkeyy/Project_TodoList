@@ -1,6 +1,7 @@
 import { dom } from './global';
 import { projectInstances } from './ProjectClass';
 import { displayItemList } from './homePage';
+import '../CSS-files/global.css';
 export { displaySidebar };
 
 const displaySidebar = () => {
@@ -46,13 +47,30 @@ const displaySidebar = () => {
         );
         dom.createP($projectItemContainer, `${project.getName()}`, 'class', 'project-name');
         dom.createP($projectItemContainer, `${project.getLength()}`, 'class', 'project-length');
+        const $deleteBtn = dom.createBtn($projectItemContainer, 'button', 'id', 'delete-btn');
+        $deleteBtn.classList.add('none');
 
         // Add project items style
         $projectItemContainer.addEventListener('mouseover', (event) => {
             event.currentTarget.classList.toggle('grey-hover');
+            event.currentTarget.querySelector('.project-length').classList.toggle('none');
+            event.currentTarget.querySelector('#delete-btn').classList.toggle('none');
         });
         $projectItemContainer.addEventListener('mouseout', (event) => {
             event.currentTarget.classList.toggle('grey-hover');
+            event.currentTarget.querySelector('.project-length').classList.toggle('none');
+            event.currentTarget.querySelector('#delete-btn').classList.toggle('none');
+        });
+
+        // Add delete btn event listener
+        $deleteBtn.addEventListener('click', (event) => {
+            const name =
+                event.currentTarget.parentElement.querySelector('.project-name').textContent;
+            const project = projectInstances
+                .getInstances()
+                .find((project) => project.getName() === name);
+            projectInstances.removeInstance(project);
+            displaySidebar();
         });
 
         // Add project items event listener

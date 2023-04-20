@@ -1,36 +1,46 @@
-import { dom } from './global';
+import { dom, focusDown } from './global';
 
 export { toDoItemCard };
 
 const toDoItemCard = (() => {
     const displayCard = (item) => {
+        // const $cardFocus = dom.createDiv(document.body, 'id', 'card-focus');
         const $card = dom.createDiv(document.body, 'id', 'card');
+        $card.classList.toggle('opacity');
+
         const $cardContent = dom.createDiv($card, 'id', 'card-content');
 
         // header-content
         const $headerContent = dom.createDiv($cardContent, 'class', 'header-content');
-        dom.createP($headerContent, item.getProjectNames());
 
-        const $nextBtn = dom.createBtn($headerContent, 'button', 'class', 'next-btn');
-        $nextBtn.classList.add('header-btn');
+        const $headerContentLeft = dom.createDiv($headerContent, 'id', 'header-content-left');
+        const $projectNameSvg = dom.createDiv($headerContentLeft, 'class', 'svg-card');
+        $projectNameSvg.id = 'project-name-svg';
+        dom.createP($headerContentLeft, item.getProjectNames());
+
+        const $headerContentRight = dom.createDiv($headerContent, 'id', 'header-content-right');
+        // header btn
+        const $nextBtn = dom.createBtn($headerContentRight, 'button', 'class', 'next-btn');
+        $nextBtn.classList.add('header-card-btn');
         $nextBtn.addEventListener('click', () => {}); //todo => add function listener
 
-        const $previousBtn = dom.createBtn($headerContent, 'button', 'class', 'previous-btn');
-        $previousBtn.classList.add('header-btn');
+        const $previousBtn = dom.createBtn($headerContentRight, 'button', 'class', 'previous-btn');
+        $previousBtn.classList.add('header-card-btn');
         $previousBtn.addEventListener('click', () => {}); //todo => add function listener
 
-        const $moreBtn = dom.createBtn($headerContent, 'button', 'class', 'more-btn');
-        $moreBtn.classList.add('header-btn');
+        const $moreBtn = dom.createBtn($headerContentRight, 'button', 'class', 'more-btn');
+        $moreBtn.classList.add('header-card-btn');
         $moreBtn.addEventListener('click', () => {}); //todo => add function listener
 
-        const $closeBtn = dom.createBtn($headerContent, 'button', 'class', 'close-btn');
-        $moreBtn.classList.add('header-btn');
+        const $closeBtn = dom.createBtn($headerContentRight, 'button', 'class', 'close-btn');
+        $closeBtn.classList.add('header-card-btn');
         $closeBtn.addEventListener('click', () => {
             clearCard();
+            focusDown();
         });
 
         // main-content
-        const $mainContent = dom.createDiv($cardContent, 'class', 'main-content');
+        const $mainContent = dom.createDiv($cardContent, 'id', 'main-content');
 
         const $titleContainer = dom.createDiv($mainContent, 'id', 'title-container');
         const $checkbox = document.createElement('input');
@@ -47,27 +57,29 @@ const toDoItemCard = (() => {
             'id',
             'item-description-container'
         );
-        dom.createDiv($itemDescriptionContainer, 'class', 'svg-card');
+        const $descriptionSvg = dom.createDiv($itemDescriptionContainer, 'class', 'svg-card');
+        $descriptionSvg.id = 'description-svg';
         dom.createP($itemDescriptionContainer, item.getDescription(), 'class', 'item-description');
 
-        const $projectNameContainer = dom.createDiv(
-            $mainContent,
-            'class',
-            'project-name-container'
-        );
-        dom.createLabel($projectNameContainer, item.getProjectNames());
+        const $projectNameContainer = dom.createDiv($mainContent, 'id', 'project-name-container');
+        const $projectSvg = dom.createDiv($projectNameContainer, 'class', 'svg-card');
+        $projectSvg.id = 'project-svg';
+        dom.createLabel($projectNameContainer, 'Project');
+        dom.createP($projectNameContainer, item.getProjectNames());
 
-        const $dueDateContainer = dom.createDiv($mainContent, 'class', 'due-date-container');
+        const $dueDateContainer = dom.createDiv($mainContent, 'id', 'due-date-container');
+        const $dueDateSvg = dom.createDiv($dueDateContainer, 'class', 'svg-card');
+        $dueDateSvg.id = 'due-date-svg';
         dom.createLabel($dueDateContainer, 'Due Date');
         //todo Implement date stuff
 
-        const $priorityContainer = dom.createDiv($mainContent, 'class', 'priority-container');
+        const $priorityContainer = dom.createDiv($mainContent, 'id', 'priority-container');
+        const $prioritySvg = dom.createDiv($priorityContainer, 'class', 'svg-card');
+        $prioritySvg.id = 'priority-svg';
         dom.createLabel($priorityContainer, 'Priority');
         //todo Create checkbox
 
         dom.createP($mainContent, item.getComment(), 'class', 'item-comment');
-
-        $card.classList.toggle('opacity');
     };
 
     const clearCard = () => {
