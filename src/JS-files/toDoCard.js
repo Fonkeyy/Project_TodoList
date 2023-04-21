@@ -1,8 +1,8 @@
 import { dom, focusDown } from './global';
 
-export { toDoItemCard };
+export { toDoCard };
 
-const toDoItemCard = (() => {
+const toDoCard = (() => {
     const displayCard = (item) => {
         // const $cardFocus = dom.createDiv(document.body, 'id', 'card-focus');
         const $card = dom.createDiv(document.body, 'id', 'card');

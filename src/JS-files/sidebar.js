@@ -62,39 +62,64 @@ const displaySidebar = () => {
             event.currentTarget.querySelector('#delete-btn').classList.toggle('none');
         });
 
-        // Add delete btn event listener
-        $deleteBtn.addEventListener('click', (event) => {
-            const name =
-                event.currentTarget.parentElement.querySelector('.project-name').textContent;
-            const project = projectInstances
-                .getInstances()
-                .find((project) => project.getName() === name);
-            projectInstances.removeInstance(project);
-            displaySidebar();
-        });
+        // $projectLength.addEventListener('mouseover', (event) => {
+        //     event.currentTarget.querySelector('.project-length').classList.toggle('red');
+        //     event.currentTarget.querySelector('#delete-btn').classList.toggle('none');
+        // });
+        // $projectLength.addEventListener('mouseout', (event) => {
+        //     event.currentTarget.querySelector('.project-length').classList.toggle('none');
+        //     event.currentTarget.querySelector('#delete-btn').classList.toggle('none');
+        // });
 
         // Add project items event listener
-        $projectItemContainer.addEventListener('click', (e) => {
-            const projectName = e.target.closest('div').querySelector('p').textContent;
+        $projectItemContainer.addEventListener('click', (e) => displayProject(e));
+
+        const displayProject = (e) => {
+            const projectName = e.target.closest('div').querySelector('.project-name').textContent;
             const project = projectInstances
                 .getInstances()
                 .find((project) => project.getName() === projectName);
             const $main = document.querySelector('main');
             const $itemList = document.querySelector('#item-list');
-            $itemList.remove();
+            if ($itemList) {
+                $itemList.remove();
+            }
             $main.appendChild(displayItemList(project));
+        };
+
+        // Add delete btn event listener
+        $deleteBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const name = e.currentTarget.parentElement.querySelector('.project-name').textContent;
+            const project = projectInstances
+                .getInstances()
+                .find((project) => project.getName() === name);
+
+            projectInstances.removeInstance(project);
+
+            const container = e.currentTarget.closest('.project-container');
+            if (container) {
+                container.remove();
+            }
+
+            const $itemList = document.querySelector('#item-list');
+            if ($itemList) {
+                $itemList.remove();
+            }
+
+            const $main = document.querySelector('main');
+            const project0 = projectInstances.getInstances()[0];
+
+            if (projectInstances.getLength() > 0) {
+                $main.appendChild(displayItemList(project0));
+            }
         });
     });
+    // const defaultProject = projectInstances
+    //     .getInstances()
+    //     .find((project) => project.getName() === 'default');
+    // document.querySelector('main').appendChild(displayItemList(defaultProject));
+    // console.log(projectInstances.getInstances());
+
     return $sidebar;
 };
-
-// const resizeSidebar = () => {
-
-// }
-
-// const $toggleBtn = dom.createBtn($sidebar, 'button', 'id', 'toggle-btn');
-// $sidebar.appendChild($toggleBtn);
-
-// $toggleBtn.addEventListener('click', () => {
-
-// })

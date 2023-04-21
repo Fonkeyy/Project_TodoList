@@ -25,6 +25,7 @@ export class ToDoItem {
         const defaultProject = projectInstances
             .getInstances()
             .find((project) => project.getName() === 'default');
+
         defaultProject.addNewItem(this);
     }
 

@@ -1,5 +1,5 @@
 import { Project } from './JS-files/ProjectClass';
-import { ToDoItem } from './JS-files/ToDoItemClass';
+import { ToDoItem } from './JS-files/ToDoClass';
 import { loadMainPage } from './JS-files/homePage';
 import './CSS-files/global.css';
 

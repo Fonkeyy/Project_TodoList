@@ -32,12 +32,12 @@ export const projectInstances = (() => {
     const instances = [];
 
     const getInstances = () => instances;
-    const getInstancesNames = () => instances.map((project) => project.getName());
-    const getInstancesLength = () => instances.length;
+    const getNames = () => instances.map((project) => project.getName());
+    const getLength = () => instances.length;
 
     const addInstance = (instance) => {
         // check if instance name is already set to instances
-        if (getInstancesNames().every((element) => element !== instance)) {
+        if (getNames().every((element) => element !== instance)) {
             instances.push(instance);
         }
     };
@@ -51,5 +51,5 @@ export const projectInstances = (() => {
         getInstances().splice(index, 1);
     };
 
-    return { addInstance, getInstances, getInstancesNames, getInstancesLength, removeInstance };
+    return { addInstance, getInstances, getNames, getLength, removeInstance };
 })();

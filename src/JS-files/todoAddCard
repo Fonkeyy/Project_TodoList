@@ -1,0 +1,52 @@
+import { dom } from './global';
+import { ToDoItem } from './ToDoClass';
+import '../CSS-files/todoAddCard.css';
+import { projectInstances } from './ProjectClass';
+
+const todoAddCard = (() => {
+    const displayCard = () => {
+        const $main = document.querySelector('main');
+        const $todoAddCard = dom.createDiv($main, 'id', 'todo-add-card');
+
+        const inputName = document.createElement('input');
+        inputName.setAttribute('type', 'text');
+        inputName.setAttribute('placeholder', 'Task name');
+        inputName.id = 'input-name';
+
+        const inputDescription = document.createElement('input');
+        inputDescription.setAttribute('type', 'text');
+        inputDescription.setAttribute('placeholder', 'Description');
+        inputDescription.id = 'input-description';
+
+        // todo: Implement dueDate, Priority and projects
+
+        const $cancelBtn = dom.createBtn($todoAddCard, 'button', 'id', 'cancel-btn', 'Cancel');
+        $cancelBtn.addEventListener('click', closeCard);
+
+        const $addTaskBtn = dom.createBtn($todoAddCard, 'button', 'id', 'add-task-btn', 'Add task');
+        $addTaskBtn.addEventListener('click', () => {
+            const title = inputName.value;
+            const description = inputDescription.value;
+            // todo: add dueDate, Priority and projects
+            new ToDoItem(title, description);
+            closeCard();
+            console.log(
+                projectInstances
+                    .getInstances()
+                    .find((project) => project.getName() === 'default')
+                    .getList()
+            );
+        });
+
+        $todoAddCard.append(inputName, inputDescription, $cancelBtn, $addTaskBtn);
+    };
+
+    const closeCard = () => {
+        const $todoAddCard = document.querySelector('#todo-add-card');
+        $todoAddCard.remove();
+    };
+
+    return { displayCard, closeCard };
+})();
+
+export { todoAddCard };

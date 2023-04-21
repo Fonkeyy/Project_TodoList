@@ -1,4 +1,5 @@
 import { dom } from './global';
+import { todoAddCard } from './todoAddCard';
 export { displayHeader };
 
 const displayHeader = () => {
@@ -25,7 +26,9 @@ const displayHeader = () => {
 
     const $newTaskBtn = dom.createBtn($headerRightContainer, 'button', 'id', 'new-task-btn');
     $newTaskBtn.classList.add('header-btn');
-    $newTaskBtn.addEventListener('click', () => {}); //todo => add function listener
+    $newTaskBtn.addEventListener('click', () => {
+        todoAddCard.displayCard();
+    });
 
     return $header;
 };
