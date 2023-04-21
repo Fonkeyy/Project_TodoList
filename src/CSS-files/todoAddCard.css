@@ -6,6 +6,12 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: aquamarine;
-    height: 200px;
-    width: 200px;
+    height: 190px;
+    max-width: 580px;
+}
+
+@media screen and (min-width = 750px) {
+    #todo-add-card {
+        width: 550px;
+    }
 }

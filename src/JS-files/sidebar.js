@@ -30,10 +30,10 @@ const displaySidebar = () => {
     const $addProjectBtn = dom.createBtn($sideBarProjectContainerTitle, 'button');
     // Add 'add' btn style
     $sidebar.addEventListener('mouseover', () => {
-        $addProjectBtn.classList.toggle('opacity');
+        $addProjectBtn.classList.add('opacity');
     });
     $sidebar.addEventListener('mouseout', () => {
-        $addProjectBtn.classList.toggle('opacity');
+        $addProjectBtn.classList.remove('opacity');
     });
 
     $addProjectBtn.addEventListener('click', () => {}); //todo => add function listeners
@@ -61,15 +61,6 @@ const displaySidebar = () => {
             event.currentTarget.querySelector('.project-length').classList.toggle('none');
             event.currentTarget.querySelector('#delete-btn').classList.toggle('none');
         });
-
-        // $projectLength.addEventListener('mouseover', (event) => {
-        //     event.currentTarget.querySelector('.project-length').classList.toggle('red');
-        //     event.currentTarget.querySelector('#delete-btn').classList.toggle('none');
-        // });
-        // $projectLength.addEventListener('mouseout', (event) => {
-        //     event.currentTarget.querySelector('.project-length').classList.toggle('none');
-        //     event.currentTarget.querySelector('#delete-btn').classList.toggle('none');
-        // });
 
         // Add project items event listener
         $projectItemContainer.addEventListener('click', (e) => displayProject(e));
