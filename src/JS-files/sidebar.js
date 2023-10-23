@@ -1,6 +1,6 @@
 import { dom } from './global';
 import { projectInstances } from './ProjectClass';
-import { displayItemList } from './homePage';
+import { displayListItem } from './homePage';
 import '../CSS-files/global.css';
 export { displaySidebar };
 
@@ -67,11 +67,11 @@ const displaySidebar = () => {
                 .getInstances()
                 .find((project) => project.getName() === projectName);
             const $main = document.querySelector('main');
-            const $itemList = document.querySelector('#item-list');
-            if ($itemList) {
-                $itemList.remove();
+            const $listItem = document.querySelector('#list-item');
+            if ($listItem) {
+                $listItem.remove();
             }
-            $main.appendChild(displayItemList(project));
+            $main.appendChild(displayListItem(project));
         };
 
         // * Add delete btn event listener
@@ -87,16 +87,16 @@ const displaySidebar = () => {
                 container.remove();
             }
 
-            const $itemList = document.querySelector('#item-list');
-            if ($itemList) {
-                $itemList.remove();
+            const $listItem = document.querySelector('#list-item');
+            if ($listItem) {
+                $listItem.remove();
             }
 
             const $main = document.querySelector('main');
             const project0 = projectInstances.getInstances()[0];
 
             if (projectInstances.getLength() > 0) {
-                $main.appendChild(displayItemList(project0));
+                $main.appendChild(displayListItem(project0));
             }
         });
     });

@@ -5,7 +5,7 @@ main {
     gap: 12rem;
 }
 
-#item-list {
+#list-item {
     /* width: calc(100% - 305px); */
     width: 50%;
     display: grid;
@@ -26,7 +26,7 @@ main {
     row-gap: 0.7rem;
 }
 
-.li-item > input[type='checkbox'] {
+/* .li-item > input[type='checkbox'] {
     -webkit-appearance: none;
     -moz-appearance: none;
     -ms-appearance: none;
@@ -35,7 +35,7 @@ main {
     border-radius: 50%;
     border: 1px solid rgb(128, 128, 128);
     grid-row-start: span 2;
-}
+} */
 
 .li-item > .close-btn {
     background-image: url('../../assets/icons/dots.svg');
@@ -50,7 +50,7 @@ main {
     transition: opacity 0.15s ease-in;
 }
 
-.item-list-due-date {
+.list-item-due-date {
     color: var(--header-color);
     font-size: 12px;
     grid-column-start: 2;

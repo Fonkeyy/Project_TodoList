@@ -26,33 +26,30 @@ export const loadMainPage = () => {
 
     // * Display default project
     const defaultProject = projectInstances.getInstances().find((project) => project.getName() === 'default');
-    $main.appendChild(displayItemList(defaultProject));
+    $main.appendChild(displayListItem(defaultProject));
 };
 
-export const displayItemList = (project) => {
+export const displayListItem = (project) => {
     if (project) {
         // * Create container
-        const $itemList = document.createElement('div');
-        $itemList.id = 'item-list';
-        $itemList.classList.add('item-list');
+        const $listItem = document.createElement('div');
+        $listItem.id = 'list-item';
+        $listItem.classList.add('list-item');
 
         // * Display project title
-        dom.createP($itemList, `${project.getName()}`, 'id', 'project-title');
+        dom.createP($listItem, `${project.getName()}`, 'id', 'project-title');
 
         // * Display project todoItems
         project.getList().forEach((item) => {
             const $li = document.createElement('div');
             $li.setAttribute('data-project-id', `${item.getId()}`);
 
-            const $checkbox = document.createElement('input');
-            $checkbox.type = 'checkbox';
-            $checkbox.name = 'checkStatus';
-            $checkbox.value = 'true';
-            $checkbox.id = 'checkbox';
-            $li.classList.add('li-item');
-            $li.appendChild($checkbox);
+            const checkbox = dom.createCheckbox($li, item.getPriority());
+            checkbox.addEventListener('click', (e) => e.stopPropagation());
 
-            dom.createP($li, item.getTitle(), 'class', 'item-list-title');
+            $li.classList.add('li-item');
+
+            dom.createP($li, item.getTitle(), 'class', 'list-item-title');
 
             // * Create close btn and add styles
             const $closeBtn = dom.createBtn($li, 'button', 'class', 'close-btn');
@@ -65,9 +62,9 @@ export const displayItemList = (project) => {
             $closeBtn.addEventListener('click', () => {}); //todo => add function listener
 
             // * Display due date
-            dom.createP($li, item.getDueDate(), 'class', 'item-list-due-date'); //todo => implement date stuff
+            dom.createP($li, item.getDueDate(), 'class', 'list-item-due-date'); //todo => implement date stuff
 
-            $itemList.appendChild($li);
+            $listItem.appendChild($li);
 
             // * Add project todoItems event listener
             //todo change title for id
@@ -81,7 +78,7 @@ export const displayItemList = (project) => {
         });
 
         // Create draggable list
-        // new Sortable($itemList);
-        return $itemList;
+        // new Sortable($listItem);
+        return $listItem;
     }
 };

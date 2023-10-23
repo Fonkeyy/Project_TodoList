@@ -102,33 +102,6 @@
     gap: 1rem;
 }
 
-#title-container > input[type='checkbox'] {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -ms-appearance: none;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    position: relative;
-}
-
-#title-container > input[type='checkbox']::before {
-    content: '\2713';
-    font-size: 18px;
-    line-height: 20px;
-    position: absolute;
-    top: 0;
-    left: 2px;
-    color: grey;
-    visibility: hidden;
-}
-
-#title-container > input[type='checkbox']:checked::before,
-#title-container > input[type='checkbox']:hover::before {
-    visibility: visible;
-}
-
 #item-description-container {
     display: flex;
     margin-left: 15px;
@@ -167,22 +140,6 @@
     background-size: contain;
     border: none;
     grid-row-start: 2;
-}
-
-.P1 {
-    border: 2px solid rgb(217, 71, 64);
-    background-color: rgba(217, 71, 64, 0.1);
-}
-.P2 {
-    border: 2px solid rgb(242, 139, 45);
-    background-color: rgba(242, 139, 45, 0.1);
-}
-.P3 {
-    border: 2px solid rgb(0, 106, 218);
-    background-color: rgba(0, 106, 218, 0.1);
-}
-.P4 {
-    border: 1px solid grey;
 }
 
 @media screen and (min-width: 750px) {

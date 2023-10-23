@@ -12,7 +12,7 @@ new Project('test1');
 
 // const toDoTest =
 new ToDoItem('try mdp 123456', 'find something', '17/08/2023', 'P1', 'test', 'no comments');
-new ToDoItem('try mdp', 'find something', '07/04/2023', 'P1', 'default', 'no comments');
+new ToDoItem('try mdp', 'find something', '07/04/2023', 'P2', 'default', 'no comments');
 // const toDoTest1 =
 
 // defaultProject.addNewItem(toDoTest1);

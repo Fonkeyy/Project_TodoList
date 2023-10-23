@@ -50,7 +50,31 @@ const dom = (() => {
         parent.appendChild(label);
         return label;
     };
-    return { createDiv, createH, createP, createBtn, createImg, createLabel };
+
+    const createCheckbox = (parent, priority) => {
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        switch (priority) {
+            case 'P1':
+                checkbox.className = 'P1';
+                break;
+            case 'P2':
+                checkbox.className = 'P2';
+                break;
+            case 'P3':
+                checkbox.className = 'P3';
+                break;
+            case 'P4':
+                checkbox.className = 'P4';
+                break;
+        }
+        checkbox.name = 'checkStatus';
+        checkbox.id = 'checkbox';
+
+        parent.appendChild(checkbox);
+        return checkbox;
+    };
+    return { createDiv, createH, createP, createBtn, createImg, createLabel, createCheckbox };
 })();
 
 const focusUp = (parent, child) => {
