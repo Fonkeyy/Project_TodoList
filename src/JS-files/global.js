@@ -1,6 +1,7 @@
 export { dom, focusUp, focusDown };
 
 import '../CSS-files/global.css';
+import { projectInstances } from './ProjectClass';
 
 const dom = (() => {
     const createDiv = (parent, attribute, attributeName) => {
@@ -74,7 +75,51 @@ const dom = (() => {
         parent.appendChild(checkbox);
         return checkbox;
     };
-    return { createDiv, createH, createP, createBtn, createImg, createLabel, createCheckbox };
+
+    const createSelectProject = (parent, todo) => {
+        const selectProject = document.createElement('select');
+        selectProject.id = 'project-select';
+
+        const projectInstancesArray = projectInstances.getInstances();
+
+        if (todo) {
+            const firstOption = document.createElement('option');
+            firstOption.textContent = todo.getProjectName() || 'default';
+            selectProject.appendChild(firstOption);
+
+            projectInstancesArray
+                .filter((project) => project.getName() != todo.getProjectName())
+                .forEach((project) => {
+                    const option = document.createElement('option');
+                    option.textContent = project.getName();
+                    selectProject.appendChild(option);
+                });
+        } else {
+            projectInstancesArray.forEach((project) => {
+                const option = document.createElement('option');
+                option.textContent = project.getName();
+                selectProject.appendChild(option);
+            });
+        }
+        selectProject.addEventListener('change', (e) => {
+            if (todo) {
+                todo.setProject(e.target.value);
+            }
+        });
+        parent.appendChild(selectProject);
+        return selectProject.value;
+    };
+
+    return {
+        createDiv,
+        createH,
+        createP,
+        createBtn,
+        createImg,
+        createLabel,
+        createCheckbox,
+        createSelectProject,
+    };
 })();
 
 const focusUp = (parent, child) => {

@@ -32,7 +32,7 @@ export class ToDoItem {
     getDescription = () => this.description;
     getDueDate = () => this.dueDate;
     getPriority = () => this.priority;
-    getProject = () => this.project;
+    getProjectName = () => this.projectName;
     getComment = () => this.comment;
     getCheckStatus = () => this.checkStatus;
     getId = () => this.id;

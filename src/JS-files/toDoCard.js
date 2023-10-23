@@ -63,7 +63,20 @@ const toDoCard = (() => {
         const $projectSvg = dom.createDiv($projectNameContainer, 'class', 'svg-card');
         $projectSvg.id = 'project-svg';
         dom.createLabel($projectNameContainer, 'Project');
-        dom.createP($projectNameContainer, item.getProjectNames());
+
+        // const projectName = dom.createP($projectNameContainer, item.getProjectNames());
+
+        // projectName.addEventListener('click', () => {
+        //     projectName.classList.toggle('display-none');
+        //     const select = dom.createSelectProject($projectNameContainer);
+        //     select.addEventListener('onchange', (e) => {
+        //         item.setPriority(e.value);
+        //         projectName.classList.toggle('display-none');
+        //         select.classList.toggle('display-none');
+        //     });
+        // });
+
+        dom.createSelectProject($projectNameContainer, item);
 
         // * Due date
         const $dueDateContainer = dom.createDiv($mainContent, 'id', 'due-date-container');

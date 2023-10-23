@@ -44,6 +44,11 @@ h6 {
     isolation: isolate;
 }
 
+.display-none {
+    display: none;
+    /* transition: opacity 0.15s ease-out; */
+}
+
 .opacity {
     opacity: 1 !important;
     transition: opacity 0.15s ease-out;
