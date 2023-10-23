@@ -12,7 +12,6 @@ import '../CSS-files/todoCard.css';
 import '../CSS-files/todoAddCard.css';
 
 import { toDoCard } from './toDoCard';
-// import { searchFunction } from './utility';
 
 export const loadMainPage = () => {
     // * Header

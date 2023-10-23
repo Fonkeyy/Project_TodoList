@@ -44,14 +44,31 @@ const toDoCard = (() => {
         const $mainContent = dom.createDiv($cardContent, 'id', 'main-content');
 
         const $titleContainer = dom.createDiv($mainContent, 'id', 'title-container');
+
         const $checkbox = document.createElement('input');
         $checkbox.type = 'checkbox';
+        switch (item.getPriority()) {
+            case 'P1':
+                $checkbox.className = 'P1';
+                break;
+            case 'P2':
+                $checkbox.className = 'P2';
+                break;
+            case 'P3':
+                $checkbox.className = 'P3';
+                break;
+            case 'P4':
+                $checkbox.className = 'P4';
+                break;
+        }
         $checkbox.name = 'checkStatus';
         $checkbox.id = 'checkbox';
 
         $titleContainer.appendChild($checkbox);
 
-        console.log($checkbox.checked);
+        $checkbox.addEventListener('click', () => {
+            console.log($checkbox.checked);
+        });
 
         dom.createH($titleContainer, item.getTitle(), 2);
 
