@@ -52,12 +52,6 @@ const todoAddCard = (() => {
 
             new ToDoItem(title, description, date, priority, projectName);
             closeCard();
-            // console.log(
-            //     projectInstances
-            //         .getInstances()
-            //         .find((project) => project.getName() === 'default')
-            //         .getList()
-            // );
         });
 
         $todoAddCard.append(

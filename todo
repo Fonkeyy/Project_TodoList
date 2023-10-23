@@ -1,7 +1,8 @@
 toDoCard:
 
-add date picker
-add priority levels
 fix checkbox
 
 wire add new project btn
+add toggle display project list
+
+add possibility to change "due" on todoCard

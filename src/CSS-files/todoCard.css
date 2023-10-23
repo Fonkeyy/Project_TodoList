@@ -17,7 +17,7 @@
     color: rgb(26, 26, 26);
 }
 
-/* Header */
+/* * Header */
 
 .header-content {
     display: grid;
@@ -87,7 +87,7 @@
     cursor: pointer;
 }
 
-/* Main */
+/* * Main */
 
 #main-content {
     margin: 0px 35px;
@@ -124,45 +124,35 @@
     cursor: pointer;
 }
 
-#project-name-container {
-    display: flex;
+.due-container {
+    display: grid;
+}
+
+.due-container label {
+    grid-column-start: span 2;
 }
 
 #project-svg {
     background-image: url('../assets/icons/inbox.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    border: none;
-    cursor: pointer;
-}
-
-#due-date-container {
-    display: flex;
 }
 
 #due-date-svg {
     background-image: url('../assets/icons/due-date.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    border: none;
-    cursor: pointer;
-}
-
-#priority-container {
-    display: flex;
 }
 
 #priority-svg {
     background-image: url('../assets/icons/priority.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    border: none;
-    cursor: pointer;
 }
 
 .svg-card {
     width: 15px;
     height: 15px;
+
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+    grid-row-start: 2;
 }
 
 @media screen and (min-width: 750px) {
