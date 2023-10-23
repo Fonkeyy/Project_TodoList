@@ -47,9 +47,11 @@ const toDoCard = (() => {
         const $checkbox = document.createElement('input');
         $checkbox.type = 'checkbox';
         $checkbox.name = 'checkStatus';
-        $checkbox.value = 'true';
         $checkbox.id = 'checkbox';
+
         $titleContainer.appendChild($checkbox);
+
+        console.log($checkbox.checked);
 
         dom.createH($titleContainer, item.getTitle(), 2);
 
@@ -58,7 +60,7 @@ const toDoCard = (() => {
         $descriptionSvg.id = 'description-svg';
         dom.createP($itemDescriptionContainer, item.getDescription(), 'class', 'item-description');
 
-        const $projectNameContainer = dom.createDiv($mainContent, 'class', 'project-name-container');
+        const $projectNameContainer = dom.createDiv($mainContent, 'id', 'project-name-container');
         $projectNameContainer.classList.add('due-container');
         const $projectSvg = dom.createDiv($projectNameContainer, 'class', 'svg-card');
         $projectSvg.id = 'project-svg';
