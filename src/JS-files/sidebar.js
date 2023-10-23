@@ -12,57 +12,53 @@ const displaySidebar = () => {
 
     const $sideBarProjectContainer = dom.createDiv($sidebar, 'id', 'side-project-container');
 
-    //Create title container
+    // * Create title container
     const $sideBarProjectContainerTitle = dom.createDiv(
         $sideBarProjectContainer,
         'id',
         'sidebar-project-container-title'
     );
 
-    // Add title style
-    $sideBarProjectContainerTitle.addEventListener('mouseover', () => {
+    // * Add title style
+    $sideBarProjectContainerTitle.addEventListener('mouseenter', () => {
         $sideBarProjectContainerTitle.classList.toggle('grey-hover');
     });
-    $sideBarProjectContainerTitle.addEventListener('mouseout', () => {
+    $sideBarProjectContainerTitle.addEventListener('mouseleave', () => {
         $sideBarProjectContainerTitle.classList.toggle('grey-hover');
     });
     dom.createH($sideBarProjectContainerTitle, 'Projects', 3);
     const $addProjectBtn = dom.createBtn($sideBarProjectContainerTitle, 'button');
-    // Add 'add' btn style
-    $sidebar.addEventListener('mouseover', () => {
+    // * Add 'add' btn style
+    $sidebar.addEventListener('mouseenter', () => {
         $addProjectBtn.classList.add('opacity');
     });
-    $sidebar.addEventListener('mouseout', () => {
+    $sidebar.addEventListener('mouseleave', () => {
         $addProjectBtn.classList.remove('opacity');
     });
 
     $addProjectBtn.addEventListener('click', () => {}); //todo => add function listeners
 
-    // Create project items
+    // * Create project items
     projectInstances.getInstances().forEach((project) => {
-        const $projectItemContainer = dom.createDiv(
-            $sideBarProjectContainer,
-            'class',
-            'project-container'
-        );
+        const $projectItemContainer = dom.createDiv($sideBarProjectContainer, 'class', 'project-container');
         dom.createP($projectItemContainer, `${project.getName()}`, 'class', 'project-name');
         dom.createP($projectItemContainer, `${project.getLength()}`, 'class', 'project-length');
         const $deleteBtn = dom.createBtn($projectItemContainer, 'button', 'id', 'delete-btn');
         $deleteBtn.classList.add('none');
 
-        // Add project items style
-        $projectItemContainer.addEventListener('mouseover', (event) => {
+        // * Add project items style
+        $projectItemContainer.addEventListener('mouseenter', (event) => {
             event.currentTarget.classList.toggle('grey-hover');
             event.currentTarget.querySelector('.project-length').classList.toggle('none');
             event.currentTarget.querySelector('#delete-btn').classList.toggle('none');
         });
-        $projectItemContainer.addEventListener('mouseout', (event) => {
+        $projectItemContainer.addEventListener('mouseleave', (event) => {
             event.currentTarget.classList.toggle('grey-hover');
             event.currentTarget.querySelector('.project-length').classList.toggle('none');
             event.currentTarget.querySelector('#delete-btn').classList.toggle('none');
         });
 
-        // Add project items event listener
+        // * Add project items event listener
         $projectItemContainer.addEventListener('click', (e) => displayProject(e));
 
         const displayProject = (e) => {
@@ -78,13 +74,11 @@ const displaySidebar = () => {
             $main.appendChild(displayItemList(project));
         };
 
-        // Add delete btn event listener
+        // * Add delete btn event listener
         $deleteBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             const name = e.currentTarget.parentElement.querySelector('.project-name').textContent;
-            const project = projectInstances
-                .getInstances()
-                .find((project) => project.getName() === name);
+            const project = projectInstances.getInstances().find((project) => project.getName() === name);
 
             projectInstances.removeInstance(project);
 
@@ -106,11 +100,6 @@ const displaySidebar = () => {
             }
         });
     });
-    // const defaultProject = projectInstances
-    //     .getInstances()
-    //     .find((project) => project.getName() === 'default');
-    // document.querySelector('main').appendChild(displayItemList(defaultProject));
-    // console.log(projectInstances.getInstances());
 
     return $sidebar;
 };

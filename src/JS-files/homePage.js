@@ -15,34 +15,32 @@ import { toDoCard } from './toDoCard';
 // import { searchFunction } from './utility';
 
 export const loadMainPage = () => {
-    // Header
+    // * Header
     document.body.appendChild(displayHeader());
 
-    // Main
+    // * Main
     const $main = document.createElement('main');
     document.body.appendChild($main);
 
-    // Sidebar
+    // * Sidebar
     $main.appendChild(displaySidebar());
 
-    // Display default project
-    const defaultProject = projectInstances
-        .getInstances()
-        .find((project) => project.getName() === 'default');
+    // * Display default project
+    const defaultProject = projectInstances.getInstances().find((project) => project.getName() === 'default');
     $main.appendChild(displayItemList(defaultProject));
 };
 
 export const displayItemList = (project) => {
     if (project) {
-        // Create container
+        // * Create container
         const $itemList = document.createElement('div');
         $itemList.id = 'item-list';
         $itemList.classList.add('item-list');
 
-        // Display project title
+        // * Display project title
         dom.createP($itemList, `${project.getName()}`, 'id', 'project-title');
 
-        // Display project todoItems
+        // * Display project todoItems
         project.getList().forEach((item) => {
             const $li = document.createElement('div');
             $li.setAttribute('data-project-id', `${item.getId()}`);
@@ -57,29 +55,28 @@ export const displayItemList = (project) => {
 
             dom.createP($li, item.getTitle(), 'class', 'item-list-title');
 
-            // Create close btn and add styles
+            // * Create close btn and add styles
             const $closeBtn = dom.createBtn($li, 'button', 'class', 'close-btn');
-            $li.addEventListener('mouseover', () => {
+            $li.addEventListener('mouseenter', () => {
                 $closeBtn.classList.toggle('opacity');
             });
-            $li.addEventListener('mouseout', () => {
+            $li.addEventListener('mouseleave', () => {
                 $closeBtn.classList.toggle('opacity');
             });
             $closeBtn.addEventListener('click', () => {}); //todo => add function listener
 
-            // Display due date
+            // * Display due date
             dom.createP($li, item.getDueDate(), 'class', 'item-list-due-date'); //todo => implement date stuff
 
             $itemList.appendChild($li);
 
-            // Add project todoItems event listener //todo change title for id
+            // * Add project todoItems event listener
+            //todo change title for id
             $li.addEventListener('click', (e) => {
                 const itemTitle = e.target.closest('div').querySelector('p').textContent;
 
                 toDoCard.clearCard();
-                toDoCard.displayCard(
-                    project.getList().find((todo) => todo.getTitle() === itemTitle)
-                );
+                toDoCard.displayCard(project.getList().find((todo) => todo.getTitle() === itemTitle));
                 focusUp(document.body, document.querySelector('#card'));
             });
         });

@@ -41,9 +41,11 @@ main {
     background-image: url('../../assets/icons/dots.svg');
     background-repeat: no-repeat;
     background-size: contain;
+    /* background-color: red; */
     border: none;
     cursor: pointer;
-    width: min-content;
+    width: fit-content;
+    height: 15px;
     opacity: 0;
     transition: opacity 0.15s ease-in;
 }

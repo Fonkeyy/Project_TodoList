@@ -5,7 +5,7 @@ export class Project {
         projectInstances.addInstance(this);
     }
 
-    //Getters
+    // * Getters
     getName = () => this.name;
     getList = () => this.list;
     getLength = () => this.list.length;
@@ -16,15 +16,16 @@ export class Project {
     getCheckStatus = () => this.list.map((item) => item.getCheckStatus());
     getIds = () => this.list.map((item) => item.getId());
 
-    //Setters
+    // * Setters
     addNewItem = (item) => {
-        // check if project name is already set to item
+        // * check if project name is already set to item
         if (item.getProjectNames().every((element) => element !== this.getName())) {
             item.setProjectName(this.getName());
         }
         this.list.push(item);
     };
 
+    // todo filter?
     removeItem = (item) => this.list.remove(this.list.getIds() === item.getId());
 }
 
@@ -36,7 +37,7 @@ export const projectInstances = (() => {
     const getLength = () => instances.length;
 
     const addInstance = (instance) => {
-        // check if instance name is already set to instances
+        // * check if instance name is already set to instances
         if (getNames().every((element) => element !== instance)) {
             instances.push(instance);
         }
@@ -44,9 +45,7 @@ export const projectInstances = (() => {
 
     const removeInstance = (instance) => {
         const index = getInstances().indexOf(
-            projectInstances
-                .getInstances()
-                .find((project) => project.getName() === instance.getName())
+            projectInstances.getInstances().find((project) => project.getName() === instance.getName())
         );
         getInstances().splice(index, 1);
     };
