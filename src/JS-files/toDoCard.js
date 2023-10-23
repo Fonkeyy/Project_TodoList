@@ -12,27 +12,30 @@ const toDoCard = (() => {
 
         // * header-content
         const $headerContent = dom.createDiv($cardContent, 'class', 'header-content');
-
         const $headerContentLeft = dom.createDiv($headerContent, 'id', 'header-content-left');
+        const $headerContentRight = dom.createDiv($headerContent, 'id', 'header-content-right');
+
+        // * Project name
         const $projectNameSvg = dom.createDiv($headerContentLeft, 'class', 'svg-card');
         $projectNameSvg.id = 'project-name-svg';
         dom.createP($headerContentLeft, item.getProjectNames());
 
-        const $headerContentRight = dom.createDiv($headerContent, 'id', 'header-content-right');
-
-        // * header btn
+        // * Next button
         const $nextBtn = dom.createBtn($headerContentRight, 'button', 'class', 'next-btn');
         $nextBtn.classList.add('header-card-btn');
         $nextBtn.addEventListener('click', () => {}); //todo => add function listener
 
+        // * Previous button
         const $previousBtn = dom.createBtn($headerContentRight, 'button', 'class', 'previous-btn');
         $previousBtn.classList.add('header-card-btn');
         $previousBtn.addEventListener('click', () => {}); //todo => add function listener
 
+        // * More button
         const $moreBtn = dom.createBtn($headerContentRight, 'button', 'class', 'more-btn');
         $moreBtn.classList.add('header-card-btn');
         $moreBtn.addEventListener('click', () => {}); //todo => add function listener
 
+        // * Close button
         const $closeBtn = dom.createBtn($headerContentRight, 'button', 'class', 'close-btn');
         $closeBtn.classList.add('header-card-btn');
         $closeBtn.addEventListener('click', () => {
@@ -40,45 +43,21 @@ const toDoCard = (() => {
             focusDown();
         });
 
-        // * main-content
+        // * Main-content
         const $mainContent = dom.createDiv($cardContent, 'id', 'main-content');
 
+        // * Title
         const $titleContainer = dom.createDiv($mainContent, 'id', 'title-container');
-
-        // const $checkbox = document.createElement('input');
-        // $checkbox.type = 'checkbox';
-        // switch (item.getPriority()) {
-        //     case 'P1':
-        //         $checkbox.className = 'P1';
-        //         break;
-        //     case 'P2':
-        //         $checkbox.className = 'P2';
-        //         break;
-        //     case 'P3':
-        //         $checkbox.className = 'P3';
-        //         break;
-        //     case 'P4':
-        //         $checkbox.className = 'P4';
-        //         break;
-        // }
-        // $checkbox.name = 'checkStatus';
-        // $checkbox.id = 'checkbox';
-
-        // $titleContainer.appendChild($checkbox);
-
         dom.createCheckbox($titleContainer, item.getPriority());
-
-        // $checkbox.addEventListener('click', () => {
-        //     console.log($checkbox.checked);
-        // });
-
         dom.createH($titleContainer, item.getTitle(), 2);
 
+        // * Description
         const $itemDescriptionContainer = dom.createDiv($mainContent, 'id', 'item-description-container');
         const $descriptionSvg = dom.createDiv($itemDescriptionContainer, 'class', 'svg-card');
         $descriptionSvg.id = 'description-svg';
         dom.createP($itemDescriptionContainer, item.getDescription(), 'class', 'item-description');
 
+        // * Project
         const $projectNameContainer = dom.createDiv($mainContent, 'id', 'project-name-container');
         $projectNameContainer.classList.add('due-container');
         const $projectSvg = dom.createDiv($projectNameContainer, 'class', 'svg-card');
@@ -86,24 +65,23 @@ const toDoCard = (() => {
         dom.createLabel($projectNameContainer, 'Project');
         dom.createP($projectNameContainer, item.getProjectNames());
 
+        // * Due date
         const $dueDateContainer = dom.createDiv($mainContent, 'id', 'due-date-container');
         $dueDateContainer.classList.add('due-container');
-
         const $dueDateSvg = dom.createDiv($dueDateContainer, 'class', 'svg-card');
         $dueDateSvg.id = 'due-date-svg';
         dom.createLabel($dueDateContainer, 'Due Date');
         dom.createP($dueDateContainer, item.getDueDate());
 
+        // * Priority
         const $priorityContainer = dom.createDiv($mainContent, 'id', 'priority-container');
         $priorityContainer.classList.add('due-container');
-
         const $prioritySvg = dom.createDiv($priorityContainer, 'class', 'svg-card');
         $prioritySvg.id = 'priority-svg';
         dom.createLabel($priorityContainer, 'Priority');
         dom.createP($priorityContainer, item.getPriority());
 
-        //todo Create checkbox
-
+        // * Comment
         dom.createP($mainContent, item.getComment(), 'class', 'item-comment');
     };
 
