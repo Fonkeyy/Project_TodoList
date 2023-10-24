@@ -7,6 +7,5 @@ add hide label class
 refactor all inputs
 
 change font-size 14px
-add svg to searchBar
 
-check border-radius bug on hover searchBar
+fix close btn always visible in sidebar

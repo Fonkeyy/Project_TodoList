@@ -4,7 +4,7 @@ header {
     height: 44px;
     width: 100vw;
     background-color: var(--bg-primary-color);
-    padding: 0px 12px;
+    padding: 0px 1rem;
     display: flex;
     justify-content: space-between;
     place-content: center;
@@ -26,9 +26,16 @@ header {
     border: none;
     background-color: transparent;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     filter: invert(100%);
+
+    /* padding: 1rem !important; */
+}
+
+.header-btn:hover {
+    background-color: rgba(250, 250, 250, 0.2);
+    border-radius: 3px;
 }
 
 #header-menu-btn {
@@ -44,7 +51,8 @@ header {
     height: 100%;
     display: flex;
     place-items: center;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition: background-color 0.2s ease;
+    border-radius: 4px;
 }
 
 #search-input {
@@ -68,6 +76,8 @@ header {
 #search-input::placeholder {
     color: var(--bg-secondary-color);
     padding-left: 0.6rem;
+    color: var(--bg-secondary-color);
+    transition: color 0.2s ease;
 }
 
 .searchBar-wrapper:hover {
