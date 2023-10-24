@@ -11,7 +11,7 @@ const displaySidebar = () => {
 
     //todo add function sidebar resize
 
-    const $sideBarProjectContainer = dom.createDiv($sidebar, 'id', 'side-project-container');
+    const $sideBarProjectContainer = dom.createDiv($sidebar);
 
     // * Create title container
     const $sideBarProjectContainerTitle = dom.createDiv(
@@ -46,18 +46,18 @@ const displaySidebar = () => {
         dom.createP($projectItemContainer, `${project.getName()}`, 'class', 'project-name');
         dom.createP($projectItemContainer, `${project.getLength()}`, 'class', 'project-length');
         const $deleteBtn = dom.createBtn($projectItemContainer, 'button', 'id', 'delete-btn');
-        $deleteBtn.classList.add('none');
+        $deleteBtn.classList.add('display-none');
 
         // * Add project items style
         $projectItemContainer.addEventListener('mouseenter', (event) => {
             event.currentTarget.classList.toggle('grey-hover');
-            event.currentTarget.querySelector('.project-length').classList.toggle('none');
-            event.currentTarget.querySelector('#delete-btn').classList.toggle('none');
+            event.currentTarget.querySelector('.project-length').classList.toggle('display-none');
+            event.currentTarget.querySelector('#delete-btn').classList.toggle('display-none');
         });
         $projectItemContainer.addEventListener('mouseleave', (event) => {
             event.currentTarget.classList.toggle('grey-hover');
-            event.currentTarget.querySelector('.project-length').classList.toggle('none');
-            event.currentTarget.querySelector('#delete-btn').classList.toggle('none');
+            event.currentTarget.querySelector('.project-length').classList.toggle('display-none');
+            event.currentTarget.querySelector('#delete-btn').classList.toggle('display-none');
         });
 
         // * Add project items event listener

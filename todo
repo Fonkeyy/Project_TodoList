@@ -9,3 +9,5 @@ refactor all inputs
 change font-size 14px
 
 fix close btn always visible in sidebar
+
+add local storage

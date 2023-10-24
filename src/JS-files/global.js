@@ -6,41 +6,63 @@ import '../CSS-files/global.css';
 const dom = (() => {
     const createDiv = (parent, attribute, attributeName) => {
         const div = document.createElement('div');
-        div.setAttribute(attribute, attributeName);
-        parent.appendChild(div);
+        if (parent) {
+            parent.appendChild(div);
+        }
+        if (attribute && attributeName) {
+            div.setAttribute(attribute, attributeName);
+        }
         return div;
     };
 
     const createH = (parent, text, number, attribute, attributeName) => {
         const h = document.createElement(`h${number}`);
         h.textContent = text;
-        parent.appendChild(h);
-        h.setAttribute(attribute, attributeName);
+        if (parent) {
+            parent.appendChild(h);
+        }
+        if (attribute && attributeName) {
+            h.setAttribute(attribute, attributeName);
+        }
         return h;
     };
 
     const createP = (parent, text, attribute, attributeName) => {
         const p = document.createElement('p');
         p.textContent = text;
-        parent.appendChild(p);
-        p.setAttribute(attribute, attributeName);
+        if (parent) {
+            parent.appendChild(p);
+        }
+        if (attribute && attributeName) {
+            p.setAttribute(attribute, attributeName);
+        }
         return p;
     };
 
-    const createBtn = (parent, type, attribute, attributeName, text) => {
+    const createBtn = (parent, type = 'button', attribute, attributeName, text) => {
         const btn = document.createElement('button');
-        parent.appendChild(btn);
         btn.type = type;
-        btn.setAttribute(attribute, attributeName);
-        btn.textContent = text;
+        if (parent) {
+            parent.appendChild(btn);
+        }
+        if (text) {
+            btn.textContent = text;
+        }
+        if (attribute && attributeName) {
+            btn.setAttribute(attribute, attributeName);
+        }
         return btn;
     };
 
     const createImg = (parent, src, attribute, attributeName) => {
         const img = document.createElement('img');
         img.src = src;
-        img.setAttribute(attribute, attributeName);
-        parent.appendChild(img);
+        if (attribute && attributeName) {
+            img.setAttribute(attribute, attributeName);
+        }
+        if (parent) {
+            parent.appendChild(img);
+        }
         return img;
     };
 
@@ -64,8 +86,12 @@ const dom = (() => {
     const createLabel = (parent, text, attribute, attributeName) => {
         const label = document.createElement('label');
         label.textContent = text;
-        label.setAttribute(attribute, attributeName);
-        parent.appendChild(label);
+        if (attribute && attributeName) {
+            label.setAttribute(attribute, attributeName);
+        }
+        if (parent) {
+            parent.appendChild(label);
+        }
         return label;
     };
 
@@ -86,14 +112,17 @@ const dom = (() => {
                 checkbox.className = 'P4';
                 break;
         }
-        checkbox.name = 'checkStatus';
-        checkbox.id = 'checkbox';
+        // checkbox.name = 'checkStatus';
+        // checkbox.id = 'checkbox';
 
-        parent.appendChild(checkbox);
+        if (parent) {
+            parent.appendChild(checkbox);
+        }
+
         return checkbox;
     };
 
-    const createSelectProject = (todo) => {
+    const createSelectProject = (parent, todo) => {
         const selectWrapper = document.createElement('div');
         selectWrapper.classList.add('select-project-wrapper');
 
@@ -137,6 +166,10 @@ const dom = (() => {
             }
         });
         selectWrapper.append(svg, selectProject);
+
+        if (parent) {
+            parent.appendChild(selectWrapper);
+        }
 
         // console.log(selectedValue);
         return selectWrapper;
