@@ -44,22 +44,22 @@ const dom = (() => {
         return img;
     };
 
-    const createInputText = (parent, labelText, labelVisibility, attribute, attributeName) => {
-        const inputWrapper = document.createElement('div');
-        inputWrapper.setAttribute(attribute, attributeName);
+    // const createInputText = (parent, labelText, labelVisibility, attribute, attributeName) => {
+    //     const inputWrapper = document.createElement('div');
+    //     inputWrapper.setAttribute(attribute, attributeName);
 
-        const label = document.createElement('label');
-        label.textContent = labelText;
-        label.className = labelVisibility ? '' : 'hide-label';
+    //     const label = document.createElement('label');
+    //     label.textContent = labelText;
+    //     label.className = labelVisibility ? '' : 'hide-label';
 
-        const inputText = document.createElement('input');
-        inputText.type = 'text';
+    //     const inputText = document.createElement('input');
+    //     inputText.type = 'text';
 
-        inputWrapper.append(label, inputText);
-        parent.appendChild(inputWrapper);
+    //     inputWrapper.append(label, inputText);
+    //     parent.appendChild(inputWrapper);
 
-        return inputText;
-    };
+    //     return inputText;
+    // };
 
     const createLabel = (parent, text, attribute, attributeName) => {
         const label = document.createElement('label');
@@ -93,13 +93,13 @@ const dom = (() => {
         return checkbox;
     };
 
-    const createSelectProject = (parent, todo) => {
+    const createSelectProject = (todo) => {
         const selectProject = document.createElement('select');
         selectProject.id = 'project-select';
 
         const projectInstancesArray = projectInstances.getInstances();
 
-        let selectedValue;
+        // let selectedValue;
 
         if (todo) {
             const firstOption = document.createElement('option');
@@ -121,17 +121,16 @@ const dom = (() => {
             });
         }
         selectProject.addEventListener('change', (e) => {
-            console.log(e.target.value);
-            console.log(selectProject.value);
-            selectedValue = e.target.value;
+            // console.log(e.target.value);
+            // console.log(selectProject.value);
+            // selectedValue = e.target.value;
 
             if (todo) {
                 todo.setProject(e.target.value);
             }
         });
-        parent.appendChild(selectProject);
-        console.log(selectedValue);
-        return selectedValue;
+        // console.log(selectedValue);
+        return selectProject;
     };
 
     return {
@@ -140,7 +139,7 @@ const dom = (() => {
         createP,
         createBtn,
         createImg,
-        createInputText,
+        // createInputText,
         createLabel,
         createCheckbox,
         createSelectProject,

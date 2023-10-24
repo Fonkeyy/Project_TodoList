@@ -6,7 +6,10 @@ import '../CSS-files/todoAddCard.css';
 const todoAddCard = (() => {
     const displayCard = () => {
         const $main = document.querySelector('main');
-        const $todoAddCard = dom.createDiv($main, 'id', 'todo-add-card');
+        const dialog = document.createElement('dialog');
+        dialog.id = 'todo-add-card';
+
+        $main.appendChild(dialog);
 
         // * Name
         const todoInputName = document.createElement('input');
@@ -33,16 +36,19 @@ const todoAddCard = (() => {
             option.textContent = `Priority ${i}`;
             todoSelectPriority.appendChild(option);
         }
+        // * First wrapper
+        const firstWrapper = document.createElement('div');
+        firstWrapper.append(todoInputDate, todoSelectPriority);
 
         //  * Project
-        const todoSelectProject = dom.createSelectProject($todoAddCard);
+        const todoSelectProject = dom.createSelectProject();
 
         // * Cancel button
-        const $cancelBtn = dom.createBtn($todoAddCard, 'button', 'id', 'cancel-btn', 'Cancel');
+        const $cancelBtn = dom.createBtn(dialog, 'button', 'class', 'card-btn cancel-btn', 'Cancel');
         $cancelBtn.addEventListener('click', closeCard);
 
         // * Add task button
-        const $addTaskBtn = dom.createBtn($todoAddCard, 'button', 'id', 'add-task-btn', 'Add task');
+        const $addTaskBtn = dom.createBtn(dialog, 'button', 'class', 'card-btn add-btn', 'Add task');
         $addTaskBtn.addEventListener('click', () => {
             const title = todoInputName.value;
             const description = todoInputDescription.value;
@@ -56,19 +62,22 @@ const todoAddCard = (() => {
             // displaySidebar();
         });
 
-        $todoAddCard.append(
-            todoInputName,
-            todoInputDescription,
-            todoInputDate,
-            todoSelectPriority,
-            $cancelBtn,
-            $addTaskBtn
-        );
+        // * Button wrapper
+        const buttonWrapper = document.createElement('div');
+        buttonWrapper.append($cancelBtn, $addTaskBtn);
+
+        // * Second wrapper
+        const secondWrapper = document.createElement('div');
+        secondWrapper.append(todoSelectProject, buttonWrapper);
+
+        dialog.append(todoInputName, todoInputDescription, firstWrapper, secondWrapper);
+
+        dialog.showModal();
     };
 
     const closeCard = () => {
-        const $todoAddCard = document.querySelector('#todo-add-card');
-        $todoAddCard.remove();
+        const dialog = document.querySelector('#todo-add-card');
+        dialog.remove();
     };
 
     return { displayCard, closeCard };
