@@ -57,6 +57,8 @@ const dom = (() => {
 
         inputWrapper.append(label, inputText);
         parent.appendChild(inputWrapper);
+
+        return inputText;
     };
 
     const createLabel = (parent, text, attribute, attributeName) => {
