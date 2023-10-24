@@ -2,6 +2,7 @@ import { dom } from './global';
 import { projectInstances } from './ProjectClass';
 import { displayListItem } from './homePage';
 import '../CSS-files/global.css';
+import { addProjectCard } from './addProjectCard';
 export { displaySidebar };
 
 const displaySidebar = () => {
@@ -36,8 +37,9 @@ const displaySidebar = () => {
         $addProjectBtn.classList.remove('opacity');
     });
 
-    $addProjectBtn.addEventListener('click', () => {}); //todo => add function listeners
-
+    $addProjectBtn.addEventListener('click', () => {
+        addProjectCard.displayCard();
+    });
     // * Create project items
     projectInstances.getInstances().forEach((project) => {
         const $projectItemContainer = dom.createDiv($sideBarProjectContainer, 'class', 'project-container');

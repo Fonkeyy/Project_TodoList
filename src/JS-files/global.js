@@ -44,6 +44,21 @@ const dom = (() => {
         return img;
     };
 
+    const createInputText = (parent, labelText, labelVisibility, attribute, attributeName) => {
+        const inputWrapper = document.createElement('div');
+        inputWrapper.setAttribute(attribute, attributeName);
+
+        const label = document.createElement('label');
+        label.textContent = labelText;
+        label.className = !labelVisibility && 'hide-label';
+
+        const inputText = document.createElement('input');
+        inputText.type = 'text';
+
+        inputWrapper.append(label, inputText);
+        parent.appendChild(inputWrapper);
+    };
+
     const createLabel = (parent, text, attribute, attributeName) => {
         const label = document.createElement('label');
         label.textContent = text;
@@ -82,6 +97,8 @@ const dom = (() => {
 
         const projectInstancesArray = projectInstances.getInstances();
 
+        let selectedValue;
+
         if (todo) {
             const firstOption = document.createElement('option');
             firstOption.textContent = todo.getProjectName() || 'default';
@@ -102,12 +119,17 @@ const dom = (() => {
             });
         }
         selectProject.addEventListener('change', (e) => {
+            console.log(e.target.value);
+            console.log(selectProject.value);
+            selectedValue = e.target.value;
+
             if (todo) {
                 todo.setProject(e.target.value);
             }
         });
         parent.appendChild(selectProject);
-        return selectProject.value;
+        console.log(selectedValue);
+        return selectedValue;
     };
 
     return {
@@ -116,6 +138,7 @@ const dom = (() => {
         createP,
         createBtn,
         createImg,
+        createInputText,
         createLabel,
         createCheckbox,
         createSelectProject,

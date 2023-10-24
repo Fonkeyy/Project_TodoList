@@ -25,6 +25,7 @@ export class ToDoItem {
         const project = projectInstances.getInstances().find((project) => project.getName() === projectName);
 
         project.addNewItem(this);
+        console.log(project);
     }
 
     // * Getters
