@@ -1,10 +1,13 @@
 import { Project, projectInstances } from './ProjectClass';
 import { dom } from './global';
+import '../CSS-files/addProjectCard.css';
+import '../CSS-files/global.css';
 
 const addProjectCard = (() => {
     const displayCard = () => {
         const $main = document.querySelector('main');
         const dialog = document.createElement('dialog');
+        dialog.id = 'add-project-card';
 
         $main.appendChild(dialog);
 
@@ -12,14 +15,25 @@ const addProjectCard = (() => {
         dom.createH(dialog, 'Add project', 3);
 
         // * Name
-        const inputName = dom.createInputText(dialog, 'Name', true, 'id', 'input-project-name');
+        const inputWrapper = document.createElement('div');
+        inputWrapper.id = 'input-project-name-wrapper';
+
+        const label = document.createElement('label');
+        label.textContent = 'Name';
+
+        const inputText = document.createElement('input');
+        inputText.id = 'input-project-name';
+        inputText.type = 'text';
+
+        inputWrapper.append(label, inputText);
+        dialog.appendChild(inputWrapper);
 
         // * Cancel button
         const buttonWrapper = document.createElement('div');
         buttonWrapper.classList.add('add-project-card-btns-wrapper');
 
-        const cancelBtn = dom.createBtn(buttonWrapper, 'button', 'classList', 'cancel-btn', 'Cancel');
-        const addBtn = dom.createBtn(buttonWrapper, 'button', 'classList', 'add-btn', 'Add');
+        const cancelBtn = dom.createBtn(buttonWrapper, 'button', 'class', ' card-btn cancel-btn', 'Cancel');
+        const addBtn = dom.createBtn(buttonWrapper, 'button', 'class', 'card-btn add-btn', 'Add');
 
         dialog.appendChild(buttonWrapper);
 
@@ -28,7 +42,7 @@ const addProjectCard = (() => {
         });
 
         addBtn.addEventListener('click', () => {
-            const newProject = new Project(inputName.value);
+            const newProject = new Project(inputText.value);
             projectInstances.addInstance(newProject);
             dialog.close();
         });

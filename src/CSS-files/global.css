@@ -46,7 +46,7 @@ h6 {
 
 .display-none {
     display: none;
-    /* transition: opacity 0.15s ease-out; */
+    transition: opacity 0.15s ease-out;
 }
 
 .opacity {
@@ -112,4 +112,32 @@ input[type='checkbox']:hover::before {
 }
 .P4 {
     border: 1px solid grey;
+}
+
+.card-btn {
+    width: 5rem;
+    height: 2.2rem;
+    text-align: center;
+    font-family: roboto-medium;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 6px;
+}
+
+.cancel-btn {
+    color: rgb(83, 83, 83);
+    background-color: white;
+}
+
+.cancel-btn:hover {
+    background-color: rgb(229, 229, 229);
+}
+
+.add-btn {
+    color: white;
+    background-color: rgb(219, 76, 63);
+}
+
+.add-btn:hover {
+    background-color: rgb(176, 61, 50);
 }

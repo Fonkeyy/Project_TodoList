@@ -1,7 +1,8 @@
-wire add new project btn
 add toggle display project list
 
 add possibility to change "due" on todoCard
 add labels on every buttons + hide it
 
-create new project window
+style add project modal
+add hide label class
+refactor all inputs

@@ -50,7 +50,7 @@ const dom = (() => {
 
         const label = document.createElement('label');
         label.textContent = labelText;
-        label.className = !labelVisibility && 'hide-label';
+        label.className = labelVisibility ? '' : 'hide-label';
 
         const inputText = document.createElement('input');
         inputText.type = 'text';
