@@ -1,7 +1,7 @@
 export { dom, focusUp, focusDown };
 
-import '../CSS-files/global.css';
 import { projectInstances } from './ProjectClass';
+import '../CSS-files/global.css';
 
 const dom = (() => {
     const createDiv = (parent, attribute, attributeName) => {
@@ -94,8 +94,15 @@ const dom = (() => {
     };
 
     const createSelectProject = (todo) => {
+        const selectWrapper = document.createElement('div');
+        selectWrapper.classList.add('select-project-wrapper');
+
+        const svg = document.createElement('div');
+        svg.classList.add('select-project-svg');
+
         const selectProject = document.createElement('select');
-        selectProject.id = 'project-select';
+        selectProject.classList.add('select-project');
+        // selectProject.id = 'project-select';
 
         const projectInstancesArray = projectInstances.getInstances();
 
@@ -129,8 +136,10 @@ const dom = (() => {
                 todo.setProject(e.target.value);
             }
         });
+        selectWrapper.append(svg, selectProject);
+
         // console.log(selectedValue);
-        return selectProject;
+        return selectWrapper;
     };
 
     return {

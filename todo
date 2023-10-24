@@ -5,3 +5,8 @@ add labels on every buttons + hide it
 
 add hide label class
 refactor all inputs
+
+change font-size 14px
+add svg to searchBar
+
+check border-radius bug on hover searchBar

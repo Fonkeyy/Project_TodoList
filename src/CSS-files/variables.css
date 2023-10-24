@@ -12,7 +12,10 @@
 }
 
 :root {
-    --primary-text-color: rgb(32, 32, 32);
-    --header-color: rgb(219, 76, 63);
-    --date-color: rgb(209, 69, 59);
+    --text-primary-color: rgb(32, 32, 32);
+    --text-secondary-color: rgb(83, 83, 83);
+    --text-tertiary-color: rgb(209, 69, 59);
+
+    --bg-primary-color: rgb(219, 76, 63);
+    --bg-secondary-color: white;
 }

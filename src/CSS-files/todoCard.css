@@ -11,7 +11,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
+    background-color: var(--bg-secondary-color);
     opacity: 0;
     border-radius: 15px;
     color: rgb(26, 26, 26);
@@ -60,7 +60,6 @@
     background-repeat: no-repeat;
     background-size: contain;
     border: none;
-    cursor: pointer;
 }
 
 #header-content-right > .previous-btn {
@@ -68,7 +67,6 @@
     background-repeat: no-repeat;
     background-size: contain;
     border: none;
-    cursor: pointer;
 }
 
 #header-content-right > .more-btn {
@@ -76,7 +74,6 @@
     background-repeat: no-repeat;
     background-size: contain;
     border: none;
-    cursor: pointer;
 }
 
 #header-content-right > .close-btn {
@@ -84,7 +81,6 @@
     background-repeat: no-repeat;
     background-size: contain;
     border: none;
-    cursor: pointer;
 }
 
 /* * Main */

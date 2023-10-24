@@ -8,7 +8,7 @@
 }
 * {
     margin: 0;
-    /* padding: 0; */
+    padding: 0;
 }
 html,
 body {
@@ -40,6 +40,12 @@ h5,
 h6 {
     overflow-wrap: break-word;
 }
+
+button,
+select,
+input[type='checkbox'] {
+    cursor: pointer;
+}
 #root,
 #__next {
     isolation: isolate;
@@ -53,10 +59,6 @@ h6 {
 .opacity {
     opacity: 1 !important;
     transition: opacity 0.15s ease-out;
-}
-
-.none {
-    display: none;
 }
 
 .grey-hover {
@@ -80,7 +82,6 @@ input[type='checkbox'] {
     width: 20px;
     border-radius: 50%;
     position: relative;
-    cursor: pointer;
 }
 
 input[type='checkbox']::before {
@@ -126,8 +127,8 @@ input[type='checkbox']:hover::before {
 }
 
 .cancel-btn {
-    color: rgb(83, 83, 83);
-    background-color: white;
+    color: var(--text-secondary-color);
+    background-color: var(--bg-secondary-color);
 }
 
 .cancel-btn:hover {
@@ -135,10 +136,32 @@ input[type='checkbox']:hover::before {
 }
 
 .add-btn {
-    color: white;
-    background-color: rgb(219, 76, 63);
+    color: var(--bg-secondary-color);
+    background-color: var(--bg-primary-color);
 }
 
 .add-btn:hover {
     background-color: rgb(176, 61, 50);
+}
+
+.select-project-wrapper {
+    color: var(--text-secondary-color);
+    display: flex;
+    gap: 0.2rem;
+}
+
+.select-project-wrapper:hover {
+    color: var(--text-primary-color);
+}
+
+.select-project {
+    border: none;
+}
+
+.select-project-svg {
+    background-image: url('../assets/icons/inbox.svg');
+    background-size: 15px 15px;
+    width: 15px;
+    height: 15px;
+    place-self: center;
 }
