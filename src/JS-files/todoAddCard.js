@@ -1,7 +1,7 @@
 import { dom } from './global';
 import { ToDoItem } from './ToDoClass';
 import '../CSS-files/todoAddCard.css';
-// import { displaySidebar } from './sidebar';
+import { sidebar } from './sidebar';
 
 const todoAddCard = (() => {
     const displayCard = () => {
@@ -59,7 +59,7 @@ const todoAddCard = (() => {
 
             new ToDoItem(title, description, date, priority, projectName);
             closeCard();
-            // displaySidebar();
+            sidebar.update();
         });
 
         // * Button wrapper

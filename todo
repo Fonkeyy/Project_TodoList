@@ -7,7 +7,12 @@ add hide label class
 refactor all inputs
 
 change font-size 14px
+add flag svg on priority select
 
-fix close btn always visible in sidebar
+add modify button on todoCard
 
+add padding to header buttons
 add local storage
+
+check accessibility
+check performance

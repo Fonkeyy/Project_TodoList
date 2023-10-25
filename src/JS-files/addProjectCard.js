@@ -1,17 +1,14 @@
-import { Project, projectInstances } from './ProjectClass';
+import { Project } from './ProjectClass';
 import { dom } from './global';
 import '../CSS-files/addProjectCard.css';
 import '../CSS-files/global.css';
-import { displaySidebar } from './sidebar';
+import { sidebar } from './sidebar';
 
 const addProjectCard = (() => {
     const displayCard = () => {
         const $main = document.querySelector('main');
         const dialog = document.createElement('dialog');
         dialog.id = 'add-project-card';
-
-        console.log(dialog);
-        console.log(document.querySelector('#add-project-card'));
 
         $main.appendChild(dialog);
 
@@ -46,11 +43,10 @@ const addProjectCard = (() => {
         });
 
         addBtn.addEventListener('click', () => {
-            const newProject = new Project(inputText.value);
-            projectInstances.addInstance(newProject);
+            new Project(inputText.value);
             dialog.remove();
 
-            displaySidebar();
+            sidebar.update();
         });
         dialog.showModal();
     };

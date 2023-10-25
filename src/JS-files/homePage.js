@@ -1,7 +1,6 @@
 // import Sortable from 'sortablejs';
 import { dom, focusUp } from './global';
 import { projectInstances } from './ProjectClass';
-import { displaySidebar } from './sidebar';
 import { displayHeader } from './header';
 import '../CSS-files/pages/homePage.css';
 import '../CSS-files/header.css';
@@ -12,6 +11,7 @@ import '../CSS-files/todoCard.css';
 import '../CSS-files/todoAddCard.css';
 
 import { toDoCard } from './toDoCard';
+import { sidebar } from './sidebar';
 
 export const loadMainPage = () => {
     // * Header
@@ -22,7 +22,8 @@ export const loadMainPage = () => {
     document.body.appendChild($main);
 
     // * Sidebar
-    $main.appendChild(displaySidebar());
+    dom.createDiv($main, 'class', 'sidebar');
+    sidebar.display();
 
     // * Display default project
     const defaultProject = projectInstances.getInstances().find((project) => project.getName() === 'default');
