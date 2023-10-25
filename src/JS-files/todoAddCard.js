@@ -2,6 +2,8 @@ import { dom } from './global';
 import { ToDoItem } from './ToDoClass';
 import '../CSS-files/todoAddCard.css';
 import { sidebar } from './sidebar';
+import { todoList } from './todoList';
+import { projectInstances } from './ProjectClass';
 
 const todoAddCard = (() => {
     const displayCard = () => {
@@ -29,6 +31,7 @@ const todoAddCard = (() => {
         todoInputDate.id = 'todo-input-date';
 
         // * Priority
+        // todo => create select in global
         const todoSelectPriority = document.createElement('select');
         todoSelectPriority.id = 'todo-select-priority';
         for (let i = 1; i < 5; i++) {
@@ -42,6 +45,8 @@ const todoAddCard = (() => {
 
         //  * Project
         const todoSelectProject = dom.createSelectProject();
+        const todoSelectProjectWrapper = todoSelectProject.selectWrapper;
+        const select = todoSelectProject.selectProject;
 
         // * Cancel button
         const $cancelBtn = dom.createBtn(dialog, 'button', 'class', 'card-btn cancel-btn', 'Cancel');
@@ -54,12 +59,15 @@ const todoAddCard = (() => {
             const description = todoInputDescription.value;
             const date = todoInputDate.value;
             const priority = todoSelectPriority.value;
-            const projectName = todoSelectProject;
-            console.log(todoSelectProject);
+            const projectName = select.value;
 
             new ToDoItem(title, description, date, priority, projectName);
             closeCard();
             sidebar.update();
+
+            const project = projectInstances.getInstances().find((project) => project.name === projectName);
+            console.log(project);
+            todoList.update(project);
         });
 
         // * Button wrapper
@@ -68,7 +76,7 @@ const todoAddCard = (() => {
 
         // * Second wrapper
         const secondWrapper = document.createElement('div');
-        secondWrapper.append(todoSelectProject, buttonWrapper);
+        secondWrapper.append(todoSelectProjectWrapper, buttonWrapper);
 
         dialog.append(todoInputName, todoInputDescription, firstWrapper, secondWrapper);
 

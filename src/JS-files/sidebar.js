@@ -1,6 +1,6 @@
 import { dom } from './global';
 import { projectInstances } from './ProjectClass';
-import { displayListItem } from './homePage';
+import { todoList } from './todoList';
 import { addProjectCard } from './addProjectCard';
 import '../CSS-files/global.css';
 export { sidebar };
@@ -74,11 +74,11 @@ const sidebar = (() => {
                     .getInstances()
                     .find((project) => project.getName() === projectName);
                 const $main = document.querySelector('main');
-                const $listItem = document.querySelector('#list-item');
-                if ($listItem) {
-                    $listItem.remove();
+                const $todoList = document.querySelector('#item-list');
+                if ($todoList) {
+                    $todoList.remove();
                 }
-                $main.appendChild(displayListItem(project));
+                $main.appendChild(todoList.display(project));
             };
 
             // * Add delete btn event listener
@@ -94,16 +94,16 @@ const sidebar = (() => {
                     container.remove();
                 }
 
-                const $listItem = document.querySelector('#list-item');
-                if ($listItem) {
-                    $listItem.remove();
+                const $todoList = document.querySelector('#item-list');
+                if ($todoList) {
+                    $todoList.remove();
                 }
 
                 const $main = document.querySelector('main');
                 const project0 = projectInstances.getInstances()[0];
 
                 if (projectInstances.getLength() > 0) {
-                    $main.appendChild(displayListItem(project0));
+                    $main.appendChild(todoList.display(project0));
                 }
             });
         });

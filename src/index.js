@@ -1,4 +1,4 @@
-import { Project, projectInstances } from './JS-files/ProjectClass';
+import { Project } from './JS-files/ProjectClass';
 import { ToDoItem } from './JS-files/ToDoClass';
 import { loadMainPage } from './JS-files/homePage';
 import './CSS-files/global.css';
@@ -27,4 +27,3 @@ new ToDoItem('try mdp', 'find something', '07/04/2023', 'P2', 'default', 'no com
 // test1Project.addNewItem(toDoTest);
 
 loadMainPage();
-console.log(projectInstances.getInstances());

@@ -5,7 +5,7 @@ main {
     gap: 12rem;
 }
 
-#list-item {
+#item-list {
     /* width: calc(100% - 305px); */
     width: 50%;
     display: grid;
@@ -48,7 +48,7 @@ main {
     transition: opacity 0.15s ease-in;
 }
 
-.list-item-due-date {
+.item-list-due-date {
     color: var(--bg-primary-color);
     font-size: 12px;
     grid-column-start: 2;

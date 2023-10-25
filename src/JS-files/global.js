@@ -131,11 +131,8 @@ const dom = (() => {
 
         const selectProject = document.createElement('select');
         selectProject.classList.add('select-project');
-        // selectProject.id = 'project-select';
 
         const projectInstancesArray = projectInstances.getInstances();
-
-        // let selectedValue;
 
         if (todo) {
             const firstOption = document.createElement('option');
@@ -157,10 +154,6 @@ const dom = (() => {
             });
         }
         selectProject.addEventListener('change', (e) => {
-            // console.log(e.target.value);
-            // console.log(selectProject.value);
-            // selectedValue = e.target.value;
-
             if (todo) {
                 todo.setProject(e.target.value);
             }
@@ -171,8 +164,7 @@ const dom = (() => {
             parent.appendChild(selectWrapper);
         }
 
-        // console.log(selectedValue);
-        return selectWrapper;
+        return { selectWrapper, selectProject };
     };
 
     return {
