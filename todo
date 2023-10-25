@@ -1,15 +1,11 @@
-add toggle display project list
+add toggle display project list on sidebar
 
-add possibility to change "due" on todoCard
 add labels on every buttons + hide it
 
 add hide label class
 refactor all inputs
 
 change font-size 14px
-add flag svg on priority select
-
-add modify button on todoCard
 
 add padding to header buttons
 add local storage
@@ -18,3 +14,12 @@ check accessibility
 check performance
 
 add little squeeze effect when click on priority or project select
+
+change flag color on todoCard depend on priority level
+
+fix checkbox color on todoCard
+add modify button on todoCard
+add possibility to change "duedate" on todoCard
+add remove btn on duedate todoCard
+style todoCard
+change description placeholder color

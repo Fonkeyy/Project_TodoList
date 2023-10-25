@@ -195,6 +195,20 @@ const dom = (() => {
                 todoSelectDialog.remove();
             });
         }
+
+        // todo => fix close dialog
+        todoSelectDialog.addEventListener('click', (e) => {
+            const dialogDimensions = todoSelectDialog.getBoundingClientRect();
+            if (
+                e.clientX < dialogDimensions.left ||
+                e.clientX > dialogDimensions.right ||
+                e.clientY < dialogDimensions.top ||
+                e.clientY > dialogDimensions.bottom
+            ) {
+                todoSelectDialog.close();
+                todoSelectDialog.remove();
+            }
+        });
         return todoSelectDialog;
     };
 
