@@ -9,6 +9,7 @@
 * {
     margin: 0;
     padding: 0;
+    /* outline: 1px solid lightgreen; */
 }
 html,
 body {
@@ -53,7 +54,6 @@ input[type='checkbox'] {
 
 .display-none {
     display: none;
-    transition: opacity 0.15s ease-out;
 }
 
 .opacity {
@@ -184,7 +184,7 @@ input[type='checkbox']:hover::before {
     cursor: pointer;
 }
 
-.flag-svg {
+.svg {
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -193,19 +193,19 @@ input[type='checkbox']:hover::before {
 }
 
 .red-flag {
-    background-image: url('../assets/icons/flag-red.svg');
+    background-image: url('../assets/icons/flag/flag-red.svg');
 }
 
 .orange-flag {
-    background-image: url('../assets/icons/flag-orange.svg');
+    background-image: url('../assets/icons/flag/flag-orange.svg');
 }
 
 .blue-flag {
-    background-image: url('../assets/icons/flag-blue.svg');
+    background-image: url('../assets/icons/flag/flag-blue.svg');
 }
 
 .white-flag {
-    background-image: url('../assets/icons/flag.svg');
+    background-image: url('../assets/icons/flag/flag.svg');
 }
 
 .priority-check {

@@ -1,8 +1,8 @@
 import { Project } from './ProjectClass';
 import { dom } from './global';
+import { sidebar } from './sidebar';
 import '../CSS-files/addProjectCard.css';
 import '../CSS-files/global.css';
-import { sidebar } from './sidebar';
 
 const addProjectCard = (() => {
     const displayCard = () => {

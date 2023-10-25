@@ -1,15 +1,9 @@
 import { dom } from './global';
 import { displayHeader } from './header';
-import '../CSS-files/pages/homePage.css';
-import '../CSS-files/header.css';
-import '../CSS-files/sidebar.css';
-import '../CSS-files/variables.css';
-import '../CSS-files/global.css';
-import '../CSS-files/todoCard.css';
-import '../CSS-files/todoAddCard.css';
-
 import { sidebar } from './sidebar';
 import { todoList } from './todoList';
+
+import '../CSS-files/pages/homePage.css';
 
 export const loadMainPage = () => {
     // * Header

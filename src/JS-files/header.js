@@ -1,5 +1,7 @@
 import { dom } from './global';
 import { todoAddCard } from './todoAddCard';
+import '../CSS-files/header.css';
+
 export { displayHeader };
 
 const displayHeader = () => {

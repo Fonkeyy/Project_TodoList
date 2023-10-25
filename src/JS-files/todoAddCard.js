@@ -1,9 +1,10 @@
 import { dom } from './global';
 import { ToDoItem } from './ToDoClass';
-import '../CSS-files/todoAddCard.css';
 import { sidebar } from './sidebar';
 import { todoList } from './todoList';
 import { projectInstances } from './ProjectClass';
+
+import '../CSS-files/todoAddCard.css';
 
 const todoAddCard = (() => {
     const displayCard = () => {

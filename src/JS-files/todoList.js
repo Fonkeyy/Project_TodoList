@@ -2,6 +2,8 @@ import { projectInstances } from './ProjectClass';
 import { dom, focusUp } from './global';
 import { toDoCard } from './toDoCard';
 
+import '../CSS-files/todoList.css';
+
 export const todoList = (() => {
     const display = (project) => {
         const $mainContent = document.querySelector('#main-content');
@@ -21,34 +23,35 @@ export const todoList = (() => {
 
             // * Display project todoItems
             project.getList().forEach((item) => {
-                const $li = document.createElement('div');
-                $li.setAttribute('data-project-id', `${item.getId()}`);
+                const todo = document.createElement('div');
+                todo.setAttribute('data-project-id', `${item.getId()}`);
+                todo.classList.add('todo');
 
-                const checkbox = dom.createCheckbox($li, item.getPriority());
+                const checkbox = dom.createCheckbox(todo, item.getPriority());
                 checkbox.addEventListener('click', (e) => e.stopPropagation());
 
-                $li.classList.add('li-item');
-
-                dom.createP($li, item.getTitle(), 'class', 'item-list-title');
+                dom.createP(todo, item.getTitle(), 'class', 'todo-title');
 
                 // * Create close btn and add styles
-                const $closeBtn = dom.createBtn($li, 'button', 'class', 'close-btn');
-                $li.addEventListener('mouseenter', () => {
+                const $closeBtn = dom.createBtn(todo, 'button', 'class', 'close-btn');
+                todo.addEventListener('mouseenter', () => {
                     $closeBtn.classList.toggle('opacity');
                 });
-                $li.addEventListener('mouseleave', () => {
+                todo.addEventListener('mouseleave', () => {
                     $closeBtn.classList.toggle('opacity');
                 });
                 $closeBtn.addEventListener('click', () => {}); //todo => add function listener
 
                 // * Display due date
-                dom.createP($li, item.getDueDate(), 'class', 'item-list-due-date'); //todo => implement date stuff
+                const dueDateWrapper = dom.createDiv(todo, 'class', 'due-date-wrapper');
+                dom.createDiv(dueDateWrapper, 'class', 'svg due-date-svg');
+                dom.createP(dueDateWrapper, item.getDueDate(), 'class', 'due-date-value'); //todo => implement date stuff
 
-                $todoList.appendChild($li);
+                $todoList.appendChild(todo);
 
                 // * Add project todoItems event listener
                 //todo change title for id
-                $li.addEventListener('click', (e) => {
+                todo.addEventListener('click', (e) => {
                     const itemTitle = e.target.closest('div').querySelector('p').textContent;
 
                     toDoCard.clearCard();

@@ -5,58 +5,7 @@ main {
     gap: 12rem;
 }
 
-#item-list {
-    /* width: calc(100% - 305px); */
-    width: 50%;
-    display: grid;
-    gap: 2rem;
-    /* padding: 30px 75px; */
-}
-
-#project-title {
-    font-family: Roboto-Bold, sans-serif;
-    font-size: 1.4rem;
-    margin-top: 20px;
-}
-
-.li-item {
-    display: grid;
-    grid-template-columns: auto 5fr 1fr;
-    column-gap: 0.6rem;
-    row-gap: 0.7rem;
-}
-
-/* .li-item > input[type='checkbox'] {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -ms-appearance: none;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    border: 1px solid rgb(128, 128, 128);
-    grid-row-start: span 2;
-} */
-
-.li-item > .close-btn {
-    background-image: url('../../assets/icons/dots.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    border: none;
-    width: fit-content;
-    height: 15px;
-    opacity: 0;
-    transition: opacity 0.15s ease-in;
-}
-
-.item-list-due-date {
-    color: var(--bg-primary-color);
-    font-size: 12px;
-    grid-column-start: 2;
-}
-
-@media screen and (min-width: 750px) {
-    .sidebar {
-        display: block;
-        width: 305px;
-    }
+/* todo => see why without flex layout brakes */
+#main-content {
+    display: flex; /* ? */
 }

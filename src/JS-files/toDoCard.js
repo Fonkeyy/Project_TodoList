@@ -1,5 +1,7 @@
 import { dom, focusDown } from './global';
 
+import '../CSS-files/todoCard.css';
+
 export { toDoCard };
 
 const toDoCard = (() => {

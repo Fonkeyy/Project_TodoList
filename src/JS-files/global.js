@@ -99,16 +99,16 @@ const dom = (() => {
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         switch (priority) {
-            case 'P1':
+            case '1':
                 checkbox.className = 'P1';
                 break;
-            case 'P2':
+            case '2':
                 checkbox.className = 'P2';
                 break;
-            case 'P3':
+            case '3':
                 checkbox.className = 'P3';
                 break;
-            case 'P4':
+            case '4':
                 checkbox.className = 'P4';
                 break;
         }
@@ -178,7 +178,7 @@ const dom = (() => {
 
         for (let priority of initialValues) {
             const priorityWrapper = dom.createDiv(todoSelectDialog, 'class', 'priority-wrapper');
-            dom.createDiv(priorityWrapper, 'class', `flag-svg ${priority.svgClass}`);
+            dom.createDiv(priorityWrapper, 'class', `svg ${priority.svgClass}`);
             dom.createP(priorityWrapper, `Priority ${priority.level}`);
             if (priority.current) {
                 dom.createDiv(priorityWrapper, 'class', 'flag priority-check');

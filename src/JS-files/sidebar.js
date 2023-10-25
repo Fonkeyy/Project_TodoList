@@ -2,8 +2,10 @@ import { dom } from './global';
 import { projectInstances } from './ProjectClass';
 import { todoList } from './todoList';
 import { addProjectCard } from './addProjectCard';
-import '../CSS-files/global.css';
 export { sidebar };
+
+import '../CSS-files/sidebar.css';
+import '../CSS-files/global.css';
 
 const sidebar = (() => {
     const display = () => {
