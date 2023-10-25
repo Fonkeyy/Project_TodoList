@@ -31,17 +31,11 @@ const todoAddCard = (() => {
         todoInputDate.id = 'todo-input-date';
 
         // * Priority
-        // todo => create select in global
-        const todoSelectPriority = document.createElement('select');
-        todoSelectPriority.id = 'todo-select-priority';
-        for (let i = 1; i < 5; i++) {
-            const option = document.createElement('option');
-            option.textContent = `Priority ${i}`;
-            todoSelectPriority.appendChild(option);
-        }
+        const todoSelectDialog = dom.createSelectDialog();
+
         // * First wrapper
         const firstWrapper = document.createElement('div');
-        firstWrapper.append(todoInputDate, todoSelectPriority);
+        firstWrapper.append(todoInputDate, todoSelectDialog);
 
         //  * Project
         const todoSelectProject = dom.createSelectProject();
@@ -58,7 +52,7 @@ const todoAddCard = (() => {
             const title = todoInputName.value;
             const description = todoInputDescription.value;
             const date = todoInputDate.value;
-            const priority = todoSelectPriority.value;
+            const priority = todoSelectDialog.value;
             const projectName = select.value;
 
             new ToDoItem(title, description, date, priority, projectName);
@@ -66,7 +60,6 @@ const todoAddCard = (() => {
             sidebar.update();
 
             const project = projectInstances.getInstances().find((project) => project.name === projectName);
-            console.log(project);
             todoList.update(project);
         });
 

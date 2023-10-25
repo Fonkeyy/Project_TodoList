@@ -165,3 +165,49 @@ input[type='checkbox']:hover::before {
     height: 15px;
     place-self: center;
 }
+
+#priority-dialog {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    padding: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    border: none;
+    border-radius: 10px;
+}
+
+.priority-wrapper {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: 1fr 3fr 1fr;
+    cursor: pointer;
+}
+
+.flag-svg {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 15px;
+    height: 15px;
+}
+
+.red-flag {
+    background-image: url('../assets/icons/flag-red.svg');
+}
+
+.orange-flag {
+    background-image: url('../assets/icons/flag-orange.svg');
+}
+
+.blue-flag {
+    background-image: url('../assets/icons/flag-blue.svg');
+}
+
+.white-flag {
+    background-image: url('../assets/icons/flag.svg');
+}
+
+.priority-check {
+    background-image: url('../assets/icons/check.svg');
+}

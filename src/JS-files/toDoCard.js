@@ -92,7 +92,18 @@ const toDoCard = (() => {
         const $prioritySvg = dom.createDiv($priorityContainer, 'class', 'svg-card');
         $prioritySvg.id = 'priority-svg';
         dom.createLabel($priorityContainer, 'Priority');
-        dom.createP($priorityContainer, item.getPriority());
+
+        const priorityP = dom.createP($priorityContainer, `P${item.getPriority()}`, 'id', 'priority-p');
+        priorityP.addEventListener('click', () => {
+            const dialog = document.querySelector('#priority-dialog');
+            if (dialog) {
+                dialog.close();
+                dialog.remove();
+            } else {
+                const dialog = $priorityContainer.appendChild(dom.createSelectDialog(item));
+                dialog.show();
+            }
+        });
 
         // * Comment
         dom.createP($mainContent, item.getComment(), 'class', 'item-comment');
