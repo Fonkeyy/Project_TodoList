@@ -101,8 +101,7 @@ const toDoCard = (() => {
             // * Due date
             const $dueDateContainer = dom.createDiv($mainContent, 'id', 'due-date-container');
             $dueDateContainer.classList.add('due-container');
-            const $dueDateSvg = dom.createDiv($dueDateContainer, 'class', 'svg-card');
-            $dueDateSvg.id = 'due-date-svg';
+            dom.createDiv($dueDateContainer, 'class', 'svg due-date-svg');
             dom.createH($dueDateContainer, 'Due Date', 4);
             const dateP = dom.createP($dueDateContainer, todo.getDueDate());
 
@@ -128,9 +127,8 @@ const toDoCard = (() => {
             // * Priority
             const $priorityContainer = dom.createDiv($mainContent, 'id', 'priority-container');
             $priorityContainer.classList.add('due-container');
-            const $prioritySvg = dom.createDiv($priorityContainer, 'class', 'svg-card');
-            $prioritySvg.id = 'priority-svg';
-            dom.createLabel($priorityContainer, 'Priority');
+            const svg = dom.createDiv($priorityContainer, 'class', `svg priority-${todo.getPriority()}`);
+            dom.createH($priorityContainer, 'Priority', 4);
 
             const priorityP = dom.createP($priorityContainer, `P${todo.getPriority()}`, 'id', 'priority-p');
             priorityP.addEventListener('click', () => {
@@ -139,8 +137,11 @@ const toDoCard = (() => {
                     dialog.close();
                     dialog.remove();
                 } else {
-                    const dialog = $priorityContainer.appendChild(dom.createSelectDialog(todo));
+                    const dialog = $priorityContainer.appendChild(dom.createSelectPriority(todo));
                     dialog.show();
+                    dialog.addEventListener('click', () => {
+                        svg.className = `svg priority-${todo.getPriority()}`;
+                    });
                 }
             });
 

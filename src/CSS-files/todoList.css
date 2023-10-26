@@ -26,12 +26,6 @@
     grid-column-start: 2;
 }
 
-.due-date-svg {
-    background: url('../assets/icons/due-date.svg');
-    width: 15px;
-    height: 15px;
-}
-
 .due-date-value {
     color: var(--bg-primary-color);
     font-size: 0.9rem;

@@ -190,22 +190,28 @@ input[type='checkbox']:hover::before {
     height: 15px;
 }
 
-.red-flag {
+.priority-1 {
     background-image: url('../assets/icons/flag/flag-red.svg');
 }
 
-.orange-flag {
+.priority-2 {
     background-image: url('../assets/icons/flag/flag-orange.svg');
 }
 
-.blue-flag {
+.priority-3 {
     background-image: url('../assets/icons/flag/flag-blue.svg');
 }
 
-.white-flag {
+.priority-4 {
     background-image: url('../assets/icons/flag/flag.svg');
 }
 
 .priority-check {
     background-image: url('../assets/icons/check.svg');
+}
+
+.due-date-svg {
+    background: url('../assets/icons/due-date.svg');
+    width: 15px;
+    height: 15px;
 }

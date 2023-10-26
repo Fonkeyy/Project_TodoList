@@ -166,12 +166,12 @@ const dom = (() => {
         return { selectWrapper, selectProject };
     };
 
-    const createSelectDialog = (todo) => {
+    const createSelectPriority = (todo) => {
         const initialValues = [
-            { level: '1', svgClass: 'red-flag', current: todo ? todo.getPriority() === '1' : false },
-            { level: '2', svgClass: 'orange-flag', current: todo ? todo.getPriority() === '2' : false },
-            { level: '3', svgClass: 'blue-flag', current: todo ? todo.getPriority() === '3' : false },
-            { level: '4', svgClass: 'white-flag', current: todo ? todo.getPriority() === '4' : true },
+            { level: '1', svgClass: 'priority-1', current: todo ? todo.getPriority() === '1' : false },
+            { level: '2', svgClass: 'priority-2', current: todo ? todo.getPriority() === '2' : false },
+            { level: '3', svgClass: 'priority-3', current: todo ? todo.getPriority() === '3' : false },
+            { level: '4', svgClass: 'priority-4', current: todo ? todo.getPriority() === '4' : true },
         ];
         const todoSelectDialog = document.createElement('dialog');
         todoSelectDialog.id = 'priority-dialog';
@@ -193,6 +193,7 @@ const dom = (() => {
                 priorityP.textContent = `P${priority.level}`;
                 todoSelectDialog.close();
                 todoSelectDialog.remove();
+                todo.setPriority(priority.level);
             });
         }
 
@@ -218,13 +219,11 @@ const dom = (() => {
         todoInputDate.id = 'todo-input-date';
 
         if (todo) {
-            console.log(todo.getDueDate());
             todoInputDate.setAttribute('value', todo.getDueDate());
         }
 
         todoInputDate.addEventListener('change', (e) => {
             todo.setDueDate(e.target.value);
-            todoInputDate.remove();
         });
 
         return todoInputDate;
@@ -240,7 +239,7 @@ const dom = (() => {
         createLabel,
         createCheckbox,
         createSelectProject,
-        createSelectDialog,
+        createSelectPriority,
         createDatePicker,
     };
 })();

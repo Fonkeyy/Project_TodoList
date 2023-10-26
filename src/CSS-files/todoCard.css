@@ -116,24 +116,6 @@
     background-image: url('../assets/icons/inbox.svg');
 }
 
-#due-date-svg {
-    background-image: url('../assets/icons/due-date.svg');
-}
-
-#priority-svg {
-    background-image: url('../assets/icons/priority.svg');
-}
-
-.svg-card {
-    width: 15px;
-    height: 15px;
-
-    background-repeat: no-repeat;
-    background-size: contain;
-    border: none;
-    grid-row-start: 2;
-}
-
 @media screen and (min-width: 750px) {
     #todo-card-content {
         display: grid;
