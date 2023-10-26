@@ -15,74 +15,57 @@
 }
 
 /* * Header */
-.header-content {
-    display: grid;
+.todo-header-content {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    grid-template-columns: 1fr 1fr;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -6px;
+}
+
+#todo-header-content-left {
+    display: flex;
+    gap: 0.3rem;
+}
+
+#todo-header-content-left > p {
+    font-size: 0.9rem;
+}
+
+#todo-header-content-right {
+    display: flex;
+    gap: 0.3rem;
 }
 
 .header-card-btn {
     width: 32px;
     height: 32px;
     background-color: transparent;
-}
-
-#header-content-left {
-    display: flex;
-    align-items: center;
-    gap: 0.2rem;
-}
-
-#header-content-left > #project-name-svg {
-    background-image: url('../assets/icons/inbox.svg');
     background-repeat: no-repeat;
     background-size: contain;
+    border: none;
+    filter: invert(70%);
 }
 
-#header-content-left > p {
-    font-size: 12px;
-    align-self: flex-end;
-}
-
-#header-content-right {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.3rem;
-}
-
-#header-content-right > .next-btn {
+#todo-header-content-right > .next-btn {
     background-image: url('../assets/icons/chevron-up.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    border: none;
 }
 
-#header-content-right > .previous-btn {
+#todo-header-content-right > .previous-btn {
     background-image: url('../assets/icons/chevron-down.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    border: none;
 }
 
-#header-content-right > .more-btn {
+#todo-header-content-right > .more-btn {
     background-image: url('../assets/icons/dots.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    border: none;
 }
 
-#header-content-right > .close-btn {
+#todo-header-content-right > .close-btn {
     background-image: url('../assets/icons/close.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    border: none;
 }
 
-/* * Main */
-
+/* * Main-content */
 #todo-card-content {
-    margin: 0px 35px;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -90,21 +73,17 @@
 
 #title-container {
     display: flex;
-    align-items: center;
+    place-items: center;
     gap: 1rem;
 }
 
-#item-description-container {
+#todo-description-container {
     display: flex;
-    margin-left: 15px;
+    padding-left: 2rem;
 }
 
-#description-svg {
+.description-svg {
     background-image: url('../assets/icons/description.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    border: none;
-    cursor: pointer;
 }
 
 /* .due-container {

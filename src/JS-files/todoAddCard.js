@@ -32,7 +32,7 @@ const todoAddCard = (() => {
         todoInputDate.id = 'todo-input-date';
 
         // * Priority
-        const todoSelectDialog = dom.createSelectDialog();
+        const todoSelectDialog = dom.createSelectPriority();
 
         // * First wrapper
         const firstWrapper = document.createElement('div');
@@ -43,13 +43,14 @@ const todoAddCard = (() => {
         const todoSelectProjectWrapper = todoSelectProject.selectWrapper;
         const select = todoSelectProject.selectProject;
 
+        // * Button wrapper
+        const { cancelBtn, addTaskBtn, buttonWrapper } = dom.createButtonWrapper();
+
         // * Cancel button
-        const $cancelBtn = dom.createBtn(dialog, 'button', 'class', 'card-btn cancel-btn', 'Cancel');
-        $cancelBtn.addEventListener('click', closeCard);
+        cancelBtn.addEventListener('click', closeCard);
 
         // * Add task button
-        const $addTaskBtn = dom.createBtn(dialog, 'button', 'class', 'card-btn add-btn', 'Add task');
-        $addTaskBtn.addEventListener('click', () => {
+        addTaskBtn.addEventListener('click', () => {
             const title = todoInputName.value;
             const description = todoInputDescription.value;
             const date = todoInputDate.value;
@@ -63,10 +64,6 @@ const todoAddCard = (() => {
             const project = projectInstances.getInstances().find((project) => project.name === projectName);
             todoList.update(project);
         });
-
-        // * Button wrapper
-        const buttonWrapper = document.createElement('div');
-        buttonWrapper.append($cancelBtn, $addTaskBtn);
 
         // * Second wrapper
         const secondWrapper = document.createElement('div');

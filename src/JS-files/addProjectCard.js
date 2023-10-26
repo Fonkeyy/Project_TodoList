@@ -29,12 +29,10 @@ const addProjectCard = (() => {
         inputWrapper.append(label, inputText);
         dialog.appendChild(inputWrapper);
 
-        // * Cancel button
-        const buttonWrapper = document.createElement('div');
-        buttonWrapper.classList.add('add-project-card-btns-wrapper');
+        // * Button wrapper
+        const { cancelBtn, addTaskBtn, buttonWrapper } = dom.createButtonWrapper();
 
-        const cancelBtn = dom.createBtn(buttonWrapper, 'button', 'class', ' card-btn cancel-btn', 'Cancel');
-        const addBtn = dom.createBtn(buttonWrapper, 'button', 'class', 'card-btn add-btn', 'Add');
+        buttonWrapper.classList.add('add-project-card-btns-wrapper');
 
         dialog.appendChild(buttonWrapper);
 
@@ -42,10 +40,9 @@ const addProjectCard = (() => {
             dialog.remove();
         });
 
-        addBtn.addEventListener('click', () => {
+        addTaskBtn.addEventListener('click', () => {
             new Project(inputText.value);
             dialog.remove();
-
             sidebar.update();
         });
         dialog.showModal();

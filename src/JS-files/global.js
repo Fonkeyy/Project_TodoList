@@ -39,7 +39,7 @@ const dom = (() => {
         return p;
     };
 
-    const createBtn = (parent, type = 'button', attribute, attributeName, text) => {
+    const createBtn = (parent = null, type = 'button', attribute, attributeName, text) => {
         const btn = document.createElement('button');
         btn.type = type;
         if (parent) {
@@ -229,6 +229,26 @@ const dom = (() => {
         return todoInputDate;
     };
 
+    const createButtonWrapper = () => {
+        // * Cancel button
+        // const cancelBtn = dom.createBtn('button', 'class', 'card-btn cancel-btn', 'Cancel');
+        const cancelBtn = document.createElement('button');
+        cancelBtn.className = 'card-btn cancel-btn';
+        cancelBtn.textContent = 'Cancel';
+
+        // * Add task button
+        // const addTaskBtn = dom.createBtn('button', 'class', 'card-btn add-btn', 'Add task');
+        const addTaskBtn = document.createElement('button');
+        addTaskBtn.className = 'card-btn add-btn';
+        addTaskBtn.textContent = 'Add task';
+
+        // * Button wrapper
+        const buttonWrapper = document.createElement('div');
+        buttonWrapper.append(cancelBtn, addTaskBtn);
+
+        return { cancelBtn, addTaskBtn, buttonWrapper };
+    };
+
     return {
         createDiv,
         createH,
@@ -241,6 +261,7 @@ const dom = (() => {
         createSelectProject,
         createSelectPriority,
         createDatePicker,
+        createButtonWrapper,
     };
 })();
 

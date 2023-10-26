@@ -1,7 +1,6 @@
 import { dom, focusDown } from './global';
-
-import '../CSS-files/todoCard.css';
 import { projectInstances } from './ProjectClass';
+import '../CSS-files/todoCard.css';
 
 export { toDoCard };
 
@@ -20,57 +19,69 @@ const toDoCard = (() => {
             const $cardContent = dom.createDiv($card, 'id', 'card-content');
 
             // * header-content
-            const $headerContent = dom.createDiv($cardContent, 'class', 'header-content');
-            const $headerContentLeft = dom.createDiv($headerContent, 'id', 'header-content-left');
-            const $headerContentRight = dom.createDiv($headerContent, 'id', 'header-content-right');
+            const $headerContent = dom.createDiv($cardContent, 'class', 'todo-header-content');
+            const $headerContentLeft = dom.createDiv($headerContent, 'id', 'todo-header-content-left');
+            const $headerContentRight = dom.createDiv($headerContent, 'id', 'todo-header-content-right');
 
             // * Project name
             if (projectName === 'default') {
-                const $projectNameSvg = dom.createDiv($headerContentLeft, 'class', 'svg-card');
-                $projectNameSvg.id = 'project-name-svg';
+                dom.createDiv($headerContentLeft, 'class', 'svg select-project-svg');
             }
             const headerProjectName = dom.createP($headerContentLeft, projectName);
 
             // * Next button
-            const $nextBtn = dom.createBtn($headerContentRight, 'button', 'class', 'next-btn');
-            $nextBtn.classList.add('header-card-btn');
+            const $nextBtn = dom.createBtn(
+                $headerContentRight,
+                'button',
+                'class',
+                'header-card-btn next-btn'
+            );
+
             $nextBtn.addEventListener('click', async () => {
                 clearCard();
-
                 let nextIndex = (index + 1) % todoList.length;
                 if (nextIndex < 0) {
                     nextIndex = todoList.length - 1;
                 }
-
                 const nextTodo = todoList[nextIndex];
                 await displayCard(nextTodo);
             });
 
             // * Previous button
-            const $previousBtn = dom.createBtn($headerContentRight, 'button', 'class', 'previous-btn');
-            $previousBtn.classList.add('header-card-btn');
+            const $previousBtn = dom.createBtn(
+                $headerContentRight,
+                'button',
+                'class',
+                ' header-card-btn previous-btn'
+            );
             $previousBtn.addEventListener('click', async () => {
                 clearCard();
-
                 let prevIndex = (index - 1) % todoList.length;
                 if (prevIndex < 0) {
                     prevIndex = todoList.length - 1;
                 }
-
                 const prevTodo = todoList[prevIndex];
                 await displayCard(prevTodo);
             });
 
             // * More button
-            const $moreBtn = dom.createBtn($headerContentRight, 'button', 'class', 'more-btn');
-            $moreBtn.classList.add('header-card-btn');
+            const $moreBtn = dom.createBtn(
+                $headerContentRight,
+                'button',
+                'class',
+                'header-card-btn more-btn'
+            );
             $moreBtn.addEventListener('click', (e) => {
                 e.preventDefault();
             });
 
             // * Close button
-            const $closeBtn = dom.createBtn($headerContentRight, 'button', 'class', 'close-btn');
-            $closeBtn.classList.add('header-card-btn');
+            const $closeBtn = dom.createBtn(
+                $headerContentRight,
+                'button',
+                'class',
+                'header-card-btn close-btn'
+            );
             $closeBtn.addEventListener('click', () => {
                 clearCard();
                 focusDown();
@@ -86,9 +97,20 @@ const toDoCard = (() => {
 
             // * Description
             const $todoDescriptionContainer = dom.createDiv($mainContent, 'id', 'todo-description-container');
-            const $descriptionSvg = dom.createDiv($todoDescriptionContainer, 'class', 'svg-card');
-            $descriptionSvg.id = 'description-svg';
-            dom.createP($todoDescriptionContainer, todo.getDescription(), 'class', 'todo-description');
+            dom.createDiv($todoDescriptionContainer, 'class', 'svg description-svg');
+            const descriptionP = dom.createP(
+                $todoDescriptionContainer,
+                todo.getDescription(),
+                'class',
+                'todo-description'
+            );
+
+            descriptionP.addEventListener('click', () => {
+                descriptionP.remove();
+                const textarea = document.createElement('input');
+                textarea.type = 'textarea';
+                $todoDescriptionContainer.appendChild(textarea);
+            });
 
             // * Project
             const $projectNameContainer = dom.createDiv($mainContent, 'id', 'project-name-container');
