@@ -2,10 +2,12 @@
 
 main {
     display: flex;
-    gap: 12rem;
+    /* gap: 12rem; */
 }
 
 /* todo => see why without flex layout brakes */
 #main-content {
-    display: flex; /* ? */
+    width: 100%;
+    display: flex;
+    place-content: center;
 }

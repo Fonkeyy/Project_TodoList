@@ -85,7 +85,7 @@
 
 /* * Main */
 
-#main-content {
+#todo-card-content {
     margin: 0px 35px;
     display: flex;
     flex-direction: column;
@@ -139,22 +139,22 @@
 }
 
 @media screen and (min-width: 750px) {
-    #main-content {
+    #todo-card-content {
         display: grid;
         align-items: center;
         grid-template-columns: 4fr 1fr;
         grid-auto-rows: 40px;
     }
 
-    #main-content > h2 {
+    #todo-card-content > h2 {
     }
 
-    #main-content > #item-description-container {
+    #todo-card-content > #item-description-container {
         grid-column-start: 1;
         grid-row-start: 2;
     }
 
-    #main-content > .item-comment {
+    #todo-card-content > .item-comment {
         grid-column-start: 1;
         margin-left: 15px;
     }
@@ -167,7 +167,7 @@
         grid-column-start: span 2;
     }
 
-    #main-content > #priority-container {
+    #todo-card-content > #priority-container {
         grid-column-start: 2;
         grid-row-start: 3;
     }

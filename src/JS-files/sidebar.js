@@ -76,7 +76,7 @@ const sidebar = (() => {
                     .getInstances()
                     .find((project) => project.getName() === projectName);
                 const $main = document.querySelector('main');
-                const $todoList = document.querySelector('#item-list');
+                const $todoList = document.querySelector('#todo-list');
                 if ($todoList) {
                     $todoList.remove();
                 }
@@ -96,7 +96,7 @@ const sidebar = (() => {
                     container.remove();
                 }
 
-                const $todoList = document.querySelector('#item-list');
+                const $todoList = document.querySelector('#todo-list');
                 if ($todoList) {
                     $todoList.remove();
                 }

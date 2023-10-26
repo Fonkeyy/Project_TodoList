@@ -46,7 +46,7 @@ const toDoCard = (() => {
         });
 
         // * Main-content
-        const $mainContent = dom.createDiv($cardContent, 'id', 'main-content');
+        const $mainContent = dom.createDiv($cardContent, 'id', 'todo-card-content');
 
         // * Title
         const $titleContainer = dom.createDiv($mainContent, 'id', 'title-container');

@@ -16,7 +16,7 @@ export const todoList = (() => {
         }
         if (project) {
             // * Create container
-            const $todoList = dom.createDiv($mainContent, 'id', 'item-list');
+            const $todoList = dom.createDiv($mainContent, 'id', 'todo-list');
 
             // * Display project title
             dom.createP($todoList, `${project.getName()}`, 'id', 'project-title');
@@ -66,7 +66,7 @@ export const todoList = (() => {
         }
     };
     const update = (project) => {
-        document.querySelector('#item-list').remove();
+        document.querySelector('#todo-list').remove();
         display(project);
     };
 
