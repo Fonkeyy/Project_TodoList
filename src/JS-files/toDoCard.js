@@ -6,14 +6,14 @@ import { projectInstances } from './ProjectClass';
 export { toDoCard };
 
 const toDoCard = (() => {
-    const displayCard = async (item) => {
+    const displayCard = async (todo) => {
         try {
-            const projectName = item.getProjectName();
+            const projectName = todo.getProjectName();
             const project = projectInstances
                 .getInstances()
                 .find((project) => project.getName() === projectName);
             const todoList = project.getList();
-            const index = todoList.indexOf(item);
+            const index = todoList.indexOf(todo);
 
             const $card = dom.createDiv(document.body, 'id', 'card');
             $card.classList.toggle('opacity');
@@ -29,7 +29,7 @@ const toDoCard = (() => {
                 const $projectNameSvg = dom.createDiv($headerContentLeft, 'class', 'svg-card');
                 $projectNameSvg.id = 'project-name-svg';
             }
-            dom.createP($headerContentLeft, projectName);
+            const headerProjectName = dom.createP($headerContentLeft, projectName);
 
             // * Next button
             const $nextBtn = dom.createBtn($headerContentRight, 'button', 'class', 'next-btn');
@@ -42,8 +42,8 @@ const toDoCard = (() => {
                     nextIndex = todoList.length - 1;
                 }
 
-                const nextItem = todoList[nextIndex];
-                await displayCard(nextItem);
+                const nextTodo = todoList[nextIndex];
+                await displayCard(nextTodo);
             });
 
             // * Previous button
@@ -57,8 +57,8 @@ const toDoCard = (() => {
                     prevIndex = todoList.length - 1;
                 }
 
-                const prevItem = todoList[prevIndex];
-                await displayCard(prevItem);
+                const prevTodo = todoList[prevIndex];
+                await displayCard(prevTodo);
             });
 
             // * More button
@@ -81,43 +81,49 @@ const toDoCard = (() => {
 
             // * Title
             const $titleContainer = dom.createDiv($mainContent, 'id', 'title-container');
-            dom.createCheckbox($titleContainer, item.getPriority());
-            dom.createH($titleContainer, item.getTitle(), 2);
+            dom.createCheckbox($titleContainer, todo.getPriority());
+            dom.createH($titleContainer, todo.getTitle(), 2);
 
             // * Description
-            const $itemDescriptionContainer = dom.createDiv($mainContent, 'id', 'item-description-container');
-            const $descriptionSvg = dom.createDiv($itemDescriptionContainer, 'class', 'svg-card');
+            const $todoDescriptionContainer = dom.createDiv($mainContent, 'id', 'todo-description-container');
+            const $descriptionSvg = dom.createDiv($todoDescriptionContainer, 'class', 'svg-card');
             $descriptionSvg.id = 'description-svg';
-            dom.createP($itemDescriptionContainer, item.getDescription(), 'class', 'item-description');
+            dom.createP($todoDescriptionContainer, todo.getDescription(), 'class', 'todo-description');
 
             // * Project
             const $projectNameContainer = dom.createDiv($mainContent, 'id', 'project-name-container');
-            $projectNameContainer.classList.add('due-container');
-            const $projectSvg = dom.createDiv($projectNameContainer, 'class', 'svg-card');
-            $projectSvg.id = 'project-svg';
-            dom.createLabel($projectNameContainer, 'Project');
-
-            // const projectName = dom.createP($projectNameContainer, item.getProjectNames());
-
-            // projectName.addEventListener('click', () => {
-            //     projectName.classList.toggle('display-none');
-            //     const select = dom.createSelectProject($projectNameContainer);
-            //     select.addEventListener('onchange', (e) => {
-            //         item.setPriority(e.value);
-            //         projectName.classList.toggle('display-none');
-            //         select.classList.toggle('display-none');
-            //     });
-            // });
-
-            dom.createSelectProject($projectNameContainer, item);
+            dom.createH($projectNameContainer, 'Project', 4);
+            const select = dom.createSelectProject($projectNameContainer, todo);
+            select.selectProject.addEventListener('change', () => {
+                headerProjectName.textContent = select.selectProject.value;
+            });
 
             // * Due date
             const $dueDateContainer = dom.createDiv($mainContent, 'id', 'due-date-container');
             $dueDateContainer.classList.add('due-container');
             const $dueDateSvg = dom.createDiv($dueDateContainer, 'class', 'svg-card');
             $dueDateSvg.id = 'due-date-svg';
-            dom.createLabel($dueDateContainer, 'Due Date');
-            dom.createP($dueDateContainer, item.getDueDate());
+            dom.createH($dueDateContainer, 'Due Date', 4);
+            const dateP = dom.createP($dueDateContainer, todo.getDueDate());
+
+            dateP.addEventListener('click', () => {
+                const todoInputDate = document.querySelector('#todo-input-date');
+
+                if (todoInputDate) {
+                    todoInputDate.remove();
+                    dateP.classList.toggle('display-none');
+                } else {
+                    dateP.classList.toggle('display-none');
+                    const datePicker = dom.createDatePicker(todo);
+                    $dueDateContainer.appendChild(datePicker);
+
+                    datePicker.addEventListener('change', () => {
+                        datePicker.remove();
+                        dateP.textContent = todo.getDueDate();
+                        dateP.classList.toggle('display-none');
+                    });
+                }
+            });
 
             // * Priority
             const $priorityContainer = dom.createDiv($mainContent, 'id', 'priority-container');
@@ -126,20 +132,20 @@ const toDoCard = (() => {
             $prioritySvg.id = 'priority-svg';
             dom.createLabel($priorityContainer, 'Priority');
 
-            const priorityP = dom.createP($priorityContainer, `P${item.getPriority()}`, 'id', 'priority-p');
+            const priorityP = dom.createP($priorityContainer, `P${todo.getPriority()}`, 'id', 'priority-p');
             priorityP.addEventListener('click', () => {
                 const dialog = document.querySelector('#priority-dialog');
                 if (dialog) {
                     dialog.close();
                     dialog.remove();
                 } else {
-                    const dialog = $priorityContainer.appendChild(dom.createSelectDialog(item));
+                    const dialog = $priorityContainer.appendChild(dom.createSelectDialog(todo));
                     dialog.show();
                 }
             });
 
             // * Comment
-            dom.createP($mainContent, item.getComment(), 'class', 'item-comment');
+            dom.createP($mainContent, todo.getComment(), 'class', 'todo-comment');
         } catch (error) {
             console.error(error);
         }

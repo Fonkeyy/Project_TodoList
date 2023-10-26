@@ -166,12 +166,12 @@ const dom = (() => {
         return { selectWrapper, selectProject };
     };
 
-    const createSelectDialog = (item) => {
+    const createSelectDialog = (todo) => {
         const initialValues = [
-            { level: '1', svgClass: 'red-flag', current: item ? item.getPriority() === '1' : false },
-            { level: '2', svgClass: 'orange-flag', current: item ? item.getPriority() === '2' : false },
-            { level: '3', svgClass: 'blue-flag', current: item ? item.getPriority() === '3' : false },
-            { level: '4', svgClass: 'white-flag', current: item ? item.getPriority() === '4' : true },
+            { level: '1', svgClass: 'red-flag', current: todo ? todo.getPriority() === '1' : false },
+            { level: '2', svgClass: 'orange-flag', current: todo ? todo.getPriority() === '2' : false },
+            { level: '3', svgClass: 'blue-flag', current: todo ? todo.getPriority() === '3' : false },
+            { level: '4', svgClass: 'white-flag', current: todo ? todo.getPriority() === '4' : true },
         ];
         const todoSelectDialog = document.createElement('dialog');
         todoSelectDialog.id = 'priority-dialog';
@@ -185,8 +185,8 @@ const dom = (() => {
             }
 
             priorityWrapper.addEventListener('click', () => {
-                if (item) {
-                    item.setPriority(priority.level);
+                if (todo) {
+                    todo.setPriority(priority.level);
                 }
 
                 const priorityP = document.querySelector('#priority-p');
@@ -212,6 +212,24 @@ const dom = (() => {
         return todoSelectDialog;
     };
 
+    const createDatePicker = (todo) => {
+        const todoInputDate = document.createElement('input');
+        todoInputDate.setAttribute('type', 'date');
+        todoInputDate.id = 'todo-input-date';
+
+        if (todo) {
+            console.log(todo.getDueDate());
+            todoInputDate.setAttribute('value', todo.getDueDate());
+        }
+
+        todoInputDate.addEventListener('change', (e) => {
+            todo.setDueDate(e.target.value);
+            todoInputDate.remove();
+        });
+
+        return todoInputDate;
+    };
+
     return {
         createDiv,
         createH,
@@ -223,6 +241,7 @@ const dom = (() => {
         createCheckbox,
         createSelectProject,
         createSelectDialog,
+        createDatePicker,
     };
 })();
 

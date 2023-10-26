@@ -107,10 +107,10 @@
     cursor: pointer;
 }
 
-.due-container {
+/* .due-container {
     display: flex;
     gap: 1rem;
-}
+} */
 
 #project-svg {
     background-image: url('../assets/icons/inbox.svg');
@@ -143,6 +143,10 @@
     }
 
     #todo-card-content > h2 {
+    }
+
+    #todo-card-content > #project-name-container {
+        grid-column-start: 2;
     }
 
     #todo-card-content > #item-description-container {
