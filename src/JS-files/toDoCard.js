@@ -106,10 +106,30 @@ const toDoCard = (() => {
             );
 
             descriptionP.addEventListener('click', () => {
-                descriptionP.remove();
+                descriptionP.classList.add('display-none');
                 const textarea = document.createElement('input');
                 textarea.type = 'textarea';
-                $todoDescriptionContainer.appendChild(textarea);
+                textarea.classList.add('todo-card-textarea');
+                textarea.value = todo.getDescription();
+
+                const { cancelBtn, addTaskBtn, buttonWrapper } = dom.createButtonWrapper();
+
+                addTaskBtn.textContent = 'Save';
+
+                cancelBtn.addEventListener('click', () => {
+                    descriptionP.classList.remove('display-none');
+                    textarea.remove();
+                    buttonWrapper.remove();
+                });
+
+                addTaskBtn.addEventListener('click', () => {
+                    todo.setDescription(textarea.value);
+                    descriptionP.textContent = textarea.value;
+                    descriptionP.classList.toggle('display-none');
+                    textarea.remove();
+                    buttonWrapper.remove();
+                });
+                $todoDescriptionContainer.append(textarea, buttonWrapper);
             });
 
             // * Project
