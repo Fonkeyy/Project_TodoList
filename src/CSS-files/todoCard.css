@@ -1,11 +1,8 @@
-@import '../CSS-files/global.css';
-@import '../CSS-files/variables.css';
-
 #card-focus {
 }
 
 #card {
-    width: 90%;
+    width: clamp(350px, 864px, 90vw);
     height: 90%;
     position: absolute;
     top: 50%;
@@ -18,7 +15,6 @@
 }
 
 /* * Header */
-
 .header-content {
     display: grid;
     align-items: center;

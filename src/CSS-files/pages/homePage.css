@@ -2,7 +2,6 @@
 
 main {
     display: flex;
-    /* gap: 12rem; */
 }
 
 /* todo => see why without flex layout brakes */

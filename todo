@@ -1,15 +1,12 @@
 add toggle display project list on sidebar
 
-add labels on every buttons + hide it
-
-add hide label class
 refactor all inputs
-
-change font-size 14px
 
 add padding to header buttons
 add local storage
 
+add labels on every buttons + hide it
+add hide label class
 check accessibility
 check performance
 
@@ -23,3 +20,7 @@ add possibility to change "duedate" on todoCard
 add remove btn on duedate todoCard
 style todoCard
 change description placeholder color
+
+remove todo when checkbox clicked + set it to archive folder
+
+add functionality to 3 dots button on todo
