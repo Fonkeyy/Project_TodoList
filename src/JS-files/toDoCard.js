@@ -1,6 +1,7 @@
-import { dom, focusDown } from './global';
-import { projectInstances } from './ProjectClass';
+import { dom } from './global';
 import '../CSS-files/todoCard.css';
+import { sidebar } from './sidebar';
+// import { todoList } from './todoList';
 
 export { toDoCard };
 
@@ -8,18 +9,14 @@ const toDoCard = (() => {
     const displayCard = async (todo) => {
         try {
             const projectName = todo.getProjectName();
-            const project = projectInstances
-                .getInstances()
-                .find((project) => project.getName() === projectName);
+            const project = todo.getProject();
             const todoList = project.getList();
             const index = todoList.indexOf(todo);
-
-            const $card = dom.createDiv(document.body, 'id', 'card');
-            $card.classList.toggle('opacity');
+            const $card = dom.createDiv(null, 'id', 'todo-card');
             const $cardContent = dom.createDiv($card, 'id', 'card-content');
 
             // * header-content
-            const $headerContent = dom.createDiv($cardContent, 'class', 'todo-header-content');
+            const $headerContent = dom.createDiv($cardContent, 'id', 'todo-header-content');
             const $headerContentLeft = dom.createDiv($headerContent, 'id', 'todo-header-content-left');
             const $headerContentRight = dom.createDiv($headerContent, 'id', 'todo-header-content-right');
 
@@ -44,6 +41,7 @@ const toDoCard = (() => {
                     nextIndex = todoList.length - 1;
                 }
                 const nextTodo = todoList[nextIndex];
+                document.querySelector('.dialog-modal').remove();
                 await displayCard(nextTodo);
             });
 
@@ -61,6 +59,7 @@ const toDoCard = (() => {
                     prevIndex = todoList.length - 1;
                 }
                 const prevTodo = todoList[prevIndex];
+                document.querySelector('.dialog-modal').remove();
                 await displayCard(prevTodo);
             });
 
@@ -71,8 +70,21 @@ const toDoCard = (() => {
                 'class',
                 'header-card-btn more-btn'
             );
-            $moreBtn.addEventListener('click', (e) => {
-                e.preventDefault();
+            const dialog = document.querySelector('.drop-down-dialog');
+            $moreBtn.addEventListener('click', () => {
+                if (dialog) {
+                    dialog.remove();
+                } else {
+                    const dialog = dom.createDropDown(todo);
+                    $headerContentRight.appendChild(dialog);
+
+                    dialog.addEventListener('click', () => {
+                        document.querySelector('.dialog-modal').close();
+                        document.querySelector('.dialog-modal').remove();
+                        sidebar.update();
+                        // todoList.update(project);
+                    });
+                }
             });
 
             // * Close button
@@ -83,8 +95,8 @@ const toDoCard = (() => {
                 'header-card-btn close-btn'
             );
             $closeBtn.addEventListener('click', () => {
-                clearCard();
-                focusDown();
+                document.querySelector('.dialog-modal').close();
+                document.querySelector('.dialog-modal').remove();
             });
 
             // * Main-content
@@ -134,6 +146,7 @@ const toDoCard = (() => {
 
             // * Project
             const $projectNameContainer = dom.createDiv($mainContent, 'id', 'project-name-container');
+            $projectNameContainer.classList.add('due-container');
             dom.createH($projectNameContainer, 'Project', 4);
             const select = dom.createSelectProject($projectNameContainer, todo);
             select.selectProject.addEventListener('change', () => {
@@ -143,9 +156,10 @@ const toDoCard = (() => {
             // * Due date
             const $dueDateContainer = dom.createDiv($mainContent, 'id', 'due-date-container');
             $dueDateContainer.classList.add('due-container');
-            dom.createDiv($dueDateContainer, 'class', 'svg due-date-svg');
             dom.createH($dueDateContainer, 'Due Date', 4);
-            const dateP = dom.createP($dueDateContainer, todo.getDueDate());
+            const dueDateWrapper = dom.createDiv($dueDateContainer, 'class', 'due-wrapper');
+            dom.createDiv(dueDateWrapper, 'class', 'svg due-date-svg');
+            const dateP = dom.createP(dueDateWrapper, todo.getDueDate());
 
             dateP.addEventListener('click', () => {
                 const todoInputDate = document.querySelector('#todo-input-date');
@@ -169,10 +183,11 @@ const toDoCard = (() => {
             // * Priority
             const $priorityContainer = dom.createDiv($mainContent, 'id', 'priority-container');
             $priorityContainer.classList.add('due-container');
-            const svg = dom.createDiv($priorityContainer, 'class', `svg priority-${todo.getPriority()}`);
             dom.createH($priorityContainer, 'Priority', 4);
+            const duePriorityWrapper = dom.createDiv($priorityContainer, 'class', 'due-wrapper');
+            const svg = dom.createDiv(duePriorityWrapper, 'class', `svg priority-${todo.getPriority()}`);
+            const priorityP = dom.createP(duePriorityWrapper, `P${todo.getPriority()}`, 'id', 'priority-p');
 
-            const priorityP = dom.createP($priorityContainer, `P${todo.getPriority()}`, 'id', 'priority-p');
             priorityP.addEventListener('click', () => {
                 const dialog = document.querySelector('#priority-dialog');
                 if (dialog) {
@@ -189,6 +204,8 @@ const toDoCard = (() => {
 
             // * Comment
             dom.createP($mainContent, todo.getComment(), 'class', 'todo-comment');
+
+            dom.createDialogModal($card);
         } catch (error) {
             console.error(error);
         }

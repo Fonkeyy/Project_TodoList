@@ -9,12 +9,12 @@ export class Project {
     getName = () => this.name;
     getList = () => this.list;
     getLength = () => this.list.length;
-    getTitles = () => this.list.map((item) => item.getTitle());
-    getDueDates = () => this.list.map((item) => item.getDueDate());
-    getPriorities = () => this.list.map((item) => item.getPriority());
-    getNotes = () => this.list.map((item) => item.getNote());
-    getCheckStatus = () => this.list.map((item) => item.getCheckStatus());
-    getIds = () => this.list.map((item) => item.getId());
+    getTitles = () => this.list.map((todo) => todo.getTitle());
+    getDueDates = () => this.list.map((todo) => todo.getDueDate());
+    getPriorities = () => this.list.map((todo) => todo.getPriority());
+    getNotes = () => this.list.map((todo) => todo.getNote());
+    getCheckStatus = () => this.list.map((todo) => todo.getCheckStatus());
+    getIds = () => this.list.map((todo) => todo.getId());
 
     // * Setters
     addNewItem = (item) => {
@@ -26,7 +26,10 @@ export class Project {
     };
 
     // todo filter?
-    removeItem = (item) => this.list.remove(this.list.getIds() === item.getId());
+    // removeItem = (item) => this.list.remove(this.list.getIds() === item.getId());
+    removeTodo = (todo) => {
+        this.list = this.list.filter((item) => item.getId() !== todo.getId());
+    };
 }
 
 export const projectInstances = (() => {

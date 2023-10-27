@@ -1,5 +1,5 @@
 import { projectInstances } from './ProjectClass';
-import { dom, focusUp } from './global';
+import { dom } from './global';
 import { toDoCard } from './toDoCard';
 
 import '../CSS-files/todoList.css';
@@ -51,15 +51,16 @@ export const todoList = (() => {
 
                 // * Add project todoItems event listener
                 //todo change title for id
-                todo.addEventListener('click', (e) => {
+                todo.addEventListener('click', async (e) => {
                     const itemTitle = e.target.closest('div').querySelector('p').textContent;
 
                     toDoCard.clearCard();
-                    toDoCard.displayCard(project.getList().find((todo) => todo.getTitle() === itemTitle));
-                    focusUp(document.body, document.querySelector('#card'));
+                    const card = await toDoCard.displayCard(
+                        project.getList().find((todo) => todo.getTitle() === itemTitle)
+                    );
+                    dom.createDialogModal(card);
                 });
             });
-            // const $mainContent = document.querySelector('#main-content');
 
             $mainContent.appendChild($todoList);
             return $todoList;

@@ -10,17 +10,14 @@ add hide label class
 check accessibility
 check performance
 
-add little squeeze effect when click on priority or project select
+add little squeeze effect onClick on priority or project select in todoCard
 
-style todoCard
 change description placeholder color
 
-add remove btn on duedate todoCard
+fix parent container when click on another project.
 
 remove todo when checkbox clicked + set it to archive folder
 
-add functionality to 3 dots button on todo:
--add modify button on todoCard
--add remove btn
+add remove btn on duedate todoCard
 
-fix recurrent errors
+-fix remove btn

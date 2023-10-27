@@ -17,14 +17,14 @@ export class ToDoItem {
         this.projectName = projectName;
         this.comment = comment;
         this.checkStatus = checkStatus;
-        this.Id = null;
+        this.Id = Date.now();
         this.projectNames = [projectName];
 
-        this.setId();
+        // this.setId();
 
-        const project = projectInstances.getInstances().find((project) => project.getName() === projectName);
+        this.project = projectInstances.getInstances().find((project) => project.getName() === projectName);
 
-        project.addNewItem(this);
+        this.project.addNewItem(this);
     }
 
     // * Getters
@@ -32,6 +32,7 @@ export class ToDoItem {
     getDescription = () => this.description;
     getDueDate = () => this.dueDate;
     getPriority = () => this.priority;
+    getProject = () => this.project;
     getProjectName = () => this.projectName;
     getComment = () => this.comment;
     getCheckStatus = () => this.checkStatus;
@@ -45,6 +46,6 @@ export class ToDoItem {
     setProject = (project) => (this.project = project);
     setComment = (text) => (this.comment = text);
     setCheckStatus = (boolean) => (this.checkStatus = boolean);
-    setId = () => (this.id = Date.now());
+    // setId = () => (this.id = Date.now());
     setProjectName = (projectName) => this.projectNames.push(projectName);
 }
