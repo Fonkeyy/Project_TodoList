@@ -21,3 +21,10 @@ remove todo when checkbox clicked + set it to archive folder
 add remove btn on duedate todoCard
 
 -fix remove btn
+
+update listItem after close todoCard etc
+
+fix add todoCard style
+
+fix select priority:
+-flag color within add todo card

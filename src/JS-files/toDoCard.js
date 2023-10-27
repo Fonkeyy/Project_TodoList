@@ -181,26 +181,28 @@ const toDoCard = (() => {
             });
 
             // * Priority
-            const $priorityContainer = dom.createDiv($mainContent, 'id', 'priority-container');
-            $priorityContainer.classList.add('due-container');
-            dom.createH($priorityContainer, 'Priority', 4);
-            const duePriorityWrapper = dom.createDiv($priorityContainer, 'class', 'due-wrapper');
-            const svg = dom.createDiv(duePriorityWrapper, 'class', `svg priority-${todo.getPriority()}`);
-            const priorityP = dom.createP(duePriorityWrapper, `P${todo.getPriority()}`, 'id', 'priority-p');
+            // const $priorityContainer = dom.createDiv($mainContent, 'id', 'priority-container');
+            // $priorityContainer.classList.add('due-container');
+            // dom.createH($priorityContainer, 'Priority', 4);
+            // const duePriorityWrapper = dom.createDiv($priorityContainer, 'class', 'due-wrapper');
+            // const svg = dom.createDiv(duePriorityWrapper, 'class', `svg priority-${todo.getPriority()}`);
+            // const priorityP = dom.createP(duePriorityWrapper, `P${todo.getPriority()}`, 'id', 'priority-p');
 
-            priorityP.addEventListener('click', () => {
-                const dialog = document.querySelector('#priority-dialog');
-                if (dialog) {
-                    dialog.close();
-                    dialog.remove();
-                } else {
-                    const dialog = $priorityContainer.appendChild(dom.createSelectPriority(todo));
-                    dialog.show();
-                    dialog.addEventListener('click', () => {
-                        svg.className = `svg priority-${todo.getPriority()}`;
-                    });
-                }
-            });
+            // priorityP.addEventListener('click', () => {
+            //     const dialog = document.querySelector('#priority-dialog');
+            //     if (dialog) {
+            //         dialog.close();
+            //         dialog.remove();
+            //     } else {
+            //         const dialog = $priorityContainer.appendChild(dom.createSelectPriority(todo));
+            //         dialog.show();
+            //         dialog.addEventListener('click', () => {
+            //             svg.className = `svg priority-${todo.getPriority()}`;
+            //         });
+            //     }
+            // });
+            const priority = dom.createSelectPriority(todo);
+            $mainContent.appendChild(priority);
 
             // * Comment
             dom.createP($mainContent, todo.getComment(), 'class', 'todo-comment');

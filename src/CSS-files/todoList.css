@@ -31,7 +31,7 @@
     font-size: 0.9rem;
 }
 
-.todo .close-btn {
+.todo .more-btn {
     background-image: url('../assets/icons/dots.svg');
     background-repeat: no-repeat;
     background-size: contain;

@@ -15,50 +15,53 @@ export const todoList = (() => {
             project = defaultProject;
         }
         if (project) {
-            // * Create container
+            // * Container
             const $todoList = dom.createDiv($mainContent, 'id', 'todo-list');
 
-            // * Display project title
+            // * Project title
             dom.createP($todoList, `${project.getName()}`, 'id', 'project-title');
 
-            // * Display project todoItems
-            project.getList().forEach((item) => {
-                const todo = document.createElement('div');
-                todo.setAttribute('data-project-id', `${item.getId()}`);
-                todo.classList.add('todo');
+            // * Display project todo
+            project.getList().forEach((todo) => {
+                const item = document.createElement('div');
+                item.setAttribute('data-project-id', `${todo.getId()}`);
+                item.classList.add('todo');
 
-                const checkbox = dom.createCheckbox(todo, item.getPriority());
+                // * Checkbox
+                const checkbox = dom.createCheckbox(item, todo.getPriority());
                 checkbox.addEventListener('click', (e) => e.stopPropagation());
 
-                dom.createP(todo, item.getTitle(), 'class', 'todo-title');
+                // * Todo title
+                dom.createP(item, todo.getTitle(), 'class', 'todo-title');
 
-                // * Create close btn and add styles
-                const $closeBtn = dom.createBtn(todo, 'button', 'class', 'close-btn');
-                todo.addEventListener('mouseenter', () => {
-                    $closeBtn.classList.toggle('opacity');
+                // * Close button
+                const $moreBtn = dom.createBtn(item, 'button', 'class', ' svg more-btn');
+                item.addEventListener('mouseenter', () => {
+                    $moreBtn.classList.toggle('opacity');
                 });
-                todo.addEventListener('mouseleave', () => {
-                    $closeBtn.classList.toggle('opacity');
+                item.addEventListener('mouseleave', () => {
+                    $moreBtn.classList.toggle('opacity');
                 });
-                $closeBtn.addEventListener('click', () => {}); //todo => add function listener
 
-                // * Display due date
-                const dueDateWrapper = dom.createDiv(todo, 'class', 'due-date-wrapper');
+                $moreBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    dom.createDropDown(todo);
+                });
+
+                // * Due date
+                const dueDateWrapper = dom.createDiv(item, 'class', 'due-date-wrapper');
                 dom.createDiv(dueDateWrapper, 'class', 'svg due-date-svg');
-                dom.createP(dueDateWrapper, item.getDueDate(), 'class', 'due-date-value'); //todo => implement date stuff
+                dom.createP(dueDateWrapper, todo.getDueDate(), 'class', 'due-date-value');
+                $todoList.appendChild(item);
 
-                $todoList.appendChild(todo);
-
-                // * Add project todoItems event listener
-                //todo change title for id
-                todo.addEventListener('click', async (e) => {
-                    const itemTitle = e.target.closest('div').querySelector('p').textContent;
+                // * Display todoCard on click
+                item.addEventListener('click', async (e) => {
+                    const todoTitle = e.target.closest('div').querySelector('p').textContent;
 
                     toDoCard.clearCard();
-                    const card = await toDoCard.displayCard(
-                        project.getList().find((todo) => todo.getTitle() === itemTitle)
+                    await toDoCard.displayCard(
+                        project.getList().find((todo) => todo.getTitle() === todoTitle)
                     );
-                    dom.createDialogModal(card);
                 });
             });
 

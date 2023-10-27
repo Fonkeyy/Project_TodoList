@@ -151,44 +151,75 @@ export const dom = (() => {
             { level: '3', svgClass: 'priority-3', current: todo ? todo.getPriority() === '3' : false },
             { level: '4', svgClass: 'priority-4', current: todo ? todo.getPriority() === '4' : true },
         ];
-        const todoSelectDialog = document.createElement('dialog');
-        todoSelectDialog.id = 'priority-dialog';
 
-        for (let priority of initialValues) {
-            const priorityWrapper = dom.createDiv(todoSelectDialog, 'class', 'priority-wrapper');
-            dom.createDiv(priorityWrapper, 'class', `svg ${priority.svgClass}`);
-            dom.createP(priorityWrapper, `Priority ${priority.level}`);
-            if (priority.current) {
-                dom.createDiv(priorityWrapper, 'class', 'flag priority-check');
-            }
+        const findSelectedPriority = () => (todo ? todo.getPriority() : '4');
 
-            priorityWrapper.addEventListener('click', () => {
-                if (todo) {
-                    todo.setPriority(priority.level);
-                }
+        const $priorityContainer = document.createElement('div');
+        $priorityContainer.id = 'priority-container';
+        $priorityContainer.classList.add('due-container');
+        dom.createH($priorityContainer, 'Priority', 4);
+        const duePriorityWrapper = dom.createDiv($priorityContainer, 'class', 'due-wrapper');
 
-                const priorityP = document.querySelector('#priority-p');
-                priorityP.textContent = `P${priority.level}`;
-                todoSelectDialog.close();
-                todoSelectDialog.remove();
-                todo.setPriority(priority.level);
-            });
-        }
+        const svg = dom.createDiv(duePriorityWrapper, 'class', `svg priority-${findSelectedPriority()}`);
+        const priorityP = dom.createP(duePriorityWrapper, `P${findSelectedPriority()}`, 'id', 'priority-p');
 
-        // todo => fix close dialog
-        todoSelectDialog.addEventListener('click', (e) => {
-            const dialogDimensions = todoSelectDialog.getBoundingClientRect();
-            if (
-                e.clientX < dialogDimensions.left ||
-                e.clientX > dialogDimensions.right ||
-                e.clientY < dialogDimensions.top ||
-                e.clientY > dialogDimensions.bottom
-            ) {
-                todoSelectDialog.close();
-                todoSelectDialog.remove();
+        priorityP.addEventListener('click', () => {
+            const dialog = document.querySelector('#priority-dialog');
+            if (dialog) {
+                dialog.close();
+                dialog.remove();
+            } else {
+                const dialog = $priorityContainer.appendChild(createPriorityDialog(todo));
+                dialog.show();
+                dialog.addEventListener('click', () => {
+                    svg.className = `svg priority-${findSelectedPriority()}`;
+                });
             }
         });
-        return todoSelectDialog;
+
+        const createPriorityDialog = (todo) => {
+            const selectPriorityDialog = document.createElement('dialog');
+            selectPriorityDialog.id = 'priority-dialog';
+
+            for (let priority of initialValues) {
+                const priorityWrapper = dom.createDiv(selectPriorityDialog, 'class', 'priority-wrapper');
+                dom.createDiv(priorityWrapper, 'class', `svg ${priority.svgClass}`);
+                dom.createP(priorityWrapper, `Priority ${priority.level}`);
+                if (priority.current) {
+                    dom.createDiv(priorityWrapper, 'class', 'flag priority-check');
+                }
+
+                priorityWrapper.addEventListener('click', () => {
+                    if (todo) {
+                        todo.setPriority(priority.level);
+                    }
+
+                    const priorityP = document.querySelector('#priority-p');
+                    priorityP.textContent = `P${priority.level}`;
+                    svg.className = `svg priority-${priority.level}`;
+
+                    selectPriorityDialog.close();
+                    selectPriorityDialog.remove();
+                });
+            }
+
+            // todo => fix close dialog
+            selectPriorityDialog.addEventListener('click', (e) => {
+                const dialogDimensions = selectPriorityDialog.getBoundingClientRect();
+                if (
+                    e.clientX < dialogDimensions.left ||
+                    e.clientX > dialogDimensions.right ||
+                    e.clientY < dialogDimensions.top ||
+                    e.clientY > dialogDimensions.bottom
+                ) {
+                    selectPriorityDialog.close();
+                    selectPriorityDialog.remove();
+                }
+            });
+            return selectPriorityDialog;
+        };
+
+        return $priorityContainer;
     };
 
     const createDatePicker = (todo) => {
