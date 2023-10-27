@@ -43,5 +43,4 @@ export class ToDoItem {
     setProject = (project) => (this.project = project);
     setComment = (text) => (this.comment = text);
     setCheckStatus = (boolean) => (this.checkStatus = boolean);
-    // setId = () => (this.id = Date.now());
 }

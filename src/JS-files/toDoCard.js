@@ -166,7 +166,7 @@ const toDoCard = (() => {
             });
 
             // * Priority
-            const priority = dom.createSelectPriority(todo);
+            const priority = dom.createSelectPriority(todo).$priorityContainer;
             $mainContent.appendChild(priority);
 
             // * Comment

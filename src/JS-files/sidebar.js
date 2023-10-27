@@ -10,8 +10,6 @@ import '../CSS-files/global.css';
 const sidebar = (() => {
     const display = () => {
         const sidebar = document.querySelector('.sidebar');
-        //todo add function sidebar resize
-
         const sideBarProjectContainer = dom.createDiv(sidebar, 'id', 'sidebar-project-container');
 
         // * Create title container

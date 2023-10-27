@@ -57,7 +57,6 @@ export const todoList = (() => {
                 // * Display todoCard on click
                 item.addEventListener('click', async (e) => {
                     const todoTitle = e.target.closest('div').querySelector('.todo-title').textContent;
-                    console.log(todoTitle);
 
                     toDoCard.clearCard();
                     await toDoCard.displayCard(

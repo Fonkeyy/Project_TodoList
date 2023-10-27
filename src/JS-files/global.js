@@ -155,13 +155,16 @@ export const dom = (() => {
         ];
 
         const findSelectedPriority = () => (todo ? todo.getPriority() : '4');
+        let selectedPriorityLevel = findSelectedPriority();
 
         const $priorityContainer = document.createElement('div');
         $priorityContainer.id = 'priority-container';
         $priorityContainer.classList.add('due-container');
         dom.createH($priorityContainer, 'Priority', 4);
         const duePriorityWrapper = dom.createDiv($priorityContainer, 'class', 'due-wrapper');
+        // const svg = dom.createDiv(duePriorityWrapper, 'class', `svg priority-${selectedPriorityLevel}`);
         const svg = dom.createDiv(duePriorityWrapper, 'class', `svg priority-${findSelectedPriority()}`);
+        // const priorityP = dom.createP(duePriorityWrapper, `P${selectedPriorityLevel}`, 'id', 'priority-p');
         const priorityP = dom.createP(duePriorityWrapper, `P${findSelectedPriority()}`, 'id', 'priority-p');
 
         priorityP.addEventListener('click', () => {
@@ -170,11 +173,14 @@ export const dom = (() => {
                 dialog.close();
                 dialog.remove();
             } else {
-                const dialog = $priorityContainer.appendChild(createPriorityDialog(todo));
+                const dialog = $priorityContainer.appendChild(
+                    createPriorityDialog(todo).selectPriorityDialog
+                );
                 dialog.show();
-                // dialog.addEventListener('click', () => {
-                //     svg.className = `svg priority-${findSelectedPriority()}`;
-                // });
+                dialog.addEventListener('click', () => {
+                    // svg.className = `svg priority-${selectedPriorityLevel}`;
+                    svg.className = `svg priority-${findSelectedPriority()}`;
+                });
             }
         });
 
@@ -191,15 +197,19 @@ export const dom = (() => {
                 }
 
                 priorityWrapper.addEventListener('click', () => {
-                    if (todo) {
-                        todo.setPriority(priority.level);
-                    }
-
                     priorityP.textContent = `P${priority.level}`;
+                    // svg.className = `svg priority-${selectedPriorityLevel}`;
                     svg.className = `svg priority-${findSelectedPriority()}`;
 
                     selectPriorityDialog.close();
                     selectPriorityDialog.remove();
+
+                    if (todo) {
+                        todo.setPriority(priority.level);
+                    } else {
+                        selectedPriorityLevel = priority.level;
+                        return selectedPriorityLevel;
+                    }
                 });
             }
 
@@ -216,10 +226,11 @@ export const dom = (() => {
             // //         selectPriorityDialog.remove();
             // //     }
             // // });
-            return selectPriorityDialog;
+            // return selectPriorityDialog;
+            return { selectPriorityDialog };
+            // return selectedPriorityLevel;
         };
-
-        return $priorityContainer;
+        return { $priorityContainer, selectedPriorityLevel };
     };
 
     const createDatePicker = (todo) => {
