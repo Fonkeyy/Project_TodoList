@@ -9,7 +9,7 @@ export class Project {
     getName = () => this.name;
     getList = () => this.list;
     getLength = () => this.list.length;
-    getTitles = () => this.list.map((todo) => todo.getTitle());
+    getTitles = () => this.list.map((todo) => todo.getName());
     getDueDates = () => this.list.map((todo) => todo.getDueDate());
     getPriorities = () => this.list.map((todo) => todo.getPriority());
     getNotes = () => this.list.map((todo) => todo.getNote());
@@ -17,18 +17,19 @@ export class Project {
     getIds = () => this.list.map((todo) => todo.getId());
 
     // * Setters
-    addNewItem = (item) => {
-        // * check if project name is already set to item
-        if (item.getProjectNames().every((element) => element !== this.getName())) {
-            item.setProjectName(this.getName());
+    addNewTodo = (todo) => {
+        // * check if project name is already set to todo
+        if (todo.getProjectName() === this.getName()) {
+            this.list.push(todo);
+        } else {
+            alert(`You have already a todo name's ${this.getName()}`);
         }
-        this.list.push(item);
     };
 
     // todo filter?
     // removeItem = (item) => this.list.remove(this.list.getIds() === item.getId());
     removeTodo = (todo) => {
-        this.list = this.list.filter((item) => item.getId() !== todo.getId());
+        this.list = this.list.filter((item) => item.getName() !== todo.getName());
     };
 }
 

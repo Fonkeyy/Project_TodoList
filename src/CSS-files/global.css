@@ -147,7 +147,6 @@ input[type='checkbox']:hover::before {
 }
 
 .select-project-wrapper {
-    color: var(--text-secondary-color);
     display: flex;
     gap: 0.2rem;
 }
@@ -236,7 +235,6 @@ input[type='checkbox']:hover::before {
 }
 
 .drop-down-dialog {
-    position: absolute;
     top: 3rem;
     border: none;
     border-radius: 5px;

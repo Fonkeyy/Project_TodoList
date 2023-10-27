@@ -1,7 +1,5 @@
 import { dom } from './global';
 import '../CSS-files/todoCard.css';
-import { sidebar } from './sidebar';
-// import { todoList } from './todoList';
 
 export { toDoCard };
 
@@ -70,21 +68,8 @@ const toDoCard = (() => {
                 'class',
                 'header-card-btn more-btn'
             );
-            const dialog = document.querySelector('.drop-down-dialog');
             $moreBtn.addEventListener('click', () => {
-                if (dialog) {
-                    dialog.remove();
-                } else {
-                    const dialog = dom.createDropDown(todo);
-                    $headerContentRight.appendChild(dialog);
-
-                    dialog.addEventListener('click', () => {
-                        document.querySelector('.dialog-modal').close();
-                        document.querySelector('.dialog-modal').remove();
-                        sidebar.update();
-                        // todoList.update(project);
-                    });
-                }
+                $headerContentRight.append(dom.createDropDown(todo));
             });
 
             // * Close button
@@ -105,7 +90,7 @@ const toDoCard = (() => {
             // * Title
             const $titleContainer = dom.createDiv($mainContent, 'id', 'title-container');
             dom.createCheckbox($titleContainer, todo.getPriority());
-            dom.createH($titleContainer, todo.getTitle(), 2);
+            dom.createH($titleContainer, todo.getName(), 2);
 
             // * Description
             const $todoDescriptionContainer = dom.createDiv($mainContent, 'id', 'todo-description-container');
@@ -181,26 +166,6 @@ const toDoCard = (() => {
             });
 
             // * Priority
-            // const $priorityContainer = dom.createDiv($mainContent, 'id', 'priority-container');
-            // $priorityContainer.classList.add('due-container');
-            // dom.createH($priorityContainer, 'Priority', 4);
-            // const duePriorityWrapper = dom.createDiv($priorityContainer, 'class', 'due-wrapper');
-            // const svg = dom.createDiv(duePriorityWrapper, 'class', `svg priority-${todo.getPriority()}`);
-            // const priorityP = dom.createP(duePriorityWrapper, `P${todo.getPriority()}`, 'id', 'priority-p');
-
-            // priorityP.addEventListener('click', () => {
-            //     const dialog = document.querySelector('#priority-dialog');
-            //     if (dialog) {
-            //         dialog.close();
-            //         dialog.remove();
-            //     } else {
-            //         const dialog = $priorityContainer.appendChild(dom.createSelectPriority(todo));
-            //         dialog.show();
-            //         dialog.addEventListener('click', () => {
-            //             svg.className = `svg priority-${todo.getPriority()}`;
-            //         });
-            //     }
-            // });
             const priority = dom.createSelectPriority(todo);
             $mainContent.appendChild(priority);
 

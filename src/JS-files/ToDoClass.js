@@ -2,7 +2,7 @@ import { projectInstances } from './ProjectClass';
 
 export class ToDoItem {
     constructor(
-        title = null,
+        name = null,
         description = null,
         dueDate = null,
         priority = null,
@@ -10,7 +10,7 @@ export class ToDoItem {
         comment = null,
         checkStatus = false
     ) {
-        this.title = title;
+        this.name = name;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
@@ -18,17 +18,15 @@ export class ToDoItem {
         this.comment = comment;
         this.checkStatus = checkStatus;
         this.Id = Date.now();
-        this.projectNames = [projectName];
 
-        // this.setId();
+        const project = projectInstances.getInstances().find((project) => project.getName() === projectName);
+        project.addNewTodo(this);
 
-        this.project = projectInstances.getInstances().find((project) => project.getName() === projectName);
-
-        this.project.addNewItem(this);
+        this.setProject(project);
     }
 
     // * Getters
-    getTitle = () => this.title;
+    getName = () => this.name;
     getDescription = () => this.description;
     getDueDate = () => this.dueDate;
     getPriority = () => this.priority;
@@ -37,7 +35,6 @@ export class ToDoItem {
     getComment = () => this.comment;
     getCheckStatus = () => this.checkStatus;
     getId = () => this.id;
-    getProjectNames = () => this.projectNames;
 
     // * Setters
     setDescription = (text) => (this.description = text);
@@ -47,5 +44,4 @@ export class ToDoItem {
     setComment = (text) => (this.comment = text);
     setCheckStatus = (boolean) => (this.checkStatus = boolean);
     // setId = () => (this.id = Date.now());
-    setProjectName = (projectName) => this.projectNames.push(projectName);
 }

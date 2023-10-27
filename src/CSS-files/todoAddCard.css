@@ -50,8 +50,8 @@
     color: rgba(153, 153, 153);
 }
 
-.due-wrapper .svg {
-    filter: invert(50%);
+#todo-add-card .due-wrapper .svg {
+    background: url('../assets/icons/flag/flag-grey.svg');
 }
 
 #todo-add-card #priority-container h4 {

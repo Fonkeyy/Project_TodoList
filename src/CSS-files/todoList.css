@@ -12,6 +12,7 @@
 }
 
 .todo {
+    position: relative;
     padding: 1rem 0rem;
     display: grid;
     grid-template-columns: auto 5fr 1fr;
@@ -42,6 +43,11 @@
     transition: opacity 0.15s ease-in;
     grid-row-start: span 2;
     place-self: center;
+}
+
+.todo .drop-down-dialog {
+    left: 70%;
+    top: 25%;
 }
 
 @media screen and (min-width: 768px) {

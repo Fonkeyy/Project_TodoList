@@ -1,5 +1,7 @@
 import { projectInstances } from './ProjectClass';
 import '../CSS-files/global.css';
+import { sidebar } from './sidebar';
+import { todoList } from './todoList';
 
 export const dom = (() => {
     const createDiv = (parent, attribute, attributeName) => {
@@ -159,7 +161,6 @@ export const dom = (() => {
         $priorityContainer.classList.add('due-container');
         dom.createH($priorityContainer, 'Priority', 4);
         const duePriorityWrapper = dom.createDiv($priorityContainer, 'class', 'due-wrapper');
-
         const svg = dom.createDiv(duePriorityWrapper, 'class', `svg priority-${findSelectedPriority()}`);
         const priorityP = dom.createP(duePriorityWrapper, `P${findSelectedPriority()}`, 'id', 'priority-p');
 
@@ -171,9 +172,9 @@ export const dom = (() => {
             } else {
                 const dialog = $priorityContainer.appendChild(createPriorityDialog(todo));
                 dialog.show();
-                dialog.addEventListener('click', () => {
-                    svg.className = `svg priority-${findSelectedPriority()}`;
-                });
+                // dialog.addEventListener('click', () => {
+                //     svg.className = `svg priority-${findSelectedPriority()}`;
+                // });
             }
         });
 
@@ -194,28 +195,27 @@ export const dom = (() => {
                         todo.setPriority(priority.level);
                     }
 
-                    const priorityP = document.querySelector('#priority-p');
                     priorityP.textContent = `P${priority.level}`;
-                    svg.className = `svg priority-${priority.level}`;
+                    svg.className = `svg priority-${findSelectedPriority()}`;
 
                     selectPriorityDialog.close();
                     selectPriorityDialog.remove();
                 });
             }
 
-            // todo => fix close dialog
-            selectPriorityDialog.addEventListener('click', (e) => {
-                const dialogDimensions = selectPriorityDialog.getBoundingClientRect();
-                if (
-                    e.clientX < dialogDimensions.left ||
-                    e.clientX > dialogDimensions.right ||
-                    e.clientY < dialogDimensions.top ||
-                    e.clientY > dialogDimensions.bottom
-                ) {
-                    selectPriorityDialog.close();
-                    selectPriorityDialog.remove();
-                }
-            });
+            // // // todo => fix close dialog
+            // // selectPriorityDialog.addEventListener('click', (e) => {
+            // //     const dialogDimensions = selectPriorityDialog.getBoundingClientRect();
+            // //     if (
+            // //         e.clientX < dialogDimensions.left ||
+            // //         e.clientX > dialogDimensions.right ||
+            // //         e.clientY < dialogDimensions.top ||
+            // //         e.clientY > dialogDimensions.bottom
+            // //     ) {
+            // //         selectPriorityDialog.close();
+            // //         selectPriorityDialog.remove();
+            // //     }
+            // // });
             return selectPriorityDialog;
         };
 
@@ -263,10 +263,17 @@ export const dom = (() => {
         dom.createDiv(dropDownDeleteWrapper, 'class', 'svg delete-svg');
         dom.createBtn(dropDownDeleteWrapper, 'button', null, null, 'Delete task...');
 
-        dropDownDeleteWrapper.addEventListener('click', () => {
+        dropDownDeleteWrapper.addEventListener('click', (e) => {
+            e.stopPropagation();
             todo.getProject().removeTodo(todo);
             dialog.close();
             dialog.remove();
+            if (document.querySelector('.dialog-modal')) {
+                document.querySelector('.dialog-modal').close();
+                document.querySelector('.dialog-modal').remove();
+            }
+            sidebar.update();
+            todoList.update(todo.getProject());
         });
         dialog.show();
         return dialog;

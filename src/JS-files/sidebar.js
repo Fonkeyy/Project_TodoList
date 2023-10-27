@@ -75,7 +75,7 @@ const sidebar = (() => {
                 const project = projectInstances
                     .getInstances()
                     .find((project) => project.getName() === projectName);
-                const $main = document.querySelector('main');
+                const $main = document.querySelector('#main-content');
                 const $todoList = document.querySelector('#todo-list');
                 if ($todoList) {
                     $todoList.remove();

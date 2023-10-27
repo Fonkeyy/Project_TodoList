@@ -32,9 +32,9 @@ export const todoList = (() => {
                 checkbox.addEventListener('click', (e) => e.stopPropagation());
 
                 // * Todo title
-                dom.createP(item, todo.getTitle(), 'class', 'todo-title');
+                dom.createP(item, todo.getName(), 'class', 'todo-title');
 
-                // * Close button
+                // * More button
                 const $moreBtn = dom.createBtn(item, 'button', 'class', ' svg more-btn');
                 item.addEventListener('mouseenter', () => {
                     $moreBtn.classList.toggle('opacity');
@@ -45,7 +45,7 @@ export const todoList = (() => {
 
                 $moreBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    dom.createDropDown(todo);
+                    item.appendChild(dom.createDropDown(todo));
                 });
 
                 // * Due date
@@ -56,16 +56,17 @@ export const todoList = (() => {
 
                 // * Display todoCard on click
                 item.addEventListener('click', async (e) => {
-                    const todoTitle = e.target.closest('div').querySelector('p').textContent;
+                    const todoTitle = e.target.closest('div').querySelector('.todo-title').textContent;
+                    console.log(todoTitle);
 
                     toDoCard.clearCard();
                     await toDoCard.displayCard(
-                        project.getList().find((todo) => todo.getTitle() === todoTitle)
+                        project.getList().find((todo) => todo.getName() === todoTitle)
                     );
                 });
             });
 
-            $mainContent.appendChild($todoList);
+            // $mainContent.appendChild($todoList);
             return $todoList;
         }
     };

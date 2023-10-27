@@ -97,6 +97,7 @@
 .due-wrapper {
     display: flex;
     gap: 1rem;
+    cursor: pointer;
 }
 
 .due-container h4 {
