@@ -126,11 +126,11 @@
         margin-left: 2rem;
     }
 
-    #due-date-container {
+    #todo-card-content #due-date-container {
         grid-column-start: 2;
     }
 
-    #priority-container {
+    #todo-card-content #priority-container {
         grid-column-start: 2;
     }
 

@@ -1,12 +1,10 @@
 #todo-add-card {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin: auto;
+    top: -50%;
     background-color: var(--bg-secondary-color);
-    height: 200px;
     width: 550px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 10px, rgba(0, 0, 0, 0.1) 0px 15px 12px;
+
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
     border: none;
     border-radius: 10px;
 
@@ -15,6 +13,7 @@
     gap: 1rem;
 
     padding: 1.5rem;
+    overflow: visible;
 }
 
 #todo-add-card::backdrop {
@@ -25,8 +24,38 @@
     border: none;
 }
 
+#todo-add-card input[type='date'] {
+    border: 1px solid rgba(153, 153, 153, 0.5);
+    border-radius: 5px;
+    padding: 0rem 0.5rem;
+    color: rgba(153, 153, 153);
+    height: 2rem;
+}
+
 #todo-add-card input[type='text']::placeholder {
-    color: rgb(153, 153, 153);
+    color: rgba(153, 153, 153);
+}
+
+#todo-add-card .due-container {
+    height: 2rem;
+    border: 1px solid rgba(153, 153, 153, 0.5);
+    border-radius: 5px;
+    display: flex;
+    place-content: center;
+    padding: 1rem;
+}
+
+#todo-add-card .due-wrapper {
+    gap: 0.5rem;
+    color: rgba(153, 153, 153);
+}
+
+.due-wrapper .svg {
+    filter: invert(50%);
+}
+
+#todo-add-card #priority-container h4 {
+    display: none;
 }
 
 #todo-add-card > input:nth-of-type(1) {
@@ -40,6 +69,7 @@
 
 #todo-add-card > div:nth-of-type(1) {
     display: flex;
+    place-items: center;
     gap: 1rem;
 }
 
@@ -58,8 +88,6 @@
     display: flex;
     place-content: space-between;
 }
-
-/* #todo-add-card > div:nth-of-type(2)  */
 
 #todo-add-card > div:nth-of-type(2) > div:nth-of-type(2) {
     display: flex;
