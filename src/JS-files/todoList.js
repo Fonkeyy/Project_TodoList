@@ -3,6 +3,7 @@ import { dom } from './global';
 import { toDoCard } from './toDoCard';
 
 import '../CSS-files/todoList.css';
+import { todoAddCard } from './todoAddCard';
 
 export const todoList = (() => {
     const display = (project) => {
@@ -21,6 +22,17 @@ export const todoList = (() => {
             // * Project title
             dom.createP($todoList, `${project.getName()}`, 'id', 'project-title');
 
+            if (project.getLength() === 0) {
+                const emptyContainer = dom.createDiv($todoList, 'class', 'empty-container');
+                const btnWrapper = dom.createDiv(emptyContainer, 'class', 'btn-wrapper');
+                const btn = dom.createBtn(btnWrapper, 'button', 'class', 'new-task-btn');
+                btn.addEventListener('click', () => {
+                    todoAddCard.displayCard();
+                });
+                dom.createP(btnWrapper, 'Add task');
+
+                dom.createP(emptyContainer, "Oops, it seems that you haven't added any task yet");
+            }
             // * Display project todo
             project.getList().forEach((todo) => {
                 const item = document.createElement('div');

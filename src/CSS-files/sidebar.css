@@ -27,7 +27,7 @@
     #sidebar-project-container-title > button {
         width: 28px;
         height: 28px;
-        background-image: url('../assets/icons/add.svg');
+        background-image: url('../assets/icons/add/add.svg');
         background-repeat: no-repeat;
         background-size: contain;
         border: none;

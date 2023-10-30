@@ -99,6 +99,6 @@ header {
     justify-content: flex-end;
 }
 
-#new-task-btn {
-    background-image: url('../assets/icons/add.svg');
+.new-task-btn {
+    background-image: url('../assets/icons/add/add.svg');
 }

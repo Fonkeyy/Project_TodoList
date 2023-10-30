@@ -40,7 +40,7 @@ const displayHeader = () => {
 
     const $headerRightContainer = dom.createDiv($header, 'id', 'header-right-container');
 
-    const $newTaskBtn = dom.createBtn($headerRightContainer, 'button', 'id', 'new-task-btn');
+    const $newTaskBtn = dom.createBtn($headerRightContainer, 'button', 'class', 'new-task-btn');
     $newTaskBtn.classList.add('header-btn');
     $newTaskBtn.addEventListener('click', () => {
         todoAddCard.displayCard();
