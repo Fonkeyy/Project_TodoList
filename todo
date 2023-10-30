@@ -2,7 +2,6 @@ add toggle display project list on sidebar
 
 refactor all inputs
 
-add padding to header buttons
 add local storage
 
 add labels on every buttons + hide it
@@ -11,6 +10,8 @@ check accessibility
 check performance
 
 add little squeeze effect onClick on priority or project select in todoCard
+
+improve check in checkbox
 
 change description placeholder color
 
@@ -21,4 +22,5 @@ add remove btn on duedate todoCard
 fix select priority:
 -flag color within add todo card
 
+fix priority
 fix check on priority dialog
