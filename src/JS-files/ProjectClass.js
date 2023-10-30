@@ -18,16 +18,11 @@ export class Project {
 
     // * Setters
     addNewTodo = (todo) => {
-        // * check if project name is already set to todo
-        if (todo.getProjectName() === this.getName()) {
+        if (this.list.every((item) => todo.getName() !== item.getName())) {
             this.list.push(todo);
-        } else {
-            alert(`You have already a todo name's ${this.getName()}`);
         }
     };
 
-    // todo filter?
-    // removeItem = (item) => this.list.remove(this.list.getIds() === item.getId());
     removeTodo = (todo) => {
         this.list = this.list.filter((item) => item.getName() !== todo.getName());
     };

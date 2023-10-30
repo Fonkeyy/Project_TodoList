@@ -42,6 +42,12 @@ const sidebar = (() => {
         });
 
         // * Create project items
+        // if (typeof(Storage) !== "undefined") {
+        //     // Local storage is supported
+        // } else {
+        //     // Local storage is not supported
+        // }
+
         projectInstances.getInstances().forEach((project) => {
             const $projectItemContainer = dom.createDiv(
                 sideBarProjectContainer,

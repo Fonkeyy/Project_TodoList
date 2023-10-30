@@ -13,8 +13,6 @@ add little squeeze effect onClick on priority or project select in todoCard
 
 change description placeholder color
 
-remove todo when checkbox clicked + set it to archive folder
-
 add remove btn on duedate todoCard
 
 fix select priority:

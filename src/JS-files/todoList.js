@@ -4,6 +4,7 @@ import { toDoCard } from './toDoCard';
 
 import '../CSS-files/todoList.css';
 import { todoAddCard } from './todoAddCard';
+import { sidebar } from './sidebar';
 
 export const todoList = (() => {
     const display = (project) => {
@@ -41,7 +42,18 @@ export const todoList = (() => {
 
                 // * Checkbox
                 const checkbox = dom.createCheckbox(item, todo.getPriority());
-                checkbox.addEventListener('click', (e) => e.stopPropagation());
+                checkbox.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    project.removeTodo(todo);
+                    const archive = projectInstances
+                        .getInstances()
+                        .find((project) => project.getName() === 'Archive');
+                    archive.addNewTodo(todo);
+                    sidebar.update();
+                    todoList.update();
+                    console.log(archive);
+                    // todo.setProject('Archive');
+                });
 
                 // * Todo title
                 dom.createP(item, todo.getName(), 'class', 'todo-title');
