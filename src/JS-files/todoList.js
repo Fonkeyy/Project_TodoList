@@ -45,7 +45,7 @@ export const todoList = (() => {
                 checkbox.addEventListener('click', (e) => {
                     e.stopPropagation();
                     project.removeTodo(todo);
-                    todo.setProject('Archive');
+                    todo.setProjectName('Archive');
                     const archive = projectInstances
                         .getInstances()
                         .find((project) => project.getName() === 'Archive');

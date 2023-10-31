@@ -30,7 +30,8 @@ export class ToDoItem {
     getDescription = () => this.description;
     getDueDate = () => this.dueDate;
     getPriority = () => this.priority;
-    getProject = () => this.project;
+    getProject = () =>
+        projectInstances.getInstances().find((project) => project.getName() === this.projectName);
     getProjectName = () => this.projectName;
     getComment = () => this.comment;
     getCheckStatus = () => this.checkStatus;
@@ -41,6 +42,7 @@ export class ToDoItem {
     setDueDate = (date) => (this.dueDate = date);
     setPriority = (level) => (this.priority = level);
     setProject = (project) => (this.project = project);
+    setProjectName = (name) => (this.projectName = name);
     setComment = (text) => (this.comment = text);
     setCheckStatus = (boolean) => (this.checkStatus = boolean);
 }

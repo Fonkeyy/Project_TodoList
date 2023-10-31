@@ -276,6 +276,7 @@ export const dom = (() => {
 
         dropDownDeleteWrapper.addEventListener('click', (e) => {
             e.stopPropagation();
+            console.log(todo.getProject());
             todo.getProject().removeTodo(todo);
             dialog.close();
             dialog.remove();
@@ -283,6 +284,7 @@ export const dom = (() => {
                 document.querySelector('.dialog-modal').close();
                 document.querySelector('.dialog-modal').remove();
             }
+            todo.setProjectName(null);
             sidebar.update();
             todoList.update(todo.getProject());
         });

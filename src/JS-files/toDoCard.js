@@ -96,7 +96,7 @@ const toDoCard = (() => {
             checkbox.addEventListener('click', () => {
                 project.removeTodo(todo);
                 todoList.update(project);
-                todo.setProject('Archive');
+                todo.setProjectName('Archive');
                 const archive = projectInstances
                     .getInstances()
                     .find((project) => project.getName() === 'Archive');
