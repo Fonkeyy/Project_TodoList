@@ -14,9 +14,3 @@ add little squeeze effect onClick on priority or project select in todoCard
 change description placeholder color
 
 add remove btn on duedate todoCard
-
-fix select priority:
--flag color within add todo card
-
-fix priority
-fix check on priority dialog

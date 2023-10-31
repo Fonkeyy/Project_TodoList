@@ -171,13 +171,8 @@ export const dom = (() => {
                 dialog.close();
                 dialog.remove();
             } else {
-                const dialog = $priorityContainer.appendChild(
-                    createPriorityDialog(todo).selectPriorityDialog
-                );
+                const dialog = $priorityContainer.appendChild(createPriorityDialog(todo));
                 dialog.show();
-                dialog.addEventListener('click', () => {
-                    svg.className = `svg priority-${findSelectedPriority()}`;
-                });
             }
         });
 
@@ -189,14 +184,21 @@ export const dom = (() => {
                 const priorityWrapper = dom.createDiv(selectPriorityDialog, 'class', 'priority-wrapper');
                 dom.createDiv(priorityWrapper, 'class', `svg ${priority.svgClass}`);
                 dom.createP(priorityWrapper, `Priority ${priority.level}`);
-                priority.current = priority.level === findSelectedPriority();
+
+                if (todo) {
+                    priority.current = priority.level === findSelectedPriority();
+                } else {
+                    priority.current = priority.level === priorityP.textContent.slice(-1);
+                }
+
                 if (priority.current) {
                     dom.createDiv(priorityWrapper, 'class', 'flag priority-check');
                 }
 
                 priorityWrapper.addEventListener('click', () => {
+                    console.log(priority.level);
                     priorityP.textContent = `P${priority.level}`;
-                    svg.className = `svg priority-${findSelectedPriority()}`;
+                    svg.className = `svg priority-${priority.level}`;
 
                     selectPriorityDialog.close();
                     selectPriorityDialog.remove();
@@ -206,28 +208,15 @@ export const dom = (() => {
                     } else {
                         selectedPriorityLevel = priority.level;
                         priority.current = true;
+
                         return selectedPriorityLevel;
                     }
-                    console.log(todo);
-                    console.log(todo.getPriority());
-                    console.log(priority);
                 });
             }
+            selectPriorityDialog.remove();
+            selectPriorityDialog.close();
 
-            // // // todo => fix close dialog
-            // // selectPriorityDialog.addEventListener('click', (e) => {
-            // //     const dialogDimensions = selectPriorityDialog.getBoundingClientRect();
-            // //     if (
-            // //         e.clientX < dialogDimensions.left ||
-            // //         e.clientX > dialogDimensions.right ||
-            // //         e.clientY < dialogDimensions.top ||
-            // //         e.clientY > dialogDimensions.bottom
-            // //     ) {
-            // //         selectPriorityDialog.close();
-            // //         selectPriorityDialog.remove();
-            // //     }
-            // // });
-            return { selectPriorityDialog };
+            return selectPriorityDialog;
         };
         return { $priorityContainer, selectedPriorityLevel };
     };

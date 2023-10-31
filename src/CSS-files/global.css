@@ -213,23 +213,23 @@ input[type='checkbox']:checked {
 }
 
 .priority-1 {
-    background-image: url('../assets/icons/flag/flag-red.svg');
+    background-image: url('../assets/icons/flag/flag-red.svg') !important;
 }
 
 .priority-2 {
-    background-image: url('../assets/icons/flag/flag-orange.svg');
+    background-image: url('../assets/icons/flag/flag-orange.svg') !important;
 }
 
 .priority-3 {
-    background-image: url('../assets/icons/flag/flag-blue.svg');
+    background-image: url('../assets/icons/flag/flag-blue.svg') !important;
 }
 
 .priority-4 {
-    background-image: url('../assets/icons/flag/flag.svg');
+    background-image: url('../assets/icons/flag/flag.svg') !important;
 }
 
 .priority-check {
-    background-image: url('../assets/icons/check.svg');
+    background-image: url('../assets/icons/check.svg') !important;
 }
 
 .due-date-svg {
