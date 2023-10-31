@@ -102,14 +102,8 @@ const sidebar = (() => {
 
                 const $todoList = document.querySelector('#todo-list');
                 if ($todoList) {
-                    $todoList.remove();
-                }
-
-                const $main = document.querySelector('main');
-                const project0 = projectInstances.getInstances()[0];
-
-                if (projectInstances.getLength() > 0) {
-                    $main.appendChild(todoList.display(project0));
+                    const project0 = projectInstances.getInstances()[0];
+                    todoList.update(project0);
                 }
             });
         });

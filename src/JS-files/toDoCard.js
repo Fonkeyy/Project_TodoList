@@ -1,5 +1,7 @@
 import { dom } from './global';
 import '../CSS-files/todoCard.css';
+import { projectInstances } from './ProjectClass';
+import { sidebar } from './sidebar';
 
 export { toDoCard };
 
@@ -32,15 +34,20 @@ const toDoCard = (() => {
                 'header-card-btn next-btn'
             );
 
-            $nextBtn.addEventListener('click', async () => {
+            const handleNextBtnClick = (e) => {
                 clearCard();
-                let nextIndex = (index + 1) % todoList.length;
+                let nextIndex =
+                    (e.target.classList.contains('next-btn') ? index + 1 : index - 1) % todoList.length;
                 if (nextIndex < 0) {
                     nextIndex = todoList.length - 1;
                 }
                 const nextTodo = todoList[nextIndex];
                 document.querySelector('.dialog-modal').remove();
-                await displayCard(nextTodo);
+                displayCard(nextTodo);
+            };
+
+            $nextBtn.addEventListener('click', (e) => {
+                handleNextBtnClick(e);
             });
 
             // * Previous button
@@ -50,15 +57,19 @@ const toDoCard = (() => {
                 'class',
                 ' header-card-btn previous-btn'
             );
-            $previousBtn.addEventListener('click', async () => {
-                clearCard();
-                let prevIndex = (index - 1) % todoList.length;
-                if (prevIndex < 0) {
-                    prevIndex = todoList.length - 1;
-                }
-                const prevTodo = todoList[prevIndex];
-                document.querySelector('.dialog-modal').remove();
-                await displayCard(prevTodo);
+
+            // const handlePrevBtnClick = () => {
+            //     clearCard();
+            //     let prevIndex = (index - 1) % todoList.length;
+            //     if (prevIndex < 0) {
+            //         prevIndex = todoList.length - 1;
+            //     }
+            //     const prevTodo = todoList[prevIndex];
+            //     document.querySelector('.dialog-modal').remove();
+            //     displayCard(prevTodo);
+            // };
+            $previousBtn.addEventListener('click', (e) => {
+                handleNextBtnClick(e);
             });
 
             // * More button
@@ -87,9 +98,21 @@ const toDoCard = (() => {
             // * Main-content
             const $mainContent = dom.createDiv($cardContent, 'id', 'todo-card-content');
 
-            // * Title
+            // * Checkbox
             const $titleContainer = dom.createDiv($mainContent, 'id', 'title-container');
-            dom.createCheckbox($titleContainer, todo.getPriority());
+            const checkbox = dom.createCheckbox($titleContainer, todo.getPriority());
+
+            checkbox.addEventListener('click', () => {
+                project.removeTodo(todo);
+                todo.setProject('Archive');
+                const archive = projectInstances
+                    .getInstances()
+                    .find((project) => project.getName() === 'Archive');
+                archive.addNewTodo(todo);
+                sidebar.update();
+                todoList.update();
+            });
+            // * Title
             dom.createH($titleContainer, todo.getName(), 2);
 
             // * Description

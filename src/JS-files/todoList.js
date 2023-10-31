@@ -45,14 +45,15 @@ export const todoList = (() => {
                 checkbox.addEventListener('click', (e) => {
                     e.stopPropagation();
                     project.removeTodo(todo);
+                    todo.setProject('Archive');
                     const archive = projectInstances
                         .getInstances()
                         .find((project) => project.getName() === 'Archive');
                     archive.addNewTodo(todo);
                     sidebar.update();
                     todoList.update();
+                    console.log(todo);
                     console.log(archive);
-                    // todo.setProject('Archive');
                 });
 
                 // * Todo title
@@ -79,17 +80,13 @@ export const todoList = (() => {
                 $todoList.appendChild(item);
 
                 // * Display todoCard on click
-                item.addEventListener('click', async (e) => {
+                item.addEventListener('click', (e) => {
                     const todoTitle = e.target.closest('div').querySelector('.todo-title').textContent;
 
                     toDoCard.clearCard();
-                    await toDoCard.displayCard(
-                        project.getList().find((todo) => todo.getName() === todoTitle)
-                    );
+                    toDoCard.displayCard(project.getList().find((todo) => todo.getName() === todoTitle));
                 });
             });
-
-            // $mainContent.appendChild($todoList);
             return $todoList;
         }
     };
