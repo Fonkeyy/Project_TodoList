@@ -2,6 +2,8 @@ import { dom } from './global';
 import '../CSS-files/todoCard.css';
 import { projectInstances } from './ProjectClass';
 import { sidebar } from './sidebar';
+import { todoList } from './todoList';
+// import { todoList } from './todoList';
 
 export { toDoCard };
 
@@ -10,8 +12,8 @@ const toDoCard = (() => {
         try {
             const projectName = todo.getProjectName();
             const project = todo.getProject();
-            const todoList = project.getList();
-            const index = todoList.indexOf(todo);
+            const todoList1 = project.getList();
+            const index = todoList1.indexOf(todo);
             const $card = dom.createDiv(null, 'id', 'todo-card');
             const $cardContent = dom.createDiv($card, 'id', 'card-content');
 
@@ -34,20 +36,19 @@ const toDoCard = (() => {
                 'header-card-btn next-btn'
             );
 
-            const handleNextBtnClick = (e) => {
+            const handleNextBtnClick = (sign) => {
                 clearCard();
-                let nextIndex =
-                    (e.target.classList.contains('next-btn') ? index + 1 : index - 1) % todoList.length;
+                let nextIndex = sign === '+' ? index + 1 : index - (1 % todoList1.length);
                 if (nextIndex < 0) {
-                    nextIndex = todoList.length - 1;
+                    nextIndex = todoList1.length - 1;
                 }
-                const nextTodo = todoList[nextIndex];
+                const nextTodo = todoList1[nextIndex];
                 document.querySelector('.dialog-modal').remove();
                 displayCard(nextTodo);
             };
 
-            $nextBtn.addEventListener('click', (e) => {
-                handleNextBtnClick(e);
+            $nextBtn.addEventListener('click', () => {
+                handleNextBtnClick('+');
             });
 
             // * Previous button
@@ -58,18 +59,8 @@ const toDoCard = (() => {
                 ' header-card-btn previous-btn'
             );
 
-            // const handlePrevBtnClick = () => {
-            //     clearCard();
-            //     let prevIndex = (index - 1) % todoList.length;
-            //     if (prevIndex < 0) {
-            //         prevIndex = todoList.length - 1;
-            //     }
-            //     const prevTodo = todoList[prevIndex];
-            //     document.querySelector('.dialog-modal').remove();
-            //     displayCard(prevTodo);
-            // };
-            $previousBtn.addEventListener('click', (e) => {
-                handleNextBtnClick(e);
+            $previousBtn.addEventListener('click', () => {
+                handleNextBtnClick('-');
             });
 
             // * More button
@@ -104,14 +95,16 @@ const toDoCard = (() => {
 
             checkbox.addEventListener('click', () => {
                 project.removeTodo(todo);
+                todoList.update(project);
                 todo.setProject('Archive');
                 const archive = projectInstances
                     .getInstances()
                     .find((project) => project.getName() === 'Archive');
                 archive.addNewTodo(todo);
                 sidebar.update();
-                todoList.update();
+                handleNextBtnClick('+');
             });
+
             // * Title
             dom.createH($titleContainer, todo.getName(), 2);
 

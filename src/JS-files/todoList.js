@@ -51,9 +51,7 @@ export const todoList = (() => {
                         .find((project) => project.getName() === 'Archive');
                     archive.addNewTodo(todo);
                     sidebar.update();
-                    todoList.update();
-                    console.log(todo);
-                    console.log(archive);
+                    todoList.update(project);
                 });
 
                 // * Todo title
@@ -91,7 +89,10 @@ export const todoList = (() => {
         }
     };
     const update = (project) => {
-        document.querySelector('#todo-list').remove();
+        const todoList = document.querySelector('#todo-list');
+        if (todoList) {
+            todoList.remove();
+        }
         display(project);
     };
 
