@@ -14,3 +14,7 @@ add little squeeze effect onClick on priority or project select in todoCard
 change description placeholder color
 
 add remove btn on duedate todoCard
+
+sync todoCard checkbox color when priority update
+
+fix why selectedPriorityLevel dont update when create new todo

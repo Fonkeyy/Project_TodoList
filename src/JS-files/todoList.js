@@ -41,7 +41,7 @@ export const todoList = (() => {
                 item.classList.add('todo');
 
                 // * Checkbox
-                const checkbox = dom.createCheckbox(item, todo.getPriority());
+                const checkbox = dom.createCheckbox(todo.getPriority(), item);
                 checkbox.addEventListener('click', (e) => {
                     e.stopPropagation();
                     project.removeTodo(todo);

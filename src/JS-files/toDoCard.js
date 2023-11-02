@@ -84,6 +84,7 @@ const toDoCard = (() => {
             $closeBtn.addEventListener('click', () => {
                 document.querySelector('.dialog-modal').close();
                 document.querySelector('.dialog-modal').remove();
+                todoList.update(todo.getProject());
             });
 
             // * Main-content
@@ -91,7 +92,8 @@ const toDoCard = (() => {
 
             // * Checkbox
             const $titleContainer = dom.createDiv($mainContent, 'id', 'title-container');
-            const checkbox = dom.createCheckbox($titleContainer, todo.getPriority());
+
+            const checkbox = dom.createCheckbox(todo.getPriority());
 
             checkbox.addEventListener('click', () => {
                 project.removeTodo(todo);
@@ -104,6 +106,8 @@ const toDoCard = (() => {
                 sidebar.update();
                 handleNextBtnClick('+');
             });
+
+            $titleContainer.appendChild(checkbox);
 
             // * Title
             dom.createH($titleContainer, todo.getName(), 2);
@@ -182,8 +186,12 @@ const toDoCard = (() => {
             });
 
             // * Priority
-            const priority = dom.createSelectPriority(todo).$priorityContainer;
-            $mainContent.appendChild(priority);
+            const { $priorityContainer } = dom.createSelectPriority(todo);
+            $mainContent.appendChild($priorityContainer);
+
+            $priorityContainer.addEventListener('click', () => {
+                checkbox.className = `P${todo.getPriority()}`;
+            });
 
             // * Comment
             dom.createP($mainContent, todo.getComment(), 'class', 'todo-comment');

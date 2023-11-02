@@ -40,10 +40,7 @@ const todoAddCard = (() => {
         firstWrapper.append(todoInputDate, $priorityContainer);
 
         //  * Project
-        const todoSelectProject = dom.createSelectProject();
-        const todoSelectProjectWrapper = todoSelectProject.selectWrapper;
-        const select = todoSelectProject.selectProject;
-
+        const { selectWrapper, selectProject } = dom.createSelectProject();
         // * Button wrapper
         const { cancelBtn, addTaskBtn, buttonWrapper } = dom.createButtonWrapper();
 
@@ -56,9 +53,9 @@ const todoAddCard = (() => {
             const description = todoInputDescription.value;
             const date = todoInputDate.value;
             const priority = selectedPriorityLevel;
-            const projectName = select.value;
+            const projectName = selectProject.value;
 
-            console.log(priority);
+            console.log(selectedPriorityLevel);
             new ToDoItem(title, description, date, priority, projectName);
             closeCard();
             sidebar.update();
@@ -69,7 +66,7 @@ const todoAddCard = (() => {
 
         // * Second wrapper
         const secondWrapper = document.createElement('div');
-        secondWrapper.append(todoSelectProjectWrapper, buttonWrapper);
+        secondWrapper.append(selectWrapper, buttonWrapper);
 
         dialog.append(todoInputName, todoInputDescription, firstWrapper, secondWrapper);
 

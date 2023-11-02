@@ -78,7 +78,7 @@ export const dom = (() => {
         return label;
     };
 
-    const createCheckbox = (parent, priority) => {
+    const createCheckbox = (priority, parent) => {
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         switch (priority) {
@@ -154,18 +154,27 @@ export const dom = (() => {
             { level: '4', svgClass: 'priority-4', current: false },
         ];
 
-        const findSelectedPriority = () => (todo ? todo.getPriority() : '4');
-        let selectedPriorityLevel = findSelectedPriority();
+        const findSelectedPriority = (todo) => (todo ? todo.getPriority() : '4');
+
+        // let selectedPriorityLevel = findSelectedPriority();
+        let selectedPriorityLevel = null;
 
         const $priorityContainer = document.createElement('div');
         $priorityContainer.id = 'priority-container';
+        $priorityContainer.tabIndex = 0;
         $priorityContainer.classList.add('due-container');
+
         dom.createH($priorityContainer, 'Priority', 4);
         const duePriorityWrapper = dom.createDiv($priorityContainer, 'class', 'due-wrapper');
-        const svg = dom.createDiv(duePriorityWrapper, 'class', `svg priority-${findSelectedPriority()}`);
-        const priorityP = dom.createP(duePriorityWrapper, `P${findSelectedPriority()}`, 'id', 'priority-p');
+        const svg = dom.createDiv(duePriorityWrapper, 'class', `svg priority-${findSelectedPriority(todo)}`);
+        const priorityP = dom.createP(
+            duePriorityWrapper,
+            `P${findSelectedPriority(todo)}`,
+            'id',
+            'priority-p'
+        );
 
-        priorityP.addEventListener('click', () => {
+        const handle$priorityContainerClick = () => {
             const dialog = document.querySelector('#priority-dialog');
             if (dialog) {
                 dialog.close();
@@ -174,6 +183,16 @@ export const dom = (() => {
                 const dialog = $priorityContainer.appendChild(createPriorityDialog(todo));
                 dialog.show();
             }
+        };
+
+        $priorityContainer.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                handle$priorityContainerClick();
+            }
+        });
+
+        $priorityContainer.addEventListener('click', () => {
+            handle$priorityContainerClick();
         });
 
         const createPriorityDialog = (todo) => {
@@ -182,11 +201,13 @@ export const dom = (() => {
 
             for (let priority of initialValues) {
                 const priorityWrapper = dom.createDiv(selectPriorityDialog, 'class', 'priority-wrapper');
+                priorityWrapper.tabIndex = 0;
+
                 dom.createDiv(priorityWrapper, 'class', `svg ${priority.svgClass}`);
                 dom.createP(priorityWrapper, `Priority ${priority.level}`);
 
                 if (todo) {
-                    priority.current = priority.level === findSelectedPriority();
+                    priority.current = priority.level === findSelectedPriority(todo);
                 } else {
                     priority.current = priority.level === priorityP.textContent.slice(-1);
                 }
@@ -195,22 +216,26 @@ export const dom = (() => {
                     dom.createDiv(priorityWrapper, 'class', 'flag priority-check');
                 }
 
-                priorityWrapper.addEventListener('click', () => {
-                    console.log(priority.level);
+                const handlePriorityWrapperClick = () => {
                     priorityP.textContent = `P${priority.level}`;
                     svg.className = `svg priority-${priority.level}`;
-
-                    selectPriorityDialog.close();
-                    selectPriorityDialog.remove();
 
                     if (todo) {
                         todo.setPriority(priority.level);
                     } else {
                         selectedPriorityLevel = priority.level;
-                        priority.current = true;
-
-                        return selectedPriorityLevel;
+                        console.log(selectedPriorityLevel);
                     }
+                };
+
+                priorityWrapper.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        handlePriorityWrapperClick();
+                    }
+                });
+
+                priorityWrapper.addEventListener('click', () => {
+                    handlePriorityWrapperClick();
                 });
             }
             selectPriorityDialog.remove();
@@ -218,6 +243,8 @@ export const dom = (() => {
 
             return selectPriorityDialog;
         };
+        console.log(selectedPriorityLevel);
+
         return { $priorityContainer, selectedPriorityLevel };
     };
 

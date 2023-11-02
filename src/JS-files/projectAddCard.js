@@ -32,6 +32,7 @@ const addProjectCard = (() => {
         // * Button wrapper
         const { cancelBtn, addTaskBtn, buttonWrapper } = dom.createButtonWrapper();
 
+        addTaskBtn.textContent = 'Add';
         buttonWrapper.classList.add('add-project-card-btns-wrapper');
 
         dialog.appendChild(buttonWrapper);
