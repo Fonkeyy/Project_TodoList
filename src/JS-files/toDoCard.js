@@ -186,7 +186,8 @@ const toDoCard = (() => {
             });
 
             // * Priority
-            const { $priorityContainer } = dom.createSelectPriority(todo);
+            const { $priorityContainer } = dom.createSelectPriority(null, todo);
+
             $mainContent.appendChild($priorityContainer);
 
             $priorityContainer.addEventListener('click', () => {

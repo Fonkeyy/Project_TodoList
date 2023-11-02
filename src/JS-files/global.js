@@ -146,7 +146,8 @@ export const dom = (() => {
         return { selectWrapper, selectProject };
     };
 
-    const createSelectPriority = (todo) => {
+    // !
+    const createSelectPriority = (onPriorityChange, todo) => {
         const initialValues = [
             { level: '1', svgClass: 'priority-1', current: false },
             { level: '2', svgClass: 'priority-2', current: false },
@@ -155,9 +156,8 @@ export const dom = (() => {
         ];
 
         const findSelectedPriority = (todo) => (todo ? todo.getPriority() : '4');
-
         // let selectedPriorityLevel = findSelectedPriority();
-        let selectedPriorityLevel = null;
+        // let selectedPriorityLevel = null;
 
         const $priorityContainer = document.createElement('div');
         $priorityContainer.id = 'priority-container';
@@ -223,8 +223,11 @@ export const dom = (() => {
                     if (todo) {
                         todo.setPriority(priority.level);
                     } else {
-                        selectedPriorityLevel = priority.level;
-                        console.log(selectedPriorityLevel);
+                        // selectedPriorityLevel = priority.level;
+
+                        if (onPriorityChange) {
+                            onPriorityChange(priority.level);
+                        }
                     }
                 };
 
@@ -243,10 +246,11 @@ export const dom = (() => {
 
             return selectPriorityDialog;
         };
-        console.log(selectedPriorityLevel);
 
-        return { $priorityContainer, selectedPriorityLevel };
+        return { $priorityContainer };
     };
+
+    //   !
 
     const createDatePicker = (todo) => {
         const todoInputDate = document.createElement('input');
