@@ -1,8 +1,7 @@
 # Project_ToDoList
 
 ## Project Overview
-The TodoList
-the design is 100% inspired by [Todo](https://todoist.com/)
+The design is 100% inspired by [Todo](https://todoist.com/)
 
 ## 🚀 Learning Highlights
 - **Class**:
