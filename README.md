@@ -1,4 +1,4 @@
-# Project_ToDoList
+# Project_TodoList
 
 ## Project Overview
 The design is 100% inspired by [Todo](https://todoist.com/)
