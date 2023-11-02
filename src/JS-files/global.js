@@ -39,8 +39,9 @@ export const dom = (() => {
         return p;
     };
 
-    const createBtn = (parent = null, type = 'button', attribute, attributeName, text) => {
+    const createBtn = (parent = null, type = 'button', attribute, attributeName, text, label) => {
         const btn = document.createElement('button');
+        btn.setAttribute('aria-label', label);
         btn.type = type;
         if (parent) {
             parent.appendChild(btn);
@@ -78,9 +79,10 @@ export const dom = (() => {
         return label;
     };
 
-    const createCheckbox = (priority, parent) => {
+    const createCheckbox = (priority, parent, ariaLabel) => {
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
+        checkbox.ariaLabel = ariaLabel;
         switch (priority) {
             case '1':
                 checkbox.className = 'P1';
@@ -146,7 +148,6 @@ export const dom = (() => {
         return { selectWrapper, selectProject };
     };
 
-    // !
     const createSelectPriority = (onPriorityChange, todo) => {
         const initialValues = [
             { level: '1', svgClass: 'priority-1', current: false },
@@ -156,8 +157,6 @@ export const dom = (() => {
         ];
 
         const findSelectedPriority = (todo) => (todo ? todo.getPriority() : '4');
-        // let selectedPriorityLevel = findSelectedPriority();
-        // let selectedPriorityLevel = null;
 
         const $priorityContainer = document.createElement('div');
         $priorityContainer.id = 'priority-container';
@@ -222,12 +221,8 @@ export const dom = (() => {
 
                     if (todo) {
                         todo.setPriority(priority.level);
-                    } else {
-                        // selectedPriorityLevel = priority.level;
-
-                        if (onPriorityChange) {
-                            onPriorityChange(priority.level);
-                        }
+                    } else if (onPriorityChange) {
+                        onPriorityChange(priority.level);
                     }
                 };
 
@@ -249,8 +244,6 @@ export const dom = (() => {
 
         return { $priorityContainer };
     };
-
-    //   !
 
     const createDatePicker = (todo) => {
         const todoInputDate = document.createElement('input');

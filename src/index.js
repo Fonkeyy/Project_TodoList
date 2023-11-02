@@ -3,6 +3,17 @@ import { ToDoItem } from './JS-files/ToDoClass';
 import { loadMainPage } from './JS-files/homePage';
 import './CSS-files/global.css';
 
+document.title = 'todo app';
+const html = document.querySelector('html');
+html.setAttribute('lang', 'en');
+
+const metaDescription = document.createElement('meta');
+metaDescription.name = 'description';
+metaDescription.content = 'A simple todo app';
+
+const head = document.head || document.getElementsByTagName('head')[0];
+head.appendChild(metaDescription);
+
 new Project('default');
 new Project('Archive');
 new Project('test');

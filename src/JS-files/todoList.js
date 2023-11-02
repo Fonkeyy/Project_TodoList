@@ -26,7 +26,14 @@ export const todoList = (() => {
             if (project.getLength() === 0) {
                 const emptyContainer = dom.createDiv($todoList, 'class', 'empty-container');
                 const btnWrapper = dom.createDiv(emptyContainer, 'class', 'btn-wrapper');
-                const btn = dom.createBtn(btnWrapper, 'button', 'class', 'new-task-btn');
+                const btn = dom.createBtn(
+                    btnWrapper,
+                    'button',
+                    'class',
+                    'new-todo-btn',
+                    null,
+                    'add first todo'
+                );
                 btn.addEventListener('click', () => {
                     todoAddCard.displayCard();
                 });
@@ -41,7 +48,7 @@ export const todoList = (() => {
                 item.classList.add('todo');
 
                 // * Checkbox
-                const checkbox = dom.createCheckbox(todo.getPriority(), item);
+                const checkbox = dom.createCheckbox(todo.getPriority(), item, 'check if todo is done');
                 checkbox.addEventListener('click', (e) => {
                     e.stopPropagation();
                     project.removeTodo(todo);
@@ -58,7 +65,14 @@ export const todoList = (() => {
                 dom.createP(item, todo.getName(), 'class', 'todo-title');
 
                 // * More button
-                const $moreBtn = dom.createBtn(item, 'button', 'class', ' svg more-btn');
+                const $moreBtn = dom.createBtn(
+                    item,
+                    'button',
+                    'class',
+                    ' svg more-btn',
+                    null,
+                    'more options'
+                );
                 item.addEventListener('mouseenter', () => {
                     $moreBtn.classList.toggle('opacity');
                 });

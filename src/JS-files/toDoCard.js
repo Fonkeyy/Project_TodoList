@@ -1,9 +1,8 @@
 import { dom } from './global';
-import '../CSS-files/todoCard.css';
 import { projectInstances } from './ProjectClass';
 import { sidebar } from './sidebar';
 import { todoList } from './todoList';
-// import { todoList } from './todoList';
+import '../CSS-files/todoCard.css';
 
 export { toDoCard };
 
@@ -33,7 +32,9 @@ const toDoCard = (() => {
                 $headerContentRight,
                 'button',
                 'class',
-                'header-card-btn next-btn'
+                'header-card-btn next-btn',
+                null,
+                'next todo'
             );
 
             const handleNextBtnClick = (sign) => {
@@ -56,7 +57,9 @@ const toDoCard = (() => {
                 $headerContentRight,
                 'button',
                 'class',
-                ' header-card-btn previous-btn'
+                ' header-card-btn previous-btn',
+                null,
+                'previous todo'
             );
 
             $previousBtn.addEventListener('click', () => {
@@ -68,7 +71,9 @@ const toDoCard = (() => {
                 $headerContentRight,
                 'button',
                 'class',
-                'header-card-btn more-btn'
+                'header-card-btn more-btn',
+                null,
+                'more options'
             );
             $moreBtn.addEventListener('click', () => {
                 $headerContentRight.append(dom.createDropDown(todo));
@@ -79,7 +84,9 @@ const toDoCard = (() => {
                 $headerContentRight,
                 'button',
                 'class',
-                'header-card-btn close-btn'
+                'header-card-btn close-btn',
+                null,
+                `close todo ${todo.getName()}`
             );
             $closeBtn.addEventListener('click', () => {
                 document.querySelector('.dialog-modal').close();
@@ -93,7 +100,7 @@ const toDoCard = (() => {
             // * Checkbox
             const $titleContainer = dom.createDiv($mainContent, 'id', 'title-container');
 
-            const checkbox = dom.createCheckbox(todo.getPriority());
+            const checkbox = dom.createCheckbox(todo.getPriority(), $titleContainer, 'check if todo is done');
 
             checkbox.addEventListener('click', () => {
                 project.removeTodo(todo);
@@ -107,7 +114,7 @@ const toDoCard = (() => {
                 handleNextBtnClick('+');
             });
 
-            $titleContainer.appendChild(checkbox);
+            // .appendChild(checkbox);
 
             // * Title
             dom.createH($titleContainer, todo.getName(), 2);

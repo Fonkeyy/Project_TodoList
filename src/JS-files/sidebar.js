@@ -28,7 +28,14 @@ const sidebar = (() => {
             sideBarProjectContainerTitle.classList.toggle('grey-hover');
         });
         dom.createH(sideBarProjectContainerTitle, 'Projects', 3);
-        const $addProjectBtn = dom.createBtn(sideBarProjectContainerTitle, 'button');
+        const $addProjectBtn = dom.createBtn(
+            sideBarProjectContainerTitle,
+            'button',
+            null,
+            null,
+            null,
+            'add new project'
+        );
 
         // * Add 'add' btn style
         sidebar.addEventListener('mouseenter', () => {
@@ -57,7 +64,13 @@ const sidebar = (() => {
             );
             dom.createP($projectItemContainer, `${project.getName()}`, 'class', 'project-name');
             dom.createP($projectItemContainer, `${project.getLength()}`, 'class', 'project-length');
-            const $deleteBtn = dom.createBtn($projectItemContainer, 'button', 'id', 'delete-btn');
+            const $deleteBtn = dom.createBtn(
+                $projectItemContainer,
+                'button',
+                'id',
+                'delete-btn',
+                `delete project ${project.getName()}`
+            );
             $deleteBtn.classList.add('display-none');
 
             // * Add project items style

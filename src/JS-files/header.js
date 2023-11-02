@@ -10,14 +10,28 @@ const displayHeader = () => {
     const $headerLeftContainer = dom.createDiv($header, 'id', 'header-left-container');
 
     // * Menu button
-    const $menuBtn = dom.createBtn($headerLeftContainer, 'button', 'id', 'header-menu-btn');
+    const $menuBtn = dom.createBtn(
+        $headerLeftContainer,
+        'button',
+        'id',
+        'header-menu-btn',
+        null,
+        'menu button'
+    );
     $menuBtn.classList.add('header-btn');
     $menuBtn.addEventListener('click', (e) => {
         e.preventDefault();
     });
 
     // * Home button
-    const $homeBtn = dom.createBtn($headerLeftContainer, 'button', 'id', 'header-home-btn');
+    const $homeBtn = dom.createBtn(
+        $headerLeftContainer,
+        'button',
+        'id',
+        'header-home-btn',
+        null,
+        'home button'
+    );
     $homeBtn.classList.add('header-btn');
     $homeBtn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -40,9 +54,17 @@ const displayHeader = () => {
 
     const $headerRightContainer = dom.createDiv($header, 'id', 'header-right-container');
 
-    const $newTaskBtn = dom.createBtn($headerRightContainer, 'button', 'class', 'new-task-btn');
-    $newTaskBtn.classList.add('header-btn');
-    $newTaskBtn.addEventListener('click', () => {
+    // * New todo btn
+    const $newTodoBtn = dom.createBtn(
+        $headerRightContainer,
+        'button',
+        'class',
+        'new-todo-btn',
+        null,
+        'add new todo'
+    );
+    $newTodoBtn.classList.add('header-btn');
+    $newTodoBtn.addEventListener('click', () => {
         todoAddCard.displayCard();
     });
 

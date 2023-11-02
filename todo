@@ -1,20 +1,7 @@
-add toggle display project list on sidebar
-
-refactor all inputs
-
 add local storage
-
-add labels on every buttons + hide it
-add hide label class
-check accessibility
-check performance
-
+add toggle display project list on sidebar
 add little squeeze effect onClick on priority or project select in todoCard
-
-change description placeholder color
-
 add remove btn on duedate todoCard
+add possibility to modify date on todoCard when no date value
 
-sync todoCard checkbox color when priority update
-
-fix why selectedPriorityLevel dont update when create new todo
+check each file and clean it

@@ -5,13 +5,10 @@ header {
     padding: 0px 2rem;
     display: flex;
     justify-content: space-between;
-    place-content: center;
     place-items: center;
-    gap: 2rem;
 }
 
 #header-left-container {
-    width: 60%;
     height: 65%;
     display: flex;
     place-items: center;
@@ -90,12 +87,12 @@ header {
     color: var(--text-secondary-color);
 }
 
-#header-right-container {
-    width: 40%;
-    display: flex;
-    justify-content: flex-end;
+.new-todo-btn {
+    background-image: url('../assets/icons/add/add.svg');
 }
 
-.new-task-btn {
-    background-image: url('../assets/icons/add/add.svg');
+@media screen and (max-width: 360px) {
+    header {
+        padding: 0rem;
+    }
 }
