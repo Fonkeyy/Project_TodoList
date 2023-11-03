@@ -86,7 +86,7 @@ const toDoCard = (() => {
                 'class',
                 'header-card-btn close-btn',
                 null,
-                `close todo ${todo.getName()}`
+                `close todo ${todo.name}`
             );
             $closeBtn.addEventListener('click', () => {
                 document.querySelector('.dialog-modal').close();
@@ -106,18 +106,18 @@ const toDoCard = (() => {
                 project.removeTodo(todo);
                 todoList.update(project);
                 todo.setProjectName('Archive');
-                const archive = projectInstances
-                    .getInstances()
-                    .find((project) => project.getName() === 'Archive');
+                const archive = projectInstances.getInstances().find((project) => project.name === 'Archive');
                 archive.addNewTodo(todo);
                 sidebar.update();
                 handleNextBtnClick('+');
+
+                // !storageService
             });
 
             // .appendChild(checkbox);
 
             // * Title
-            dom.createH($titleContainer, todo.getName(), 2);
+            dom.createH($titleContainer, todo.name, 2);
 
             // * Description
             const $todoDescriptionContainer = dom.createDiv($mainContent, 'id', 'todo-description-container');

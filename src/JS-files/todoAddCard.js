@@ -1,10 +1,11 @@
 import { dom } from './global';
-import { ToDoItem } from './ToDoClass';
+import { TodoItem } from './ToDoClass';
 import { sidebar } from './sidebar';
 import { todoList } from './todoList';
 import { projectInstances } from './ProjectClass';
 
 import '../CSS-files/todoAddCard.css';
+import { storageService } from './storageService';
 
 const todoAddCard = (() => {
     const displayCard = () => {
@@ -47,25 +48,31 @@ const todoAddCard = (() => {
         const { selectWrapper, selectProject } = dom.createSelectProject();
 
         // * Button wrapper
-        const { cancelBtn, addTaskBtn, buttonWrapper } = dom.createButtonWrapper();
+        const { cancelBtn, addTodoBtn, buttonWrapper } = dom.createButtonWrapper();
 
         // * Cancel button
         cancelBtn.addEventListener('click', closeCard);
 
-        // * Add task button
-        addTaskBtn.addEventListener('click', () => {
+        // * Add todo button
+        addTodoBtn.addEventListener('click', () => {
             const title = todoInputName.value;
             const description = todoInputDescription.value;
             const date = todoInputDate.value;
             const priority = selectedPriorityLevel;
             const projectName = selectProject.value;
 
-            new ToDoItem(title, description, date, priority, projectName);
+            const newTodo = new TodoItem(title, description, date, priority, projectName);
+            const project = projectInstances.getInstances().find((project) => project.name === projectName);
+            project.addNewTodo(newTodo);
+            newTodo.setProject(project);
+            todoList.update(project);
+
+            const data = JSON.parse(storageService.get(`${projectName}`));
+            data.list.push(newTodo);
+            storageService.set(`${projectName}`, JSON.stringify(data));
+
             closeCard();
             sidebar.update();
-
-            const project = projectInstances.getInstances().find((project) => project.name === projectName);
-            todoList.update(project);
         });
 
         // * Second wrapper

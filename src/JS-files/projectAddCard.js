@@ -1,6 +1,7 @@
-import { Project } from './ProjectClass';
+import { Project, projectInstances } from './ProjectClass';
 import { dom } from './global';
 import { sidebar } from './sidebar';
+import { storageService } from './storageService';
 import '../CSS-files/addProjectCard.css';
 import '../CSS-files/global.css';
 
@@ -30,9 +31,9 @@ const addProjectCard = (() => {
         dialog.appendChild(inputWrapper);
 
         // * Button wrapper
-        const { cancelBtn, addTaskBtn, buttonWrapper } = dom.createButtonWrapper();
+        const { cancelBtn, addTodoBtn, buttonWrapper } = dom.createButtonWrapper();
 
-        addTaskBtn.textContent = 'Add';
+        addTodoBtn.textContent = 'Add';
         buttonWrapper.classList.add('add-project-card-btns-wrapper');
 
         dialog.appendChild(buttonWrapper);
@@ -41,8 +42,12 @@ const addProjectCard = (() => {
             dialog.remove();
         });
 
-        addTaskBtn.addEventListener('click', () => {
-            new Project(inputText.value);
+        addTodoBtn.addEventListener('click', () => {
+            const newProject = new Project(inputText.value);
+            projectInstances.addInstance(newProject);
+
+            storageService.set(`${inputText.value}`, JSON.stringify(newProject));
+            storageService.set('instances', JSON.stringify(projectInstances.instances));
             dialog.remove();
             sidebar.update();
         });

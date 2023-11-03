@@ -50,7 +50,6 @@ const displayHeader = () => {
     searchBarWrapper.append($searchInput, svg);
 
     $headerLeftContainer.appendChild(searchBarWrapper);
-    // $searchInput.onkeyup = searchFunction();
 
     const $headerRightContainer = dom.createDiv($header, 'id', 'header-right-container');
 
@@ -59,11 +58,10 @@ const displayHeader = () => {
         $headerRightContainer,
         'button',
         'class',
-        'new-todo-btn',
+        'new-todo-btn header-btn',
         null,
         'add new todo'
     );
-    $newTodoBtn.classList.add('header-btn');
     $newTodoBtn.addEventListener('click', () => {
         todoAddCard.displayCard();
     });

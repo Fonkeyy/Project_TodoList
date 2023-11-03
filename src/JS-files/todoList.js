@@ -5,25 +5,30 @@ import { toDoCard } from './toDoCard';
 import '../CSS-files/todoList.css';
 import { todoAddCard } from './todoAddCard';
 import { sidebar } from './sidebar';
+import { storageService } from './storageService';
+// import { storageService } from './storageService';
 
 export const todoList = (() => {
     const display = (project) => {
+        const projectsData = storageService.get('instances');
+        if (projectsData) {
+            project = JSON.parse(projectsData)[0];
+        }
+
         const $mainContent = document.querySelector('#main-content');
-        const defaultProject = projectInstances
-            .getInstances()
-            .find((project) => project.getName() === 'default');
+        // const defaultProject = projectInstances.getInstances().find((project) => project.name === 'default');
 
         if (!project) {
-            project = defaultProject;
+            // const projectsData = storageService.get('instances');
         }
         if (project) {
             // * Container
             const $todoList = dom.createDiv($mainContent, 'id', 'todo-list');
 
             // * Project title
-            dom.createP($todoList, `${project.getName()}`, 'id', 'project-title');
+            dom.createP($todoList, `${project.name}`, 'id', 'project-title');
 
-            if (project.getLength() === 0) {
+            if (project.length === 0) {
                 const emptyContainer = dom.createDiv($todoList, 'class', 'empty-container');
                 const btnWrapper = dom.createDiv(emptyContainer, 'class', 'btn-wrapper');
                 const btn = dom.createBtn(
@@ -42,7 +47,7 @@ export const todoList = (() => {
                 dom.createP(emptyContainer, "Oops, it seems that you haven't added any task yet");
             }
             // * Display project todo
-            project.getList().forEach((todo) => {
+            project.list.forEach((todo) => {
                 const item = document.createElement('div');
                 item.setAttribute('data-project-id', `${todo.getId()}`);
                 item.classList.add('todo');
@@ -55,14 +60,14 @@ export const todoList = (() => {
                     todo.setProjectName('Archive');
                     const archive = projectInstances
                         .getInstances()
-                        .find((project) => project.getName() === 'Archive');
+                        .find((project) => project.name === 'Archive');
                     archive.addNewTodo(todo);
                     sidebar.update();
                     todoList.update(project);
                 });
 
                 // * Todo title
-                dom.createP(item, todo.getName(), 'class', 'todo-title');
+                dom.createP(item, todo.name, 'class', 'todo-title');
 
                 // * More button
                 const $moreBtn = dom.createBtn(
@@ -96,7 +101,7 @@ export const todoList = (() => {
                     const todoTitle = e.target.closest('div').querySelector('.todo-title').textContent;
 
                     toDoCard.clearCard();
-                    toDoCard.displayCard(project.getList().find((todo) => todo.getName() === todoTitle));
+                    toDoCard.displayCard(project.getList().find((todo) => todo.name === todoTitle));
                 });
             });
             return $todoList;

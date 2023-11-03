@@ -7,8 +7,8 @@
 //     }
 
 //     const defaultProject = projectInstances
-//         .getInstances()
-//         .find((project) => project.getName() === 'default');
+//         .instances
+//         .find((project) => project.name === 'default');
 
 //     defaultProject.getList().forEach((element) => {
 //         if (element.getTitle().toUpperCase().indexOf(filter) > -1) {

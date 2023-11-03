@@ -2,6 +2,7 @@ import { projectInstances } from './ProjectClass';
 import '../CSS-files/global.css';
 import { sidebar } from './sidebar';
 import { todoList } from './todoList';
+import { storageService } from './storageService';
 
 export const dom = (() => {
     const createDiv = (parent, attribute, attributeName) => {
@@ -122,16 +123,16 @@ export const dom = (() => {
             selectProject.appendChild(firstOption);
 
             projectInstancesArray
-                .filter((project) => project.getName() != todo.getProjectName())
+                .filter((project) => project.name != todo.getProjectName())
                 .forEach((project) => {
                     const option = document.createElement('option');
-                    option.textContent = project.getName();
+                    option.textContent = project.name;
                     selectProject.appendChild(option);
                 });
         } else {
             projectInstancesArray.forEach((project) => {
                 const option = document.createElement('option');
-                option.textContent = project.getName();
+                option.textContent = project.name;
                 selectProject.appendChild(option);
             });
         }
@@ -268,15 +269,15 @@ export const dom = (() => {
         cancelBtn.textContent = 'Cancel';
 
         // * Add task button
-        const addTaskBtn = document.createElement('button');
-        addTaskBtn.className = 'card-btn add-btn';
-        addTaskBtn.textContent = 'Add task';
+        const addTodoBtn = document.createElement('button');
+        addTodoBtn.className = 'card-btn add-btn';
+        addTodoBtn.textContent = 'Add task';
 
         // * Button wrapper
         const buttonWrapper = document.createElement('div');
-        buttonWrapper.append(cancelBtn, addTaskBtn);
+        buttonWrapper.append(cancelBtn, addTodoBtn);
 
-        return { cancelBtn, addTaskBtn, buttonWrapper };
+        return { cancelBtn, addTodoBtn, buttonWrapper };
     };
 
     const createDropDown = (todo) => {
@@ -288,7 +289,8 @@ export const dom = (() => {
 
         dropDownDeleteWrapper.addEventListener('click', (e) => {
             e.stopPropagation();
-            todo.getProject().removeTodo(todo);
+            const project = todo.getProject();
+            project.removeTodo(todo);
             dialog.close();
             dialog.remove();
             if (document.querySelector('.dialog-modal')) {
@@ -298,6 +300,10 @@ export const dom = (() => {
             todo.setProjectName(null);
             sidebar.update();
             todoList.update(todo.getProject());
+
+            const newData = project.list.filter((item) => item.name !== todo.name);
+            project.list = newData;
+            storageService.set(`${project.name}`, JSON.stringify(project));
         });
         dialog.show();
         return dialog;

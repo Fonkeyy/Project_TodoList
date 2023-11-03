@@ -5,3 +5,7 @@ add remove btn on duedate todoCard
 add possibility to modify date on todoCard when no date value
 
 check each file and clean it
+
+fix sidebar width when new project
+
+display first project when no project

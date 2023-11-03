@@ -2,14 +2,12 @@ export class Project {
     constructor(name = 'default') {
         this.name = name;
         this.list = [];
-        projectInstances.addInstance(this);
     }
 
     // * Getters
-    getName = () => this.name;
     getList = () => this.list;
     getLength = () => this.list.length;
-    getTitles = () => this.list.map((todo) => todo.getName());
+    getTitles = () => this.list.map((todo) => todo.name);
     getDueDates = () => this.list.map((todo) => todo.getDueDate());
     getPriorities = () => this.list.map((todo) => todo.getPriority());
     getNotes = () => this.list.map((todo) => todo.getNote());
@@ -18,36 +16,48 @@ export class Project {
 
     // * Setters
     addNewTodo = (todo) => {
-        if (this.list.every((item) => todo.getName() !== item.getName())) {
+        if (this.list.every((item) => todo.name !== item.name)) {
             this.list.push(todo);
         }
     };
 
     removeTodo = (todo) => {
-        this.list = this.list.filter((item) => item.getName() !== todo.getName());
+        this.list = this.list.filter((item) => item.name !== todo.name);
     };
+
+    toJSON() {
+        return {
+            name: this.name,
+            list: this.list.map((todo) => ({
+                name: todo.name,
+                description: todo.description,
+                date: todo.date,
+                priority: todo.priority,
+                projectName: todo.projectName,
+            })),
+        };
+    }
 }
 
 export const projectInstances = (() => {
-    const instances = [];
+    let instances = [];
+    let projectNames = [];
 
     const getInstances = () => instances;
-    const getNames = () => instances.map((project) => project.getName());
-    const getLength = () => instances.length;
+    const getLength = () => projectNames.length;
 
     const addInstance = (instance) => {
         // * check if instance name is already set to instances
-        if (getNames().every((element) => element !== instance)) {
+        if (!projectNames.includes(instance.name)) {
             instances.push(instance);
+            projectNames.push(instance.name);
         }
     };
 
     const removeInstance = (instance) => {
-        const index = getInstances().indexOf(
-            projectInstances.getInstances().find((project) => project.getName() === instance.getName())
-        );
-        getInstances().splice(index, 1);
+        instances = projectInstances.getInstances().filter((project) => project.name !== instance.name);
+        projectNames = projectNames.filter((projectName) => projectName !== instance.name);
     };
 
-    return { addInstance, getInstances, getNames, getLength, removeInstance };
+    return { getInstances, addInstance, instances, getLength, removeInstance };
 })();

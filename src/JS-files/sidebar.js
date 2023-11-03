@@ -7,6 +7,7 @@ export { sidebar };
 import '../CSS-files/sidebar.css';
 import '../CSS-files/global.css';
 import { addProjectCard } from './projectAddCard';
+import { storageService } from './storageService';
 
 const sidebar = (() => {
     const display = () => {
@@ -50,26 +51,30 @@ const sidebar = (() => {
         });
 
         // * Create project items
-        // if (typeof(Storage) !== "undefined") {
-        //     // Local storage is supported
-        // } else {
-        //     // Local storage is not supported
-        // }
+        let projects = [];
+        const projectsData = storageService.get('instances');
+        console.log(projectsData);
+        if (projectsData) {
+            projects = JSON.parse(projectsData);
+        } else {
+            projects = projectInstances.getInstances();
+        }
 
-        projectInstances.getInstances().forEach((project) => {
+        projects.forEach((project) => {
             const $projectItemContainer = dom.createDiv(
                 sideBarProjectContainer,
                 'class',
                 'project-container'
             );
-            dom.createP($projectItemContainer, `${project.getName()}`, 'class', 'project-name');
-            dom.createP($projectItemContainer, `${project.getLength()}`, 'class', 'project-length');
+            dom.createP($projectItemContainer, `${project.name}`, 'class', 'project-name');
+            dom.createP($projectItemContainer, `${project.length}`, 'class', 'project-length');
             const $deleteBtn = dom.createBtn(
                 $projectItemContainer,
                 'button',
                 'id',
                 'delete-btn',
-                `delete project ${project.getName()}`
+                null,
+                `delete project ${project.name}`
             );
             $deleteBtn.classList.add('display-none');
 
@@ -92,7 +97,7 @@ const sidebar = (() => {
                 const projectName = e.target.closest('div').querySelector('.project-name').textContent;
                 const project = projectInstances
                     .getInstances()
-                    .find((project) => project.getName() === projectName);
+                    .find((project) => project.name === projectName);
                 const $main = document.querySelector('#main-content');
                 const $todoList = document.querySelector('#todo-list');
                 if ($todoList) {
@@ -105,9 +110,12 @@ const sidebar = (() => {
             $deleteBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const name = e.currentTarget.parentElement.querySelector('.project-name').textContent;
-                const project = projectInstances.getInstances().find((project) => project.getName() === name);
+                const project = projectInstances.getInstances().find((project) => project.name === name);
 
                 projectInstances.removeInstance(project);
+                // !
+                storageService.set('instances', JSON.stringify(projectInstances.getInstances()));
+                storageService.remove(`${project.name}`);
 
                 const container = e.currentTarget.closest('.project-container');
                 if (container) {

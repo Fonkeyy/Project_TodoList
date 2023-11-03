@@ -1,6 +1,6 @@
 import { projectInstances } from './ProjectClass';
 
-export class ToDoItem {
+export class TodoItem {
     constructor(
         name = null,
         description = null,
@@ -18,20 +18,13 @@ export class ToDoItem {
         this.comment = comment;
         this.checkStatus = checkStatus;
         this.Id = Date.now();
-
-        const project = projectInstances.getInstances().find((project) => project.getName() === projectName);
-        project.addNewTodo(this);
-
-        this.setProject(project);
     }
 
     // * Getters
-    getName = () => this.name;
     getDescription = () => this.description;
     getDueDate = () => this.dueDate;
     getPriority = () => this.priority;
-    getProject = () =>
-        projectInstances.getInstances().find((project) => project.getName() === this.projectName);
+    getProject = () => projectInstances.instances.find((project) => project.name === this.projectName);
     getProjectName = () => this.projectName;
     getComment = () => this.comment;
     getCheckStatus = () => this.checkStatus;
