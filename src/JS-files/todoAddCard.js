@@ -61,8 +61,19 @@ const todoAddCard = (() => {
             const priority = selectedPriorityLevel;
             const projectName = selectProject.value;
 
+            let projectList;
+
+            if (storageService.get('instances')) {
+                projectList = JSON.parse(storageService.get('instances'));
+                console.log(projectList);
+            } else {
+                projectList = projectInstances.getInstances();
+                console.log(projectList);
+            }
+            const project = projectList.find((project) => project.name === projectName);
+            console.log(project);
+
             const newTodo = new TodoItem(title, description, date, priority, projectName);
-            const project = projectInstances.getInstances().find((project) => project.name === projectName);
             project.addNewTodo(newTodo);
             newTodo.setProject(project);
             todoList.update(project);

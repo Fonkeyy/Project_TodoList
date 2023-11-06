@@ -10,16 +10,10 @@ import { storageService } from './storageService';
 
 export const todoList = (() => {
     const display = (project) => {
-        const projectsData = storageService.get('instances');
-        if (projectsData) {
-            project = JSON.parse(projectsData)[0];
-        }
-
         const $mainContent = document.querySelector('#main-content');
-        // const defaultProject = projectInstances.getInstances().find((project) => project.name === 'default');
 
         if (!project) {
-            // const projectsData = storageService.get('instances');
+            project = JSON.parse(storageService.get('instances'))[0];
         }
         if (project) {
             // * Container
@@ -28,7 +22,7 @@ export const todoList = (() => {
             // * Project title
             dom.createP($todoList, `${project.name}`, 'id', 'project-title');
 
-            if (project.length === 0) {
+            if (project.list.length === 0) {
                 const emptyContainer = dom.createDiv($todoList, 'class', 'empty-container');
                 const btnWrapper = dom.createDiv(emptyContainer, 'class', 'btn-wrapper');
                 const btn = dom.createBtn(

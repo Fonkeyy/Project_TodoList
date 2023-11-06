@@ -53,7 +53,6 @@ const sidebar = (() => {
         // * Create project items
         let projects = [];
         const projectsData = storageService.get('instances');
-        console.log(projectsData);
         if (projectsData) {
             projects = JSON.parse(projectsData);
         } else {
@@ -67,14 +66,14 @@ const sidebar = (() => {
                 'project-container'
             );
             dom.createP($projectItemContainer, `${project.name}`, 'class', 'project-name');
-            dom.createP($projectItemContainer, `${project.length}`, 'class', 'project-length');
+            dom.createP($projectItemContainer, `${project.list.length}`, 'class', 'project-length');
             const $deleteBtn = dom.createBtn(
                 $projectItemContainer,
                 'button',
                 'id',
                 'delete-btn',
                 null,
-                `delete project ${project.name}`
+                `delete ${project.name}`
             );
             $deleteBtn.classList.add('display-none');
 
@@ -95,9 +94,15 @@ const sidebar = (() => {
 
             const displayProject = (e) => {
                 const projectName = e.target.closest('div').querySelector('.project-name').textContent;
-                const project = projectInstances
-                    .getInstances()
-                    .find((project) => project.name === projectName);
+                let project;
+
+                if (storageService.get('instances')) {
+                    project = JSON.parse(storageService.get('instances')).find(
+                        (project) => project.name === projectName
+                    );
+                } else {
+                    project = projectInstances.getInstances().find((project) => project.name === projectName);
+                }
                 const $main = document.querySelector('#main-content');
                 const $todoList = document.querySelector('#todo-list');
                 if ($todoList) {
@@ -113,7 +118,6 @@ const sidebar = (() => {
                 const project = projectInstances.getInstances().find((project) => project.name === name);
 
                 projectInstances.removeInstance(project);
-                // !
                 storageService.set('instances', JSON.stringify(projectInstances.getInstances()));
                 storageService.remove(`${project.name}`);
 
@@ -129,7 +133,6 @@ const sidebar = (() => {
                 }
             });
         });
-
         return sidebar;
     };
 
@@ -138,6 +141,5 @@ const sidebar = (() => {
         sidebarProjectContainer.remove();
         display();
     };
-
     return { display, update };
 })();
