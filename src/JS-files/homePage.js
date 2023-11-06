@@ -20,8 +20,4 @@ export const loadMainPage = () => {
     // * Main-content
     dom.createDiv($main, 'id', 'main-content');
     todoList.display();
-
-    // todo => see if possible to integrate to the todoList function directly
-    // // * Display default project
-    // mainContent.appendChild(todoList.display(defaultProject));
 };

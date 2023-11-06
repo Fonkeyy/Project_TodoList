@@ -51,15 +51,7 @@ const sidebar = (() => {
         });
 
         // * Create project items
-        let projects = [];
-        const projectsData = storageService.get('instances');
-        if (projectsData) {
-            projects = JSON.parse(projectsData);
-        } else {
-            projects = projectInstances.getInstances();
-        }
-
-        projects.forEach((project) => {
+        projectInstances.getInstances().forEach((project) => {
             const $projectItemContainer = dom.createDiv(
                 sideBarProjectContainer,
                 'class',
@@ -94,15 +86,11 @@ const sidebar = (() => {
 
             const displayProject = (e) => {
                 const projectName = e.target.closest('div').querySelector('.project-name').textContent;
-                let project;
 
-                if (storageService.get('instances')) {
-                    project = JSON.parse(storageService.get('instances')).find(
-                        (project) => project.name === projectName
-                    );
-                } else {
-                    project = projectInstances.getInstances().find((project) => project.name === projectName);
-                }
+                const project = projectInstances
+                    .getInstances()
+                    .find((project) => project.name === projectName);
+
                 const $main = document.querySelector('#main-content');
                 const $todoList = document.querySelector('#todo-list');
                 if ($todoList) {
@@ -119,7 +107,6 @@ const sidebar = (() => {
 
                 projectInstances.removeInstance(project);
                 storageService.set('instances', JSON.stringify(projectInstances.getInstances()));
-                storageService.remove(`${project.name}`);
 
                 const container = e.currentTarget.closest('.project-container');
                 if (container) {

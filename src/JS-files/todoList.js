@@ -5,15 +5,15 @@ import { toDoCard } from './toDoCard';
 import '../CSS-files/todoList.css';
 import { todoAddCard } from './todoAddCard';
 import { sidebar } from './sidebar';
-import { storageService } from './storageService';
-// import { storageService } from './storageService';
 
 export const todoList = (() => {
     const display = (project) => {
         const $mainContent = document.querySelector('#main-content');
 
         if (!project) {
-            project = JSON.parse(storageService.get('instances'))[0];
+            if (projectInstances.getInstances()) {
+                project = projectInstances.getInstances()[0];
+            }
         }
         if (project) {
             // * Container
@@ -40,6 +40,7 @@ export const todoList = (() => {
 
                 dom.createP(emptyContainer, "Oops, it seems that you haven't added any task yet");
             }
+            console.log(project);
             // * Display project todo
             project.list.forEach((todo) => {
                 const item = document.createElement('div');

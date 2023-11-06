@@ -46,8 +46,7 @@ const addProjectCard = (() => {
             const newProject = new Project(inputText.value);
             projectInstances.addInstance(newProject);
 
-            storageService.set(`${inputText.value}`, JSON.stringify(newProject));
-            storageService.set('instances', JSON.stringify(projectInstances.instances));
+            storageService.set('instances', JSON.stringify(projectInstances.getInstances()));
             dialog.remove();
             sidebar.update();
         });

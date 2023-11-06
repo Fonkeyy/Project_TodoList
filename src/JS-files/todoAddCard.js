@@ -55,32 +55,21 @@ const todoAddCard = (() => {
 
         // * Add todo button
         addTodoBtn.addEventListener('click', () => {
-            const title = todoInputName.value;
+            const name = todoInputName.value;
             const description = todoInputDescription.value;
             const date = todoInputDate.value;
             const priority = selectedPriorityLevel;
             const projectName = selectProject.value;
 
-            let projectList;
-
-            if (storageService.get('instances')) {
-                projectList = JSON.parse(storageService.get('instances'));
-                console.log(projectList);
-            } else {
-                projectList = projectInstances.getInstances();
-                console.log(projectList);
-            }
-            const project = projectList.find((project) => project.name === projectName);
+            const project = projectInstances.getInstances().find((project) => project.name === projectName);
             console.log(project);
 
-            const newTodo = new TodoItem(title, description, date, priority, projectName);
+            const newTodo = new TodoItem(name, description, date, priority, projectName);
             project.addNewTodo(newTodo);
             newTodo.setProject(project);
             todoList.update(project);
 
-            const data = JSON.parse(storageService.get(`${projectName}`));
-            data.list.push(newTodo);
-            storageService.set(`${projectName}`, JSON.stringify(data));
+            storageService.set('instances', JSON.stringify(projectInstances.getInstances()));
 
             closeCard();
             sidebar.update();

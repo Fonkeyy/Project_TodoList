@@ -1,9 +1,31 @@
-import { projectInstances } from './ProjectClass';
+import { Project, projectInstances } from './ProjectClass';
 import '../CSS-files/global.css';
 import { sidebar } from './sidebar';
 import { todoList } from './todoList';
 import { storageService } from './storageService';
+import { TodoItem } from './ToDoClass';
 
+export const loadLocalStorage = () => {
+    if (storageService.get('instances')) {
+        const data = JSON.parse(storageService.get('instances'));
+        data.forEach((project) => {
+            const newProject = new Project(project.name);
+            projectInstances.addInstance(newProject);
+            project.list.forEach((todo) => {
+                const newTodo = new TodoItem(
+                    todo.name,
+                    todo.description,
+                    todo.dueDate,
+                    todo.priority,
+                    todo.projectName,
+                    todo.comment,
+                    todo.checkStatus
+                );
+                newProject.addNewTodo(newTodo);
+            });
+        });
+    }
+};
 export const dom = (() => {
     const createDiv = (parent, attribute, attributeName) => {
         const div = document.createElement('div');
@@ -301,9 +323,7 @@ export const dom = (() => {
             sidebar.update();
             todoList.update(todo.getProject());
 
-            const newData = project.list.filter((item) => item.name !== todo.name);
-            project.list = newData;
-            storageService.set(`${project.name}`, JSON.stringify(project));
+            storageService.set('instances', JSON.stringify(projectInstances.getInstances()));
         });
         dialog.show();
         return dialog;

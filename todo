@@ -1,4 +1,3 @@
-add local storage
 add toggle display project list on sidebar
 add little squeeze effect onClick on priority or project select in todoCard
 add remove btn on duedate todoCard
@@ -9,3 +8,5 @@ check each file and clean it
 fix sidebar width when new project
 
 display first project when no project
+
+auto select current project when add new todo
