@@ -7,7 +7,6 @@
 * {
     margin: 0;
     padding: 0;
-    /* outline: 1px solid lightgreen; */
 }
 html,
 body {
@@ -51,6 +50,11 @@ input[type='checkbox'] {
 }
 
 .display-none {
+    display: none;
+}
+
+.translate-sidebar {
+    transform: translateX(-305px);
     display: none;
 }
 

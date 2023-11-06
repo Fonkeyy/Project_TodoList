@@ -1,17 +1,27 @@
 import { dom } from './global';
 import { projectInstances } from './ProjectClass';
 import { todoList } from './todoList';
-
-export { sidebar };
-
-import '../CSS-files/sidebar.css';
-import '../CSS-files/global.css';
 import { addProjectCard } from './projectAddCard';
 import { storageService } from './storageService';
+import '../CSS-files/sidebar.css';
+import '../CSS-files/global.css';
+
+export { sidebar };
 
 const sidebar = (() => {
     const display = () => {
         const sidebar = document.querySelector('.sidebar');
+        if (window.innerWidth < '750') {
+            sidebar.classList.add('translate-sidebar');
+        }
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth < '750') {
+                sidebar.classList.add('translate-sidebar');
+            } else {
+                sidebar.classList.remove('translate-sidebar');
+            }
+        });
         const sideBarProjectContainer = dom.createDiv(sidebar, 'id', 'sidebar-project-container');
 
         // * Create title container

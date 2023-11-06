@@ -19,8 +19,8 @@ const displayHeader = () => {
         'menu button'
     );
     $menuBtn.classList.add('header-btn');
-    $menuBtn.addEventListener('click', (e) => {
-        e.preventDefault();
+    $menuBtn.addEventListener('click', () => {
+        document.querySelector('.sidebar').classList.toggle('translate-sidebar');
     });
 
     // * Home button

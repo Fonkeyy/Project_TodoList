@@ -5,8 +5,8 @@ add possibility to modify date on todoCard when no date value
 
 check each file and clean it
 
-fix sidebar width when new project
-
-display first project when no project
-
 auto select current project when add new todo
+
+finish transition sidebar
+
+fix priority on todoCard

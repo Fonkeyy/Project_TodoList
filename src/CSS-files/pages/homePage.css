@@ -1,12 +1,17 @@
 @import '../variables.css';
 
 main {
-    display: flex;
+    /* display: flex; */
 }
 
 /* todo => see why without flex layout brakes */
 #main-content {
-    width: 100%;
+    width: 80%;
     display: flex;
-    place-content: center;
+    margin: auto;
+}
+
+@media screen and (min-width: 750px) {
+    main {
+    }
 }
