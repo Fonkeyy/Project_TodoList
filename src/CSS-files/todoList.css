@@ -46,7 +46,8 @@
 }
 
 #todo-list .empty-container p {
-    place-self: center;
+    /* place-self: center; */
+    align-self: center;
 }
 
 .todo {
@@ -86,11 +87,4 @@
 .todo .drop-down-dialog {
     left: 70%;
     top: 25%;
-}
-
-@media screen and (min-width: 768px) {
-    .sidebar {
-        display: block;
-        width: 305px;
-    }
 }

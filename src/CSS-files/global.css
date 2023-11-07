@@ -54,8 +54,9 @@ input[type='checkbox'] {
 }
 
 .translate-sidebar {
-    transform: translateX(-305px);
-    display: none;
+    /* transform: translateX(-305px); */
+    margin-left: -305px;
+    /* display: none; */
 }
 
 .opacity {

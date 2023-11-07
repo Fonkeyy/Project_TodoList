@@ -1,12 +1,11 @@
 .sidebar {
-    display: block;
     width: 305px;
     padding: 2rem 1.7rem;
-    transition: transform 1s ease;
+    transition: margin-left 1s ease;
+    overflow: hidden;
 }
 
-#side-project-container {
-    width: 100%;
+#sidebar-project-container {
     cursor: pointer;
 }
 
