@@ -16,6 +16,8 @@
 #todo-list .empty-container {
     display: grid;
     grid-template-rows: auto 50vh;
+    width: fit-content;
+    margin: auto;
 }
 
 #todo-list .btn-wrapper {
