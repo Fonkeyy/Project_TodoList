@@ -62,7 +62,6 @@ const todoAddCard = (() => {
             const projectName = selectProject.value;
 
             const project = projectInstances.getInstances().find((project) => project.name === projectName);
-            console.log(project);
 
             const newTodo = new TodoItem(name, description, date, priority, projectName);
             project.addNewTodo(newTodo);

@@ -40,7 +40,7 @@ export const todoList = (() => {
 
                 dom.createP(emptyContainer, "Oops, it seems that you haven't added any task yet");
             }
-            console.log(project);
+
             // * Display project todo
             project.list.forEach((todo) => {
                 const item = document.createElement('div');

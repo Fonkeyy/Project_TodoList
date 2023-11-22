@@ -1,9 +1,15 @@
 import { Project, projectInstances } from './ProjectClass';
-import '../CSS-files/global.css';
 import { sidebar } from './sidebar';
 import { todoList } from './todoList';
 import { storageService } from './storageService';
 import { TodoItem } from './ToDoClass';
+import '../CSS-files/global.css';
+
+export const createArchiveProject = () => {
+    const archive = new Project('Archives');
+    projectInstances.addInstance(archive);
+    storageService.set('instances', JSON.stringify(projectInstances.getInstances()));
+};
 
 export const loadLocalStorage = () => {
     if (storageService.get('instances')) {
