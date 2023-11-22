@@ -105,8 +105,10 @@ const toDoCard = (() => {
             checkbox.addEventListener('click', () => {
                 project.removeTodo(todo);
                 todoList.update(project);
-                todo.setProjectName('Archive');
-                const archive = projectInstances.getInstances().find((project) => project.name === 'Archive');
+                todo.setProjectName('Archives');
+                const archive = projectInstances
+                    .getInstances()
+                    .find((project) => project.name === 'Archives');
                 archive.addNewTodo(todo);
                 sidebar.update();
                 handleNextBtnClick('+');

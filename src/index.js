@@ -1,5 +1,5 @@
 import { loadMainPage } from './JS-files/homePage';
-import { createArchiveProject, loadLocalStorage } from './JS-files/global';
+import { createArchivesProject, loadLocalStorage } from './JS-files/global';
 import './CSS-files/global.css';
 
 document.title = 'todo app';
@@ -13,6 +13,6 @@ metaDescription.content = 'A simple todo app';
 const head = document.head || document.getElementsByTagName('head')[0];
 head.appendChild(metaDescription);
 
-createArchiveProject();
 loadLocalStorage();
+createArchivesProject();
 loadMainPage();

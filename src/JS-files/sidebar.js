@@ -39,6 +39,8 @@ const sidebar = (() => {
             sideBarProjectContainerTitle.classList.toggle('grey-hover');
         });
         dom.createH(sideBarProjectContainerTitle, 'Projects', 3);
+
+        // * Add todo button
         const $addProjectBtn = dom.createBtn(
             sideBarProjectContainerTitle,
             'button',
@@ -48,7 +50,6 @@ const sidebar = (() => {
             'add new project'
         );
 
-        // * Add 'add' btn style
         sidebar.addEventListener('mouseenter', () => {
             $addProjectBtn.classList.add('opacity');
         });

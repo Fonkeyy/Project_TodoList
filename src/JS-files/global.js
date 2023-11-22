@@ -5,7 +5,7 @@ import { storageService } from './storageService';
 import { TodoItem } from './ToDoClass';
 import '../CSS-files/global.css';
 
-export const createArchiveProject = () => {
+export const createArchivesProject = () => {
     const archive = new Project('Archives');
     projectInstances.addInstance(archive);
     storageService.set('instances', JSON.stringify(projectInstances.getInstances()));

@@ -52,10 +52,10 @@ export const todoList = (() => {
                 checkbox.addEventListener('click', (e) => {
                     e.stopPropagation();
                     project.removeTodo(todo);
-                    todo.setProjectName('Archive');
+                    todo.setProjectName('Archives');
                     const archive = projectInstances
                         .getInstances()
-                        .find((project) => project.name === 'Archive');
+                        .find((project) => project.name === 'Archives');
                     archive.addNewTodo(todo);
                     sidebar.update();
                     todoList.update(project);
