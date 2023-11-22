@@ -3,9 +3,8 @@ import { TodoItem } from './ToDoClass';
 import { sidebar } from './sidebar';
 import { todoList } from './todoList';
 import { projectInstances } from './ProjectClass';
-
-import '../CSS-files/todoAddCard.css';
 import { storageService } from './storageService';
+import '../CSS-files/todoAddCard.css';
 
 const todoAddCard = (() => {
     const displayCard = () => {
@@ -33,7 +32,7 @@ const todoAddCard = (() => {
         todoInputDate.id = 'todo-input-date';
 
         // * Priority
-        let selectedPriorityLevel;
+        let selectedPriorityLevel = 4;
         const handlePriorityChange = (priority) => {
             selectedPriorityLevel = priority;
         };
@@ -57,7 +56,8 @@ const todoAddCard = (() => {
         addTodoBtn.addEventListener('click', () => {
             const name = todoInputName.value;
             const description = todoInputDescription.value;
-            const date = todoInputDate.value;
+            const date = new Date(todoInputDate.value);
+            // const date = todoInputDate.value;
             const priority = selectedPriorityLevel;
             const projectName = selectProject.value;
 
@@ -65,7 +65,6 @@ const todoAddCard = (() => {
 
             const newTodo = new TodoItem(name, description, date, priority, projectName);
             project.addNewTodo(newTodo);
-            newTodo.setProject(project);
             todoList.update(project);
 
             storageService.set('instances', JSON.stringify(projectInstances.getInstances()));

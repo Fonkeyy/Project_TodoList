@@ -31,7 +31,7 @@ export class Project {
             list: this.list.map((todo) => ({
                 name: todo.name,
                 description: todo.description,
-                date: todo.date,
+                date: todo.dueDate,
                 priority: todo.priority,
                 projectName: todo.projectName,
             })),

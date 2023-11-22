@@ -89,6 +89,7 @@ export const todoList = (() => {
                 const dueDateWrapper = dom.createDiv(item, 'class', 'due-date-wrapper');
                 dom.createDiv(dueDateWrapper, 'class', 'svg due-date-svg');
                 dom.createP(dueDateWrapper, todo.getDueDate(), 'class', 'due-date-value');
+                // dom.createP(dueDateWrapper, todo.getDueDate().toDateString(), 'class', 'due-date-value');
                 $todoList.appendChild(item);
 
                 // * Display todoCard on click

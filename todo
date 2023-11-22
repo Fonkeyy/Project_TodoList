@@ -10,3 +10,9 @@ auto select current project when add new todo
 finish transition sidebar
 
 fix priority on todoCard
+
+error text content when click on date todoCard
+
+
+FIX LOCALSTORAGE
+check why priority don't save to local storage

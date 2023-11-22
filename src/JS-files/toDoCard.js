@@ -3,6 +3,7 @@ import { projectInstances } from './ProjectClass';
 import { sidebar } from './sidebar';
 import { todoList } from './todoList';
 import '../CSS-files/todoCard.css';
+import { storageService } from './storageService';
 
 export { toDoCard };
 
@@ -22,9 +23,9 @@ const toDoCard = (() => {
             const $headerContentRight = dom.createDiv($headerContent, 'id', 'todo-header-content-right');
 
             // * Project name
-            if (projectName === 'default') {
-                dom.createDiv($headerContentLeft, 'class', 'svg select-project-svg');
-            }
+            // if (projectName === 'default') {
+            //     dom.createDiv($headerContentLeft, 'class', 'svg select-project-svg');
+            // }
             const headerProjectName = dom.createP($headerContentLeft, projectName);
 
             // * Next button
@@ -92,6 +93,7 @@ const toDoCard = (() => {
                 document.querySelector('.dialog-modal').close();
                 document.querySelector('.dialog-modal').remove();
                 todoList.update(todo.getProject());
+                storageService.set('instances', JSON.stringify(projectInstances.getInstances()));
             });
 
             // * Main-content
@@ -113,10 +115,8 @@ const toDoCard = (() => {
                 sidebar.update();
                 handleNextBtnClick('+');
 
-                // !storageService
+                storageService.set('instances', JSON.stringify(projectInstances.getInstances()));
             });
-
-            // .appendChild(checkbox);
 
             // * Title
             dom.createH($titleContainer, todo.name, 2);
@@ -207,6 +207,8 @@ const toDoCard = (() => {
             dom.createP($mainContent, todo.getComment(), 'class', 'todo-comment');
 
             dom.createDialogModal($card);
+
+            console.log(todo);
         } catch (error) {
             console.error(error);
         }
