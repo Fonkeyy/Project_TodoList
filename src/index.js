@@ -1,5 +1,5 @@
 import { loadMainPage } from './JS-files/homePage';
-import { createArchivesProject, loadLocalStorage } from './JS-files/global';
+import { createDefaultProject, loadLocalStorage } from './JS-files/global';
 import './CSS-files/global.css';
 
 document.title = 'todo app';
@@ -14,5 +14,5 @@ const head = document.head || document.getElementsByTagName('head')[0];
 head.appendChild(metaDescription);
 
 loadLocalStorage();
-createArchivesProject();
+createDefaultProject();
 loadMainPage();

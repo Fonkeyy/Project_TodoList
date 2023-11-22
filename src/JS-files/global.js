@@ -5,8 +5,10 @@ import { storageService } from './storageService';
 import { TodoItem } from './ToDoClass';
 import '../CSS-files/global.css';
 
-export const createArchivesProject = () => {
+export const createDefaultProject = () => {
+    const inbox = new Project('Inbox');
     const archive = new Project('Archives');
+    projectInstances.addInstance(inbox);
     projectInstances.addInstance(archive);
     storageService.set('instances', JSON.stringify(projectInstances.getInstances()));
 };
@@ -133,7 +135,7 @@ export const dom = (() => {
         return checkbox;
     };
 
-    const createSelectProject = (parent, todo) => {
+    const createSelectProject = (parent, todo, project) => {
         const selectWrapper = document.createElement('div');
         selectWrapper.classList.add('select-project-wrapper');
 
@@ -145,9 +147,9 @@ export const dom = (() => {
 
         const projectInstancesArray = projectInstances.getInstances();
 
-        if (todo) {
+        if (todo || project) {
             const firstOption = document.createElement('option');
-            firstOption.textContent = todo.getProjectName() || 'default';
+            firstOption.textContent = todo.getProjectName() || project.name || 'default';
             selectProject.appendChild(firstOption);
 
             projectInstancesArray
