@@ -22,7 +22,7 @@ export const todoList = (() => {
             // * Project title
             dom.createP($todoList, `${project.name}`, 'id', 'project-title');
 
-            if (project.list.length === 0) {
+            if (project.list.length === 0 && project.name !== 'Archives') {
                 const emptyContainer = dom.createDiv($todoList, 'class', 'empty-container');
                 const btnWrapper = dom.createDiv(emptyContainer, 'class', 'btn-wrapper');
                 const btn = dom.createBtn(
