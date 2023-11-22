@@ -69,26 +69,54 @@ const sidebar = (() => {
             );
             dom.createP($projectItemContainer, `${project.name}`, 'class', 'project-name');
             dom.createP($projectItemContainer, `${project.list.length}`, 'class', 'project-length');
-            const $deleteBtn = dom.createBtn(
-                $projectItemContainer,
-                'button',
-                'id',
-                'delete-btn',
-                null,
-                `delete ${project.name}`
-            );
-            $deleteBtn.classList.add('display-none');
+
+            if (project.name !== 'Archives') {
+                const $deleteBtn = dom.createBtn(
+                    $projectItemContainer,
+                    'button',
+                    'id',
+                    'delete-btn',
+                    null,
+                    `delete ${project.name}`
+                );
+                $deleteBtn.classList.add('display-none');
+
+                // * Add delete btn event listener
+                $deleteBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const name = e.currentTarget.parentElement.querySelector('.project-name').textContent;
+                    const project = projectInstances.getInstances().find((project) => project.name === name);
+
+                    projectInstances.removeInstance(project);
+                    storageService.set('instances', JSON.stringify(projectInstances.getInstances()));
+
+                    const container = e.currentTarget.closest('.project-container');
+                    if (container) {
+                        container.remove();
+                    }
+
+                    const $todoList = document.querySelector('#todo-list');
+                    if ($todoList) {
+                        const project0 = projectInstances.getInstances()[0];
+                        todoList.update(project0);
+                    }
+                });
+            }
 
             // * Add project items style
             $projectItemContainer.addEventListener('mouseenter', (event) => {
                 event.currentTarget.classList.toggle('grey-hover');
                 event.currentTarget.querySelector('.project-length').classList.toggle('display-none');
-                event.currentTarget.querySelector('#delete-btn').classList.toggle('display-none');
+                if (event.currentTarget.querySelector('#delete-btn')) {
+                    event.currentTarget.querySelector('#delete-btn').classList.toggle('display-none');
+                }
             });
             $projectItemContainer.addEventListener('mouseleave', (event) => {
                 event.currentTarget.classList.toggle('grey-hover');
                 event.currentTarget.querySelector('.project-length').classList.toggle('display-none');
-                event.currentTarget.querySelector('#delete-btn').classList.toggle('display-none');
+                if (event.currentTarget.querySelector('#delete-btn')) {
+                    event.currentTarget.querySelector('#delete-btn').classList.toggle('display-none');
+                }
             });
 
             // * Add project items event listener
@@ -108,27 +136,6 @@ const sidebar = (() => {
                 }
                 $main.appendChild(todoList.display(project));
             };
-
-            // * Add delete btn event listener
-            $deleteBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const name = e.currentTarget.parentElement.querySelector('.project-name').textContent;
-                const project = projectInstances.getInstances().find((project) => project.name === name);
-
-                projectInstances.removeInstance(project);
-                storageService.set('instances', JSON.stringify(projectInstances.getInstances()));
-
-                const container = e.currentTarget.closest('.project-container');
-                if (container) {
-                    container.remove();
-                }
-
-                const $todoList = document.querySelector('#todo-list');
-                if ($todoList) {
-                    const project0 = projectInstances.getInstances()[0];
-                    todoList.update(project0);
-                }
-            });
         });
         return sidebar;
     };
