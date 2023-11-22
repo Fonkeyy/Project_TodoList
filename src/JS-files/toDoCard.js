@@ -175,7 +175,7 @@ const toDoCard = (() => {
             dom.createDiv(dueDateWrapper, 'class', 'svg due-date-svg');
             const dateP = dom.createP(dueDateWrapper, todo.getDueDate());
 
-            dateP.addEventListener('click', () => {
+            dueDateWrapper.addEventListener('click', () => {
                 const todoInputDate = document.querySelector('#todo-input-date');
 
                 if (todoInputDate) {
