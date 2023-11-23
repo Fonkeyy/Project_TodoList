@@ -205,10 +205,7 @@ const toDoCard = (() => {
 
             // * Comment
             dom.createP($mainContent, todo.getComment(), 'class', 'todo-comment');
-
             dom.createDialogModal($card);
-
-            console.log(todo);
         } catch (error) {
             console.error(error);
         }

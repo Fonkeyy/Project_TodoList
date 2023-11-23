@@ -37,7 +37,6 @@ export const todoList = (() => {
                     todoAddCard.displayCard();
                 });
                 dom.createP(btnWrapper, 'Add task');
-
                 dom.createP(emptyContainer, "Oops, it seems that you haven't added any task yet");
             }
 
@@ -88,18 +87,20 @@ export const todoList = (() => {
                 // * Due date
                 const dueDateWrapper = dom.createDiv(item, 'class', 'due-date-wrapper');
                 dom.createDiv(dueDateWrapper, 'class', 'svg due-date-svg');
-                // dom.createP(dueDateWrapper, todo.getDueDate(), 'class', 'due-date-value');
                 dom.createP(dueDateWrapper, todo.getDueDate().toDateString(), 'class', 'due-date-value');
                 $todoList.appendChild(item);
 
                 // * Display todoCard on click
                 item.addEventListener('click', (e) => {
-                    const todoTitle = e.target.closest('div').querySelector('.todo-title').textContent;
-
-                    toDoCard.clearCard();
-                    toDoCard.displayCard(project.getList().find((todo) => todo.name === todoTitle));
+                    const todoDiv = e.currentTarget.closest('.todo');
+                    if (todoDiv) {
+                        const todoTitle = todoDiv.querySelector('.todo-title').textContent;
+                        toDoCard.clearCard();
+                        toDoCard.displayCard(project.getList().find((todo) => todo.name === todoTitle));
+                    }
                 });
             });
+
             return $todoList;
         }
     };
