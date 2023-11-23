@@ -20,10 +20,12 @@ export const loadLocalStorage = () => {
             const newProject = new Project(project.name);
             projectInstances.addInstance(newProject);
             project.list.forEach((todo) => {
+                console.log(todo.date);
+                const dueDate = todo.date ? new Date(todo.date) : '';
                 const newTodo = new TodoItem(
                     todo.name,
                     todo.description,
-                    new Date(todo.date),
+                    dueDate,
                     todo.priority,
                     todo.projectName,
                     todo.comment,
@@ -281,14 +283,20 @@ export const dom = (() => {
         todoInputDate.setAttribute('type', 'date');
         todoInputDate.id = 'todo-input-date';
 
+        let dueDate = '';
+
         if (todo) {
             todoInputDate.setAttribute('value', todo.getDueDate());
         }
 
         todoInputDate.addEventListener('change', (e) => {
-            todo.setDueDate(new Date(e.target.value));
+            dueDate = new Date(e.target.value);
+            todo.setDueDate(dueDate);
+            // todo.setDueDate(new Date(e.target.value));
             storageService.set('instances', JSON.stringify(projectInstances.getInstances()));
         });
+
+        todo.setDueDate(dueDate);
 
         return todoInputDate;
     };
