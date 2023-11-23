@@ -32,7 +32,7 @@ const todoAddCard = (() => {
         todoInputDate.id = 'todo-input-date';
 
         // * Priority
-        let selectedPriorityLevel = 4;
+        let selectedPriorityLevel = '4';
         const handlePriorityChange = (priority) => {
             selectedPriorityLevel = priority;
         };
@@ -57,7 +57,6 @@ const todoAddCard = (() => {
             const name = todoInputName.value;
             const description = todoInputDescription.value;
             const date = new Date(todoInputDate.value);
-            // const date = todoInputDate.value;
             const priority = selectedPriorityLevel;
             const projectName = selectProject.value;
 

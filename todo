@@ -9,5 +9,7 @@ auto select current project when add new todo
 
 finish transition sidebar
 
-fix priority on todoCard
 
+fix p4 align on narrow screen
+
+fix when no date selected

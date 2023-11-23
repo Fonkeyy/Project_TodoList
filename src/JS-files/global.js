@@ -113,7 +113,7 @@ export const dom = (() => {
     const createCheckbox = (priority, parent, ariaLabel) => {
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
-        checkbox.ariaLabel = ariaLabel;
+        checkbox.setAttribute('aria-label', ariaLabel);
         switch (priority) {
             case '1':
                 checkbox.className = 'P1';
