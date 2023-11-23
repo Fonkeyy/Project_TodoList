@@ -40,7 +40,7 @@ const sidebar = (() => {
         });
         dom.createH(sideBarProjectContainerTitle, 'Projects', 3);
 
-        // * Add todo button
+        // * Add project button
         const $addProjectBtn = dom.createBtn(
             sideBarProjectContainerTitle,
             'button',
@@ -71,6 +71,7 @@ const sidebar = (() => {
             dom.createP($projectItemContainer, `${project.name}`, 'class', 'project-name');
             dom.createP($projectItemContainer, `${project.list.length}`, 'class', 'project-length');
 
+            // * Add delete btn
             if (project.name !== 'Archives') {
                 const $deleteBtn = dom.createBtn(
                     $projectItemContainer,

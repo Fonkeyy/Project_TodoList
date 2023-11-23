@@ -1,7 +1,6 @@
 add toggle display project list on sidebar
 add little squeeze effect onClick on priority or project select in todoCard
 add remove btn on duedate todoCard
-add possibility to modify date on todoCard when no date value
 
 check each file and clean it
 

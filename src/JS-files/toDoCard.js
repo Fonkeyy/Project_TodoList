@@ -89,6 +89,7 @@ const toDoCard = (() => {
             document.querySelector('.dialog-modal').close();
             document.querySelector('.dialog-modal').remove();
             todoList.update(todo.getProject());
+            sidebar.update();
             storageService.set('instances', JSON.stringify(projectInstances.getInstances()));
         });
 
@@ -157,8 +158,20 @@ const toDoCard = (() => {
         $projectNameContainer.classList.add('due-container');
         dom.createH($projectNameContainer, 'Project', 4);
         const select = dom.createSelectProject($projectNameContainer, todo);
+
+        console.log(todo);
+        console.log(select.selectProject.value);
+
         select.selectProject.addEventListener('change', () => {
             headerProjectName.textContent = select.selectProject.value;
+
+            const oldProject = todo.getProject();
+            oldProject.removeTodo(todo);
+            todo.setProjectName(select.selectProject.value);
+            const newProject = projectInstances
+                .getInstances()
+                .find((project) => project.name === select.selectProject.value);
+            newProject.addNewTodo(todo);
         });
 
         // * Due date
