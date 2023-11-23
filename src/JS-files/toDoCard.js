@@ -42,7 +42,9 @@ const toDoCard = (() => {
             }
             const nextTodo = todoList1[nextIndex];
             document.querySelector('.dialog-modal').remove();
-            displayCard(nextTodo);
+            if (nextTodo) {
+                displayCard(nextTodo);
+            }
         };
 
         $nextBtn.addEventListener('click', () => {
@@ -103,11 +105,11 @@ const toDoCard = (() => {
 
         checkbox.addEventListener('click', () => {
             project.removeTodo(todo);
-            todoList.update(project);
             todo.setProjectName('Archives');
             const archive = projectInstances.getInstances().find((project) => project.name === 'Archives');
             archive.addNewTodo(todo);
             sidebar.update();
+            todoList.update(project);
             handleNextBtnClick('+');
 
             storageService.set('instances', JSON.stringify(projectInstances.getInstances()));
@@ -158,9 +160,6 @@ const toDoCard = (() => {
         $projectNameContainer.classList.add('due-container');
         dom.createH($projectNameContainer, 'Project', 4);
         const select = dom.createSelectProject($projectNameContainer, todo);
-
-        console.log(todo);
-        console.log(select.selectProject.value);
 
         select.selectProject.addEventListener('change', () => {
             headerProjectName.textContent = select.selectProject.value;

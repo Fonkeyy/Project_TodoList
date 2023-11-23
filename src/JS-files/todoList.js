@@ -4,6 +4,7 @@ import { toDoCard } from './toDoCard';
 import { todoAddCard } from './todoAddCard';
 import { sidebar } from './sidebar';
 import '../CSS-files/todoList.css';
+import { storageService } from './storageService';
 
 export const todoList = (() => {
     const display = (project) => {
@@ -47,6 +48,7 @@ export const todoList = (() => {
 
                 // * Checkbox
                 const checkbox = dom.createCheckbox(todo.getPriority(), item, 'check if todo is done');
+
                 checkbox.addEventListener('click', (e) => {
                     e.stopPropagation();
                     project.removeTodo(todo);
@@ -57,6 +59,8 @@ export const todoList = (() => {
                     archive.addNewTodo(todo);
                     sidebar.update();
                     todoList.update(project);
+
+                    storageService.set('instances', JSON.stringify(projectInstances.getInstances()));
                 });
 
                 // * Todo title
