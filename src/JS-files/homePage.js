@@ -2,7 +2,6 @@ import { dom } from './global';
 import { displayHeader } from './header';
 import { sidebar } from './sidebar';
 import { todoList } from './todoList';
-
 import '../CSS-files/pages/homePage.css';
 
 export const loadMainPage = () => {

@@ -1,10 +1,9 @@
 import { projectInstances } from './ProjectClass';
 import { dom } from './global';
 import { toDoCard } from './toDoCard';
-
-import '../CSS-files/todoList.css';
 import { todoAddCard } from './todoAddCard';
 import { sidebar } from './sidebar';
+import '../CSS-files/todoList.css';
 
 export const todoList = (() => {
     const display = (project) => {
@@ -89,7 +88,6 @@ export const todoList = (() => {
                 dom.createDiv(dueDateWrapper, 'class', 'svg due-date-svg');
                 const dueDate = todo.getDueDate() ? todo.getDueDate().toDateString() : '';
                 dom.createP(dueDateWrapper, dueDate, 'class', 'due-date-value');
-                // dom.createP(dueDateWrapper, todo.getDueDate().toDateString(), 'class', 'due-date-value');
                 $todoList.appendChild(item);
 
                 // * Display todoCard on click

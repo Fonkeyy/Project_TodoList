@@ -56,9 +56,7 @@ const todoAddCard = (() => {
         addTodoBtn.addEventListener('click', () => {
             const name = todoInputName.value;
             const description = todoInputDescription.value;
-            console.log(todoInputDate.value);
             const date = todoInputDate.value ? new Date(todoInputDate.value) : '';
-            // const date = new Date(todoInputDate.value);
             const priority = selectedPriorityLevel;
             const projectName = selectProject.value;
 
