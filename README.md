@@ -20,4 +20,4 @@ The design is 100% inspired by [Todo](https://todoist.com/)
 
 
 ## 💻 Live Demo
-Check out the [Live Demo]() to see the TodoList in action.
+Check out the [Live Demo](https://rococo-mandazi-96e4e2.netlify.app) to see the TodoList in action.
