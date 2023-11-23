@@ -6,7 +6,7 @@ The design is 100% inspired by [Todo](https://todoist.com/)
 ## 🚀 Learning Highlights
 - **Class**: It was the opportunity to make use of the Class syntax.
 - **IIFE** : I've implemented "Immediately Invoked Function Expression" which led me to be more familiar with this concept.
-- **LocalStorage** :
+- **LocalStorage** : First use of local storage. 
 - **Integration** : It has been a good exercice to implement an existing design.
 
 ## ⚡️ Features
