@@ -23,9 +23,7 @@ export const loadLocalStorage = () => {
                 const newTodo = new TodoItem(
                     todo.name,
                     todo.description,
-                    // new Date(todo.dueDate()),
-                    // new Date(parseInt(todo.dueDate())),
-                    // todo.dueDate,
+                    new Date(todo.date),
                     todo.priority,
                     todo.projectName,
                     todo.comment,
@@ -289,10 +287,7 @@ export const dom = (() => {
 
         todoInputDate.addEventListener('change', (e) => {
             todo.setDueDate(new Date(e.target.value));
-            // todo.setDueDate(e.target.value);
             storageService.set('instances', JSON.stringify(projectInstances.getInstances()));
-
-            console.log(todo);
         });
 
         return todoInputDate;

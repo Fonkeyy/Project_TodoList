@@ -173,7 +173,7 @@ const toDoCard = (() => {
             dom.createH($dueDateContainer, 'Due Date', 4);
             const dueDateWrapper = dom.createDiv($dueDateContainer, 'class', 'due-wrapper');
             dom.createDiv(dueDateWrapper, 'class', 'svg due-date-svg');
-            const dateP = dom.createP(dueDateWrapper, todo.getDueDate());
+            const dateP = dom.createP(dueDateWrapper, todo.getDueDate().toDateString());
 
             dueDateWrapper.addEventListener('click', () => {
                 const todoInputDate = document.querySelector('#todo-input-date');
@@ -188,7 +188,7 @@ const toDoCard = (() => {
 
                     datePicker.addEventListener('change', () => {
                         datePicker.remove();
-                        dateP.textContent = todo.getDueDate();
+                        dateP.textContent = todo.getDueDate().toDateString();
                         dateP.classList.toggle('display-none');
                     });
                 }

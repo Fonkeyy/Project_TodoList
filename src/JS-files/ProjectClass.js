@@ -25,7 +25,7 @@ export class Project {
         this.list = this.list.filter((item) => item.name !== todo.name);
     };
 
-    toJSON() {
+    toJSON = () => {
         return {
             name: this.name,
             list: this.list.map((todo) => ({
@@ -36,7 +36,7 @@ export class Project {
                 projectName: todo.projectName,
             })),
         };
-    }
+    };
 }
 
 export const projectInstances = (() => {
