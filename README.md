@@ -1,7 +1,8 @@
 # Project_TodoList
 
 ## Project Overview
-The design is 100% inspired by [Todo](https://todoist.com/)
+- This project is part of the [Odin Project Course](https://www.theodinproject.com/lessons/node-path-javascript-todo-list)
+- The design is 100% inspired by [Todo](https://todoist.com/)
 
 ## 🚀 Learning Highlights
 - **Class**: It was the opportunity to make use of the Class syntax.
