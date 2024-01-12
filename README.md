@@ -8,7 +8,7 @@
 - **Class Syntax**: Utilized the Class syntax to structure and organize the code effectively.
 - **IIFE (Immediately Invoked Function Expression)** : Implemented IIFE to enhance code encapsulation and gain a deeper understanding of this concept.
 - **LocalStorage** : Successfully integrated local storage for the first time, ensuring data persistence even when the application is closed or refreshed.
-- **Integration Integration** : Executed the implementation of an existing design, providing a practical exercise in design integration.
+- **Integration** : Executed the implementation of an existing design, providing a practical exercise in design integration.
 
 ## ⚡️ Features
 - **Project Organization**: Create and manage different project folders to categorize and organize todos.
